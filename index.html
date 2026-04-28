@@ -202,6 +202,42 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .m-save{width:100%;height:43px;border:none;border-radius:11px;background:var(--navy);color:var(--amber);font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer}
 .m-cancel{width:100%;height:37px;border:none;border-radius:11px;background:var(--bg);color:var(--muted);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;margin-top:7px}
 
+
+/* ── FLOATING SAVE BTN ── */
+.float-save{position:fixed;bottom:22px;right:16px;z-index:350;background:var(--green);color:#fff;border:none;border-radius:99px;padding:11px 18px;font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(16,185,129,.45);display:none;align-items:center;gap:6px;transition:all .2s}
+.float-save.show{display:flex}
+.float-save.saving{background:var(--muted)}
+.float-save.done{background:var(--navy)}
+.auto-save-txt{font-size:10px;color:rgba(255,255,255,.75);margin-left:2px}
+
+/* ── SORT BAR ── */
+.sort-bar{display:flex;gap:6px;padding:6px 13px;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;align-items:center}
+.sort-bar::-webkit-scrollbar{display:none}
+.sort-lbl{font-size:11px;font-weight:700;color:var(--muted);flex-shrink:0}
+.sp{flex-shrink:0;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer}
+.sp.active{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* ── EVENT HISTORY SCROLL ── */
+.evt-history{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:7px;padding-bottom:2px}
+.evt-history::-webkit-scrollbar{display:none}
+.evt-hist-chip{flex-shrink:0;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.12s}
+.evt-hist-chip:active{background:rgba(255,255,255,.22)}
+.evt-hist-chip.sel{background:var(--amber);border-color:var(--amber);color:var(--navy)}
+
+/* ── COMPACT GRID VIEW ── */
+.grid-view{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:6px 12px 110px}
+.gc{background:var(--card);border-radius:10px;padding:10px 11px;display:flex;flex-direction:column;gap:3px;box-shadow:var(--sh);border-left:3px solid transparent;cursor:pointer;user-select:none;transition:all .15s}
+.gc.attend{border-left-color:var(--green);background:#f0fdf4}
+.gc-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gc-sub{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:3px}
+.gc-chk{font-size:12px;color:var(--green);font-weight:900}
+
+/* ── LANE TEAM MODE TOGGLE ── */
+.lane-mode-toggle{display:flex;border:1.5px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:10px}
+.lmt-btn{flex:1;padding:8px 4px;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:none;background:transparent;color:var(--muted);cursor:pointer;text-align:center;border-right:1.5px solid var(--border)}
+.lmt-btn:last-child{border-right:none}
+.lmt-btn.active{background:var(--navy);color:var(--amber)}
+
 /* ── MISC ── */
 .sec{display:none}.sec.active{display:block}
 .loading{text-align:center;padding:50px 20px;color:var(--muted)}
@@ -245,8 +281,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
     <div class="evt-current" id="evt-current" style="display:none">
       <div class="evt-name-badge" id="evt-name-badge">—</div>
       <button class="evt-change-btn" onclick="changeEvent()">변경</button>
-      <button class="iBtn" onclick="refreshEvtList()" title="시트에서 불러오기" style="width:28px;height:28px;font-size:12px">↓</button>
+      <button class="iBtn" onclick="refreshEvtList()" style="width:28px;height:28px;font-size:12px">↓</button>
     </div>
+    <div class="evt-history" id="evt-history" style="display:none"></div>
   </div>
 </div>
 
@@ -263,17 +300,24 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <div class="sec active" id="sec-att">
   <div class="toolbar">
     <div class="srch"><span class="srch-ico">🔍</span><input type="search" id="srch-inp" placeholder="이름 검색..." oninput="renderList()"></div>
+    <button onclick="toggleView()" id="view-btn" style="background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:0 10px;font-size:14px;cursor:pointer;height:38px;flex-shrink:0">⊞</button>
   </div>
-  <div class="unsaved" id="unsaved-bar">
-    <span class="unsaved-txt" id="unsaved-txt">변경사항 미저장</span>
-    <button class="save-btn" onclick="saveToSheet()">☁️ 시트 저장</button>
+  <div class="sort-bar">
+    <span class="sort-lbl">정렬</span>
+    <button class="sp active" onclick="setSort('default',this)">기본</button>
+    <button class="sp" onclick="setSort('name',this)">이름순</button>
+    <button class="sp" onclick="setSort('avg-d',this)">에버↑</button>
+    <button class="sp" onclick="setSort('avg-a',this)">에버↓</button>
+    <button class="sp" onclick="setSort('grade',this)">학번순</button>
   </div>
   <div class="filters">
     <button class="fp active" onclick="setFilter('all',this)">전체 <span id="cnt-all">0</span></button>
     <button class="fp ga"     onclick="setFilter('attend',this)">✅ 참석 <span id="cnt-att">0</span></button>
     <button class="fp"        onclick="setFilter('pending',this)">❓ 미정 <span id="cnt-pnd">0</span></button>
   </div>
-  <div class="mlist" id="mlist"><div class="loading"><div class="spinner"></div>데이터를 불러오는 중...</div></div>
+  <div id="mlist-wrap">
+    <div class="mlist" id="mlist"><div class="loading"><div class="spinner"></div>데이터를 불러오는 중...</div></div>
+  </div>
 </div>
 
 <!-- ════════ 레인배정 탭 ════════ -->
@@ -307,19 +351,23 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 
       <!-- 수동 배정 설정 -->
       <div id="manual-cfg" style="display:none">
+        <div class="lane-mode-toggle">
+          <button class="lmt-btn active" id="lmt-2" onclick="setManualTeamMode(2,this)">2레인 1팀<br><span style="font-size:10px;font-weight:400;opacity:.7">1·2레인 한팀</span></button>
+          <button class="lmt-btn" id="lmt-1" onclick="setManualTeamMode(1,this)">1레인 1팀<br><span style="font-size:10px;font-weight:400;opacity:.7">레인=팀</span></button>
+        </div>
         <div class="cfg-row">
           <div style="display:flex;align-items:center;gap:7px">
-            <span style="font-size:12px;font-weight:700;color:var(--muted)">레인 수</span>
+            <span style="font-size:12px;font-weight:700;color:var(--muted)" id="manual-lane-lbl">레인 수</span>
             <div class="stepper">
-              <button class="sBtn" onclick="adjLane(-2)">−</button>
-              <input class="sVal" id="lane-cnt2" type="number" value="6" min="2" max="12" step="2" oninput="clampLane2()">
-              <button class="sBtn" onclick="adjLane(2)">+</button>
+              <button class="sBtn" onclick="adjManualLane(-1)">−</button>
+              <input class="sVal" id="lane-cnt2" type="number" value="6" min="1" max="12" oninput="updateManualLaneLbl()">
+              <button class="sBtn" onclick="adjManualLane(1)">+</button>
             </div>
             <span style="font-size:12px;color:var(--muted)" id="team-lbl2">= 3팀</span>
           </div>
           <button class="bigBtn" style="max-width:110px" onclick="initManualAssign()">레인 생성</button>
         </div>
-        <div class="hint">참석자를 직접 각 레인으로 배치합니다</div>
+        <div class="hint" id="manual-hint">참석자를 직접 각 레인으로 배치합니다</div>
       </div>
     </div>
 
@@ -358,6 +406,12 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </div>
 
 </div><!-- /scr -->
+
+<!-- 플로팅 저장 버튼 -->
+<button class="float-save" id="float-save" onclick="saveToSheet()">
+  ☁️ 저장
+  <span class="auto-save-txt" id="auto-save-txt"></span>
+</button>
 
 <!-- 수동조정 배너 -->
 <div class="swap-banner" id="swap-banner">
@@ -418,7 +472,7 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbxu6run01Cc9Y5LLgXKvLt3
 /* ════ CONFIG ════ */
 let cfg = { url: GAS_URL, name:1, avg:2, dept:3, fee:5, reg:6 };
 let members=[], statusMap={}, tempAvgMap={}, eventList=[], currentEvent=null;
-let hasUnsaved=false, filter='all', laneGroups=[], laneMode='auto';
+let hasUnsaved=false, filter='all', sortMode='default', viewMode='list', laneGroups=[], laneMode='auto', manualTeamMode=2;
 let swapMode=false, swapSel=null;
 let avgPopupTarget=null;
 // 수동배정 상태
@@ -484,6 +538,8 @@ function showCurrentEvent(){
   document.getElementById('evt-picker').style.display='none';
   document.getElementById('evt-current').style.display='flex';
   document.getElementById('evt-name-badge').textContent=currentEvent;
+  const h=document.getElementById('evt-history');
+  if(h&&eventList.length){h.style.display='flex';renderEvtHistory();}
   setScrHeight();
 }
 
@@ -578,6 +634,7 @@ function renderList(){
   if(q)data=data.filter(m=>m.name.includes(q));
   if(filter==='attend') data=data.filter(m=>statusMap[m.name]==='attend');
   if(filter==='pending')data=data.filter(m=>(statusMap[m.name]||'pending')==='pending');
+  data=applySort(data);
   const attCnt=members.filter(m=>statusMap[m.name]==='attend').length;
   document.getElementById('cnt-all').textContent=members.length;
   document.getElementById('cnt-att').textContent=attCnt;
@@ -616,12 +673,15 @@ function setFilter(f,el){filter=f;document.querySelectorAll('.fp').forEach(p=>p.
 function markUnsaved(){
   hasUnsaved=true;
   const n=members.filter(m=>statusMap[m.name]==='attend').length;
-  const ev=currentEvent?`"${currentEvent}"`:'(이벤트 미선택)';
-  document.getElementById('unsaved-txt').textContent=`${ev} · ${n}명 — 미저장`;
-  document.getElementById('unsaved-bar').classList.add('show');
-  setScrHeight();
+  showFloatSave();
+  scheduleAutoSave();
 }
-function clearUnsaved(){hasUnsaved=false;document.getElementById('unsaved-bar').classList.remove('show');setScrHeight();}
+function clearUnsaved(){
+  hasUnsaved=false;
+  clearTimeout(_autoSaveTimer);
+  document.getElementById('auto-save-txt').textContent='';
+  hideFloatSave();
+}
 
 /* ════ SAVE TO SHEET ════ */
 async function saveToSheet(){
@@ -630,7 +690,9 @@ async function saveToSheet(){
   if(!attendees.length){toast('참석자가 없습니다');return;}
   const eventType=currentEvent.includes('번개')?'flash':'regular';
   const btn=document.querySelector('.save-btn');
+  const fbtn=document.getElementById('float-save');
   if(btn){btn.textContent='⏳ 저장중...';btn.disabled=true;}
+  if(fbtn){fbtn.textContent='⏳ 저장중...';fbtn.classList.add('saving');fbtn.disabled=true;}
   let saved=false;
   // 1차: POST 시도
   try{
@@ -664,6 +726,7 @@ async function saveToSheet(){
     }catch(e2){toast('❌ 저장 실패: '+e2.message);}
   }
   if(btn){btn.textContent='☁️ 시트 저장';btn.disabled=false;}
+  if(fbtn){fbtn.innerHTML='☁️ 저장<span class="auto-save-txt"></span>';fbtn.classList.remove('saving');fbtn.disabled=false;}
 }
 
 /* ════ AVG POPUP ════ */
@@ -858,9 +921,11 @@ function initManualAssign(){
   // 초기화
   manualUnassigned=[...att];
   manualLanes={};
-  for(let i=0;i<numTeams;i++){
-    manualLanes[`${i*2+1}`]=[];
-    manualLanes[`${i*2+2}`]=[];
+  if(manualTeamMode===2){
+    const numTeams2=Math.floor(numLanes/2);
+    for(let i=0;i<numTeams2;i++){manualLanes[`${i*2+1}`]=[];manualLanes[`${i*2+2}`]=[];}
+  }else{
+    for(let i=0;i<numLanes;i++){manualLanes[`${i+1}`]=[];}
   }
   manualSelChip=null;
 
@@ -885,31 +950,42 @@ function renderManualAssign(numTeams){
     </div>
   </div>`;
 
-  // 레인 쌍 그리드
-  html+=`<div class="manual-area"><div class="manual-title">🎳 레인 배치 (레인 탭해서 선택된 인원 배치)</div><div class="manual-lanes">`;
-  for(let i=0;i<numTeams;i++){
-    const la=i*2+1, lb=i*2+2;
-    html+=`<div class="manual-lane-pair">
-      <div class="manual-lane-pair-hdr">팀 ${i+1} — ${la}·${lb} 레인
-        <span style="font-size:11px;color:var(--muted);float:right">합계: ${manualLaneTotal(la,lb)}</span>
-      </div>
-      <div class="manual-lanes-grid">
-        <div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})">
+  // 레인 배치 그리드
+  html+=`<div class="manual-area"><div class="manual-title">🎳 레인 배치 (레인 탭해서 배치)</div><div class="manual-lanes">`;
+  const laneKeys=Object.keys(manualLanes).map(Number).sort((a,b)=>a-b);
+  if(manualTeamMode===2){
+    const pairs=[];
+    for(let i=0;i<laneKeys.length;i+=2) pairs.push([laneKeys[i],laneKeys[i+1]]);
+    pairs.forEach((pair,pi)=>{
+      const [la,lb]=pair;
+      html+=`<div class="manual-lane-pair">
+        <div class="manual-lane-pair-hdr">팀 ${pi+1} — ${la}·${lb||'?'} 레인
+          <span style="font-size:11px;color:var(--muted);float:right">합계: ${manualLaneTotal(la,lb)}</span>
+        </div>
+        <div class="manual-lanes-grid">
+          <div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})">
+            <div class="manual-lane-lbl">${la}번 레인</div>
+            ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span><button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
+          </div>
+          ${lb?`<div class="manual-lane" id="ml-${lb}" onclick="assignToLane(${lb})">
+            <div class="manual-lane-lbl">${lb}번 레인</div>
+            ${(manualLanes[lb]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span><button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${lb},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
+          </div>`:''}
+        </div>
+      </div>`;
+    });
+  }else{
+    laneKeys.forEach((la,pi)=>{
+      html+=`<div class="manual-lane-pair">
+        <div class="manual-lane-pair-hdr">팀 ${pi+1} — ${la}번 레인
+          <span style="font-size:11px;color:var(--muted);float:right">${(manualLanes[la]||[]).reduce((s,m)=>s+(m.avg||0),0)||0}</span>
+        </div>
+        <div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})" style="border-radius:8px;padding:7px;border:2px dashed var(--border);min-height:50px;cursor:pointer">
           <div class="manual-lane-lbl">${la}번 레인</div>
-          ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip">
-            <span>${m.name}${m.avg?` <span style="font-size:9px;color:var(--muted)">${m.avg}</span>`:''}</span>
-            <button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button>
-          </div>`).join('')}
+          ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span><button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
         </div>
-        <div class="manual-lane" id="ml-${lb}" onclick="assignToLane(${lb})">
-          <div class="manual-lane-lbl">${lb}번 레인</div>
-          ${(manualLanes[lb]||[]).map(m=>`<div class="manual-chip">
-            <span>${m.name}${m.avg?` <span style="font-size:9px;color:var(--muted)">${m.avg}</span>`:''}</span>
-            <button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${lb},'${m.name.replace(/'/g,"\\'")}')">×</button>
-          </div>`).join('')}
-        </div>
-      </div>
-    </div>`;
+      </div>`;
+    });
   }
   html+='</div></div>';
 
@@ -967,13 +1043,21 @@ function removeFromLane(laneNum,name){
 }
 
 function finalizeManual(){
-  const numTeams=Object.keys(manualLanes).length/2;
-  laneGroups=Array.from({length:numTeams},(_,i)=>{
-    const la=i*2+1,lb=i*2+2;
-    const laneA=manualLanes[la]||[],laneB=manualLanes[lb]||[];
-    const members=[...laneA,...laneB];
-    return{teamNum:i+1,laneAN:la,laneBN:lb,laneA,laneB,members,total:members.reduce((s,m)=>s+(m.avg||0),0)};
-  });
+  const laneKeys=Object.keys(manualLanes).map(Number).sort((a,b)=>a-b);
+  if(manualTeamMode===2){
+    laneGroups=[];
+    for(let i=0;i<laneKeys.length;i+=2){
+      const la=laneKeys[i],lb=laneKeys[i+1];
+      const laneA=manualLanes[la]||[],laneB=lb?manualLanes[lb]||[]:[];
+      const members=[...laneA,...laneB];
+      laneGroups.push({teamNum:laneGroups.length+1,laneAN:la,laneBN:lb||la,laneA,laneB,members,total:members.reduce((s,m)=>s+(m.avg||0),0)});
+    }
+  }else{
+    laneGroups=laneKeys.map((la,i)=>{
+      const laneA=manualLanes[la]||[];
+      return{teamNum:i+1,laneAN:la,laneBN:la,laneA,laneB:[],members:[...laneA],total:laneA.reduce((s,m)=>s+(m.avg||0),0)};
+    });
+  }
   renderAutoResults();renderDash();
   toast('✅ 수동 배정 결과 확정!');
 }
@@ -1031,8 +1115,101 @@ function saveCfg(){cfg.url=document.getElementById('c-url').value.trim()||cfg.ur
 let _tt;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(_tt);_tt=setTimeout(()=>{t.style.opacity='0';},2400);}
 
+
+/* ════ SORT ════ */
+function setSort(s,el){
+  sortMode=s;
+  document.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  renderList();
+}
+
+function applySort(data){
+  // 회비 미납자 항상 하단
+  const fee_ok = data.filter(m=>m.fee!=='X');
+  const fee_no = data.filter(m=>m.fee==='X');
+  function srt(arr){
+    if(sortMode==='name')    return [...arr].sort((a,b)=>a.name.localeCompare(b.name,'ko'));
+    if(sortMode==='avg-d')   return [...arr].sort((a,b)=>(b.avg||0)-(a.avg||0));
+    if(sortMode==='avg-a')   return [...arr].sort((a,b)=>(a.avg||0)-(b.avg||0));
+    if(sortMode==='grade')   return [...arr].sort((a,b)=>String(a.dept).localeCompare(String(b.dept)));
+    return arr;
+  }
+  return [...srt(fee_ok), ...srt(fee_no)];
+}
+
+/* ════ VIEW TOGGLE ════ */
+function toggleView(){
+  viewMode = viewMode==='list' ? 'grid' : 'list';
+  document.getElementById('view-btn').textContent = viewMode==='list' ? '⊞' : '☰';
+  renderList();
+}
+
+/* ════ FLOAT SAVE ════ */
+function showFloatSave(){
+  document.getElementById('float-save').classList.add('show');
+}
+function hideFloatSave(){
+  document.getElementById('float-save').classList.remove('show');
+}
+
+let _autoSaveTimer;
+function scheduleAutoSave(){
+  clearTimeout(_autoSaveTimer);
+  document.getElementById('auto-save-txt').textContent='3초 후 자동저장';
+  _autoSaveTimer=setTimeout(()=>{
+    if(hasUnsaved) saveToSheet();
+  }, 3000);
+}
+
+/* ════ MANUAL TEAM MODE ════ */
+function setManualTeamMode(n, el){
+  manualTeamMode=n;
+  document.querySelectorAll('.lmt-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  updateManualLaneLbl();
+}
+function adjManualLane(d){
+  const inp=document.getElementById('lane-cnt2');
+  const min=manualTeamMode===2?2:1;
+  const step=manualTeamMode===2?2:1;
+  let v=Math.max(min,Math.min(12,parseInt(inp.value)+d));
+  if(manualTeamMode===2) v=Math.round(v/2)*2;
+  inp.value=v;
+  updateManualLaneLbl();
+}
+function updateManualLaneLbl(){
+  const inp=document.getElementById('lane-cnt2');
+  const v=parseInt(inp.value)||2;
+  const teams=manualTeamMode===2?v/2:v;
+  document.getElementById('team-lbl2').textContent=`= ${teams}팀`;
+  document.getElementById('manual-hint').textContent=
+    manualTeamMode===2?`${v}개 레인, ${teams}팀 (2레인씩 한 팀)`:`${v}개 레인, ${teams}팀 (레인 = 팀)`;
+}
+
+/* ════ EVENT HISTORY ════ */
+function renderEvtHistory(){
+  const el=document.getElementById('evt-history');
+  if(!el) return;
+  if(!eventList.length){el.style.display='none';return;}
+  el.style.display='flex';
+  el.innerHTML=[...eventList].reverse().slice(0,10).map(ev=>`
+    <div class="evt-hist-chip ${currentEvent===ev.name?'sel':''}" onclick="selectHistoryEvt('${ev.name.replace(/'/g,"\'")}')">
+      ${ev.name}
+    </div>`).join('');
+}
+function selectHistoryEvt(name){
+  currentEvent=name;
+  saveLocal();
+  document.getElementById('evt-name-badge').textContent=name;
+  renderEvtHistory();
+  loadFromSheet(name);
+  toast(`📅 "${name}" 선택됨`);
+}
+
 // init
 updateTeamLbls();
+updateManualLaneLbl();
 </script>
 </body>
 </html>
