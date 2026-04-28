@@ -73,7 +73,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .mc-name{font-size:13px;font-weight:700;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mc-sub{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .avg-chip{display:inline-flex;align-items:center;background:var(--navy);color:var(--amber);font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px}
-.noavg-badge{display:inline-flex;align-items:center;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;cursor:pointer}
+.noavg-badge{display:none}
 .chk{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:transparent;transition:.15s}
 .mc.attend .chk{background:var(--green);border-color:var(--green);color:#fff}
 
@@ -225,11 +225,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .evt-hist-chip.sel{background:var(--amber);border-color:var(--amber);color:var(--navy)}
 
 /* ── COMPACT GRID VIEW ── */
-.grid-view{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:6px 12px 110px}
-.gc{background:var(--card);border-radius:10px;padding:10px 11px;display:flex;flex-direction:column;gap:3px;box-shadow:var(--sh);border-left:3px solid transparent;cursor:pointer;user-select:none;transition:all .15s}
+.grid-view{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:6px 10px 110px}
+.gc{background:var(--card);border-radius:8px;padding:7px 8px;display:flex;flex-direction:column;gap:3px;box-shadow:var(--sh);border-left:3px solid transparent;cursor:pointer;user-select:none;transition:all .15s}
 .gc.attend{border-left-color:var(--green);background:#f0fdf4}
-.gc-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gc-sub{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:3px}
+.gc-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gc-sub{font-size:9px;color:var(--muted);display:flex;align-items:center;gap:2px;margin-top:1px}
 .gc-chk{font-size:12px;color:var(--green);font-weight:900}
 
 /* ── LANE TEAM MODE TOGGLE ── */
@@ -262,33 +262,42 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
   <!-- 이벤트 피커 -->
   <div class="evt-bar" id="evt-bar" style="display:none">
-    <div id="evt-picker">
-      <div class="evt-types">
-        <button class="evt-type-btn" onclick="selType('번개',this)">⚡ 번개</button>
-        <button class="evt-type-btn" onclick="selType('정기전',this)">🎳 정기전</button>
-        <button class="evt-type-btn" onclick="selType('교류전',this)">🤝 교류전</button>
-        <button class="evt-type-btn" onclick="selType('이벤트',this)">🎉 이벤트</button>
-        <button class="evt-type-btn" onclick="selType('직접입력',this)">✏️ 직접</button>
-      </div>
-      <div class="evt-date-row" id="evt-date-row">
-        <select class="evt-date-sel" id="evt-month" onchange="updateEvtPreview()"></select>
-        <span style="color:rgba(255,255,255,.5);font-size:13px">월</span>
-        <select class="evt-date-sel" id="evt-day" onchange="updateEvtPreview()"></select>
-        <span style="color:rgba(255,255,255,.5);font-size:13px">일</span>
-        <span class="evt-preview" id="evt-preview">—</span>
-        <button class="evt-confirm-btn" onclick="confirmEvent()">선택</button>
-      </div>
-      <div class="event-new-row" id="evt-direct-row" style="display:none">
-        <input class="event-new-input" id="evt-direct-inp" type="text" placeholder="이벤트 이름 직접 입력">
-        <button class="event-ok-btn" onclick="confirmEvent()">선택</button>
-      </div>
-    </div>
+    <!-- 선택된 이벤트 표시 (선택 후) -->
     <div class="evt-current" id="evt-current" style="display:none">
       <div class="evt-name-badge" id="evt-name-badge">—</div>
       <button class="evt-change-btn" onclick="changeEvent()">변경</button>
-      <button class="iBtn" onclick="refreshEvtList()" style="width:28px;height:28px;font-size:12px">↓</button>
+      <button class="iBtn" onclick="syncAll()" style="width:28px;height:28px;font-size:11px">🔄</button>
     </div>
-    <div class="evt-history" id="evt-history" style="display:none"></div>
+    <!-- 피커 (선택 전) -->
+    <div id="evt-picker">
+      <!-- 기존 이벤트 목록 (시트에서) -->
+      <div id="evt-existing-wrap" style="display:none">
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5px">📋 기존 모임 선택</div>
+        <div class="evt-history" id="evt-history"></div>
+        <div style="height:1px;background:rgba(255,255,255,.12);margin:7px 0"></div>
+      </div>
+      <!-- 새 이벤트 만들기 -->
+      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5px">➕ 새 모임 만들기</div>
+      <div class="evt-types">
+        <button class="evt-type-btn" onclick="selType('번개',this)">⚡번개</button>
+        <button class="evt-type-btn" onclick="selType('정기전',this)">🎳정기전</button>
+        <button class="evt-type-btn" onclick="selType('교류전',this)">🤝교류전</button>
+        <button class="evt-type-btn" onclick="selType('이벤트',this)">🎉이벤트</button>
+        <button class="evt-type-btn" onclick="selType('직접입력',this)">✏️직접</button>
+      </div>
+      <div class="evt-date-row" id="evt-date-row" style="display:none">
+        <select class="evt-date-sel" id="evt-month" onchange="updateEvtPreview()"></select>
+        <span style="color:rgba(255,255,255,.5);font-size:12px">월</span>
+        <select class="evt-date-sel" id="evt-day" onchange="updateEvtPreview()"></select>
+        <span style="color:rgba(255,255,255,.5);font-size:12px">일</span>
+        <span class="evt-preview" id="evt-preview"></span>
+        <button class="evt-confirm-btn" onclick="confirmEvent()">선택</button>
+      </div>
+      <div class="event-new-row" id="evt-direct-row" style="display:none">
+        <input class="event-new-input" id="evt-direct-inp" type="text" placeholder="모임 이름 직접 입력">
+        <button class="event-ok-btn" onclick="confirmEvent()">선택</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -305,11 +314,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <div class="sec active" id="sec-att">
   <div class="toolbar">
     <div class="srch"><span class="srch-ico">🔍</span><input type="search" id="srch-inp" placeholder="이름 검색..." oninput="renderList()"></div>
-    <button onclick="toggleView()" id="view-btn" style="background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:0 10px;font-size:14px;cursor:pointer;height:38px;flex-shrink:0">⊞</button>
+    <button onclick="toggleView()" id="view-btn" style="background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:0 10px;font-size:14px;cursor:pointer;height:38px;flex-shrink:0">☰</button>
   </div>
   <div class="sort-bar">
     <span class="sort-lbl">정렬</span>
-    <button class="sp" onclick="setSort('default',this)">기본</button>
     <button class="sp active" onclick="setSort('name',this)">이름순</button>
     <button class="sp" onclick="setSort('avg-d',this)">에버↑</button>
     <button class="sp" onclick="setSort('avg-a',this)">에버↓</button>
@@ -481,7 +489,7 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbxu6run01Cc9Y5LLgXKvLt3
 /* ════ CONFIG ════ */
 let cfg = { url: GAS_URL, name:1, avg:2, dept:3, fee:5, reg:6 };
 let members=[], statusMap={}, tempAvgMap={}, eventList=[], currentEvent=null;
-let hasUnsaved=false, filter='all', sortMode='name', viewMode='list', laneGroups=[], laneMode='auto', manualTeamMode=2, autoTeamMode=2;
+let hasUnsaved=false, filter='all', sortMode='name', viewMode='grid', laneGroups=[], laneMode='auto', manualTeamMode=2, autoTeamMode=2;
 let swapMode=false, swapSel=null;
 let avgPopupTarget=null;
 // 수동배정 상태
@@ -528,7 +536,7 @@ function selType(type, el){
 function updateEvtPreview(){
   const directRow=document.getElementById('evt-direct-row');
   const dateRow=document.getElementById('evt-date-row');
-  if(!selectedType){document.getElementById('evt-preview').textContent='← 종류 선택';return;}
+  if(!selectedType) return;
   if(selectedType==='직접입력'){
     if(directRow)directRow.style.display='flex';
     if(dateRow)dateRow.style.display='none';
@@ -564,14 +572,13 @@ function showCurrentEvent(){
   document.getElementById('evt-picker').style.display='none';
   document.getElementById('evt-current').style.display='flex';
   document.getElementById('evt-name-badge').textContent=currentEvent;
-  const h=document.getElementById('evt-history');
-  if(h&&eventList.length){h.style.display='flex';renderEvtHistory();}
   setScrHeight();
 }
 
 function changeEvent(){
   document.getElementById('evt-picker').style.display='block';
   document.getElementById('evt-current').style.display='none';
+  renderEvtHistory();
   setScrHeight();
 }
 
@@ -609,6 +616,7 @@ async function syncAll(){
     }));
     eventList=Array.isArray(er)?er:[];
     document.getElementById('evt-bar').style.display='block';
+    renderEvtHistory();
     if(currentEvent) showCurrentEvent();
     if(currentEvent) await loadFromSheet(currentEvent);
     setSS('ok',`${members.length}명`);
@@ -677,7 +685,7 @@ function renderList(){
       <div class="mc-info">
         <div class="mc-name">${m.name}${m.fee==='X'?' <span style="font-size:10px;color:var(--red);font-weight:700">미납</span>':''}</div>
         <div class="mc-sub">
-          ${eff?`<span class="avg-chip">${eff}</span>`:`<span class="noavg-badge" onclick="event.stopPropagation();openAvgPopup('${nm}')">에버리지 없음 ✏️</span>`}
+          ${eff?`<span class="avg-chip">${eff}</span>`:''}
           <span>${m.dept}</span>
         </div>
       </div>
@@ -805,25 +813,88 @@ function getAttendees(){
 }
 
 /* ════ AUTO ASSIGN ════ */
+let _assignCount=0;
 function autoAssign(){
   const att=getAttendees();
   if(!att.length){toast('참석자를 먼저 체크하세요 👆');return;}
   checkNoAvg(att);
+  _assignCount++;
   const numLanes=parseInt(document.getElementById('lane-cnt').value)||6;
-  att.sort((a,b)=>b.avg-a.avg);
-  if(autoTeamMode===2){
-    const numTeams=Math.floor(numLanes/2);
-    const teams=Array.from({length:numTeams},(_,i)=>({teamNum:i+1,laneAN:i*2+1,laneBN:i*2+2,members:[],total:0}));
-    att.forEach(m=>{const t=teams.reduce((mn,t)=>t.total<mn.total?t:mn,teams[0]);t.members.push(m);t.total+=m.avg;});
-    laneGroups=teams.map(t=>{const a=[],b=[];t.members.forEach((m,i)=>{if(i%2===0)a.push(m);else b.push(m);});return{...t,laneA:a,laneB:b};});
-    toast(`⚡ ${numTeams}팀 자동 배정 완료!`);
-  }else{
-    const teams=Array.from({length:numLanes},(_,i)=>({teamNum:i+1,laneAN:i+1,laneBN:i+1,members:[],total:0}));
-    att.forEach(m=>{const t=teams.reduce((mn,t)=>t.total<mn.total?t:mn,teams[0]);t.members.push(m);t.total+=m.avg;});
-    laneGroups=teams.map(t=>({...t,laneA:t.members,laneB:[]}));
-    toast(`⚡ ${numLanes}팀(레인) 자동 배정 완료!`);
+  const numTeams=autoTeamMode===2?Math.floor(numLanes/2):numLanes;
+
+  // 재클릭시 같은 에버리지 묶음 내에서 셔플
+  const sorted=[...att].sort((a,b)=>b.avg-a.avg);
+  if(_assignCount>1){
+    // ±8 범위 내 인접 멤버들을 섞어서 다른 결과 유도
+    for(let i=0;i<sorted.length-1;i++){
+      if(Math.abs((sorted[i].avg||0)-(sorted[i+1].avg||0))<=8 && Math.random()<0.5){
+        [sorted[i],sorted[i+1]]=[sorted[i+1],sorted[i]];
+      }
+    }
   }
+
+  // 1단계: 그리디 배정
+  const teams=Array.from({length:numTeams},(_,i)=>({
+    teamNum:i+1,
+    laneAN:autoTeamMode===2?i*2+1:i+1,
+    laneBN:autoTeamMode===2?i*2+2:i+1,
+    members:[],total:0
+  }));
+  sorted.forEach(m=>{
+    const t=teams.reduce((mn,t)=>t.total<mn.total?t:mn,teams[0]);
+    t.members.push(m);t.total+=m.avg;
+  });
+
+  // 2단계: 2-opt 개선 (편차 최소화)
+  let improved=true;
+  let iter=0;
+  while(improved && iter<200){
+    improved=false;iter++;
+    for(let ti=0;ti<teams.length-1;ti++){
+      for(let tj=ti+1;tj<teams.length;tj++){
+        for(let mi=0;mi<teams[ti].members.length;mi++){
+          for(let mj=0;mj<teams[tj].members.length;mj++){
+            const ai=teams[ti].members[mi].avg||0;
+            const aj=teams[tj].members[mj].avg||0;
+            if(ai===aj) continue;
+            const oldSpread=Math.max(...teams.map(t=>t.total))-Math.min(...teams.map(t=>t.total));
+            // 스왑 시뮬레이션
+            teams[ti].total+=aj-ai;
+            teams[tj].total+=ai-aj;
+            const newSpread=Math.max(...teams.map(t=>t.total))-Math.min(...teams.map(t=>t.total));
+            if(newSpread<oldSpread-0.5){
+              // 실제 스왑
+              const tmp=teams[ti].members[mi];
+              teams[ti].members[mi]=teams[tj].members[mj];
+              teams[tj].members[mj]=tmp;
+              improved=true;
+            }else{
+              // 롤백
+              teams[ti].total+=ai-aj;
+              teams[tj].total+=aj-ai;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 3단계: 레인 내 분배 (합계 균등하게)
+  laneGroups=teams.map(t=>{
+    if(autoTeamMode===1) return{...t,laneA:t.members,laneB:[]};
+    // 2레인 1팀: 멤버를 두 레인에 균등 분배
+    const sorted2=[...t.members].sort((a,b)=>(b.avg||0)-(a.avg||0));
+    const a=[],b=[];let sa=0,sb=0;
+    sorted2.forEach(m=>{
+      if(sa<=sb){a.push(m);sa+=m.avg||0;}
+      else{b.push(m);sb+=m.avg||0;}
+    });
+    return{...t,laneA:a,laneB:b};
+  });
+
+  const spread=Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total)));
   cancelSwap();renderAutoResults();renderDash();
+  toast(`⚡ ${numTeams}팀 배정 완료 (편차: ${spread}점)${_assignCount>1?' · 재배정됨':''}`);
 }
 
 function checkNoAvg(att){
@@ -953,7 +1024,7 @@ function initManualAssign(){
   checkNoAvg(att);
 
   // 초기화
-  manualUnassigned=[...att];
+  manualUnassigned=[...att].sort((a,b)=>(b.avg||0)-(a.avg||0));
   manualLanes={};
   if(manualTeamMode===2){
     const numTeams2=Math.floor(numLanes/2);
@@ -1175,7 +1246,7 @@ function applySort(data){
 /* ════ VIEW TOGGLE ════ */
 function toggleView(){
   viewMode = viewMode==='list' ? 'grid' : 'list';
-  document.getElementById('view-btn').textContent = viewMode==='list' ? '⊞' : '☰';
+  document.getElementById('view-btn').textContent = viewMode==='grid' ? '☰' : '⊞';
   renderList();
 }
 
@@ -1224,8 +1295,13 @@ function updateManualLaneLbl(){
 /* ════ EVENT HISTORY ════ */
 function renderEvtHistory(){
   const el=document.getElementById('evt-history');
+  const wrap=document.getElementById('evt-existing-wrap');
   if(!el) return;
-  if(!eventList.length){el.style.display='none';return;}
+  if(!eventList.length){
+    if(wrap)wrap.style.display='none';
+    return;
+  }
+  if(wrap)wrap.style.display='block';
   el.style.display='flex';
   el.innerHTML=[...eventList].reverse().map(ev=>`
     <div class="evt-hist-chip ${currentEvent===ev.name?'sel':''}" onclick="selectHistoryEvt('${ev.name.replace(/'/g,"\'")}')">
