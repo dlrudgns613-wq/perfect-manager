@@ -323,7 +323,12 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
       </div>
     </div>
 
-    <div id="noavg-warn" style="display:none" class="noavg-warn"></div>
+    <!-- 에버리지 없는 참석자 입력 -->
+    <div id="noavg-section" style="display:none" class="cfg-card">
+      <div class="cfg-lbl">⚠️ 에버리지 없는 참석자</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.6">배정 전에 에버리지를 입력해주세요<br>📌 남자 평균 <strong style="color:var(--navy)">125</strong> &nbsp;/&nbsp; 여자 평균 <strong style="color:var(--navy)">105</strong></div>
+      <div id="noavg-list"></div>
+    </div>
     <div id="lane-results"></div>
 
   </div>
@@ -618,27 +623,47 @@ function markUnsaved(){
 }
 function clearUnsaved(){hasUnsaved=false;document.getElementById('unsaved-bar').classList.remove('show');setScrHeight();}
 
-/* ════ SAVE TO SHEET (GET 방식) ════ */
+/* ════ SAVE TO SHEET ════ */
 async function saveToSheet(){
   if(!currentEvent){toast('이벤트를 먼저 선택하세요');return;}
   const attendees=members.filter(m=>statusMap[m.name]==='attend').map(m=>m.name);
+  if(!attendees.length){toast('참석자가 없습니다');return;}
   const eventType=currentEvent.includes('번개')?'flash':'regular';
   const btn=document.querySelector('.save-btn');
   if(btn){btn.textContent='⏳ 저장중...';btn.disabled=true;}
+  let saved=false;
+  // 1차: POST 시도
   try{
-    const data=await gasGet('saveAttendance',{
-      eventName:currentEvent,
-      eventType,
-      attendees:JSON.stringify(attendees),
-      overwrite:'true'
+    const res=await fetch(cfg.url,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({action:'saveAttendance',eventName:currentEvent,eventType,attendees,overwrite:true}),
     });
+    const txt=await res.text();
+    const data=JSON.parse(txt);
     if(data.error) throw new Error(data.error);
     if(data.isNew) eventList.push({col:data.eventCol,name:currentEvent});
-    clearUnsaved();saveLocal();
+    clearUnsaved();saveLocal();saved=true;
     toast(`✅ ${data.markedCount}명 시트 저장 완료!`);
     if(data.notFound?.length) setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
-  }catch(e){toast('❌ 저장 실패: '+e.message);}
-  finally{if(btn){btn.textContent='☁️ 시트 저장';btn.disabled=false;}}
+  }catch(e1){
+    console.warn('POST 실패, GET으로 재시도:', e1.message);
+  }
+  // 2차: GET fallback (쉼표 구분)
+  if(!saved){
+    try{
+      const data=await gasGet('saveAttendance',{
+        eventName:currentEvent,eventType,
+        attendees:attendees.join(','),overwrite:'true'
+      });
+      if(data.error) throw new Error(data.error);
+      if(data.isNew) eventList.push({col:data.eventCol,name:currentEvent});
+      clearUnsaved();saveLocal();
+      toast(`✅ ${data.markedCount}명 시트 저장 완료!`);
+      if(data.notFound?.length) setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
+    }catch(e2){toast('❌ 저장 실패: '+e2.message);}
+  }
+  if(btn){btn.textContent='☁️ 시트 저장';btn.disabled=false;}
 }
 
 /* ════ AVG POPUP ════ */
@@ -706,11 +731,33 @@ function autoAssign(){
 
 function checkNoAvg(att){
   const noAvg=att.filter(m=>!m.avg||m.avg===0);
-  const warn=document.getElementById('noavg-warn');
-  if(noAvg.length){
-    warn.style.display='block';
-    warn.innerHTML=`⚠️ <strong>에버리지 없는 참석자 ${noAvg.length}명</strong><br>${noAvg.map(m=>`<span onclick="openAvgPopup('${m.name.replace(/'/g,"\\'")}')" style="cursor:pointer;text-decoration:underline">${m.name}</span>`).join(', ')}<br><span style="font-size:11px">이름을 탭해서 에버리지를 입력하거나, 평균값(남 125 / 여 105)이 자동 적용됩니다.</span>`;
-  }else{warn.style.display='none';}
+  const sec=document.getElementById('noavg-section');
+  const list=document.getElementById('noavg-list');
+  if(!noAvg.length){if(sec)sec.style.display='none';return;}
+  if(sec)sec.style.display='block';
+  if(!list)return;
+  list.innerHTML=noAvg.map(m=>{
+    const nm=m.name.replace(/'/g,"\'");
+    const tmp=tempAvgMap[m.name]||'';
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="flex:1;font-size:13px;font-weight:700">${m.name}</span>
+      <button onclick="setNoAvgGuide('${nm}',125)" style="padding:4px 8px;border:1.5px solid var(--border);border-radius:7px;background:var(--bg);font-size:11px;font-weight:700;cursor:pointer;color:var(--muted)">남 125</button>
+      <button onclick="setNoAvgGuide('${nm}',105)" style="padding:4px 8px;border:1.5px solid var(--border);border-radius:7px;background:var(--bg);font-size:11px;font-weight:700;cursor:pointer;color:var(--muted)">여 105</button>
+      <input type="number" id="navg-${nm}" value="${tmp}" placeholder="직접입력" min="50" max="300"
+        style="width:72px;border:1.5px solid var(--border);border-radius:8px;padding:5px 7px;font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;outline:none;text-align:center;color:var(--navy)"
+        oninput="applyNoAvg('${nm}',this.value)">
+    </div>`;
+  }).join('');
+}
+function setNoAvgGuide(name,v){
+  const inp=document.getElementById('navg-'+name.replace(/[^가-힣a-zA-Z0-9]/g,'_'));
+  if(inp)inp.value=v;
+  applyNoAvg(name,v);
+}
+function applyNoAvg(name,v){
+  const n=parseInt(v);
+  if(n>=50&&n<=300){tempAvgMap[name]=n;saveLocal();}
+}
 }
 
 const TC=['#162447','#065f46','#7c2d12','#4c1d95','#1e3a5f','#1f2937'];
