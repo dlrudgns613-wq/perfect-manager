@@ -264,9 +264,34 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   <div class="evt-bar" id="evt-bar" style="display:none">
     <!-- 선택된 이벤트 표시 (선택 후) -->
     <div class="evt-current" id="evt-current" style="display:none">
-      <div class="evt-name-badge" id="evt-name-badge">—</div>
-      <button class="evt-change-btn" onclick="changeEvent()">변경</button>
-      <button class="iBtn" onclick="syncAll()" style="width:28px;height:28px;font-size:11px">🔄</button>
+      <div class="evt-name-badge" id="evt-name-badge" onclick="toggleEvtList()" style="cursor:pointer;flex:1">—</div>
+      <span style="font-size:10px;color:rgba(255,255,255,.5);margin-left:4px" id="evt-toggle-arrow">▼</span>
+      <button class="iBtn" onclick="syncAll()" style="width:28px;height:28px;font-size:11px;margin-left:4px">🔄</button>
+    </div>
+    <!-- 이벤트 목록 토글 패널 -->
+    <div id="evt-list-panel" style="display:none;margin-top:6px">
+      <div class="evt-history" id="evt-history"></div>
+      <div style="height:1px;background:rgba(255,255,255,.12);margin:7px 0"></div>
+      <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5px">➕ 새 모임 만들기</div>
+      <div class="evt-types" id="evt-types-new">
+        <button class="evt-type-btn" onclick="selType('번개',this)">⚡번개</button>
+        <button class="evt-type-btn" onclick="selType('정기전',this)">🎳정기전</button>
+        <button class="evt-type-btn" onclick="selType('교류전',this)">🤝교류전</button>
+        <button class="evt-type-btn" onclick="selType('이벤트',this)">🎉이벤트</button>
+        <button class="evt-type-btn" onclick="selType('직접입력',this)">✏️직접</button>
+      </div>
+      <div class="evt-date-row" id="evt-date-row2" style="display:none">
+        <select class="evt-date-sel" id="evt-month2" onchange="updateEvtPreview2()"></select>
+        <span style="color:rgba(255,255,255,.5);font-size:12px">월</span>
+        <select class="evt-date-sel" id="evt-day2" onchange="updateEvtPreview2()"></select>
+        <span style="color:rgba(255,255,255,.5);font-size:12px">일</span>
+        <span class="evt-preview" id="evt-preview2"></span>
+        <button class="evt-confirm-btn" onclick="confirmEvent2()">선택</button>
+      </div>
+      <div class="event-new-row" id="evt-direct-row2" style="display:none">
+        <input class="event-new-input" id="evt-direct-inp2" type="text" placeholder="모임 이름 직접 입력">
+        <button class="event-ok-btn" onclick="confirmEvent2()">선택</button>
+      </div>
     </div>
     <!-- 피커 (선택 전) -->
     <div id="evt-picker">
@@ -612,7 +637,7 @@ async function syncAll(){
       dept:String(row[cfg.dept]||'').trim(),
       fee:String(row[cfg.fee]||'').trim(),
       reg:parseInt(row[cfg.reg])||0,
-      flash:parseInt(row[8])||0,
+      flash:parseInt(row[7])||0,
     }));
     eventList=Array.isArray(er)?er:[];
     document.getElementById('evt-bar').style.display='block';
@@ -879,17 +904,27 @@ function autoAssign(){
     }
   }
 
-  // 3단계: 레인 내 분배 (합계 균등하게)
+  // 3단계: 레인 내 분배 + 앵커 배치
+  function setAnchor(lane){
+    // 최고 에버리지 선수를 마지막(앵커)으로
+    if(lane.length<2) return lane;
+    const maxIdx=lane.reduce((mi,m,i)=>(m.avg||0)>(lane[mi].avg||0)?i:mi,0);
+    const anchor=lane.splice(maxIdx,1)[0];
+    lane.push(anchor);
+    return lane;
+  }
   laneGroups=teams.map(t=>{
-    if(autoTeamMode===1) return{...t,laneA:t.members,laneB:[]};
-    // 2레인 1팀: 멤버를 두 레인에 균등 분배
+    if(autoTeamMode===1){
+      return{...t,laneA:setAnchor([...t.members]),laneB:[]};
+    }
+    // 2레인 1팀: 균등 분배 후 각 레인 앵커 배치
     const sorted2=[...t.members].sort((a,b)=>(b.avg||0)-(a.avg||0));
     const a=[],b=[];let sa=0,sb=0;
     sorted2.forEach(m=>{
       if(sa<=sb){a.push(m);sa+=m.avg||0;}
       else{b.push(m);sb+=m.avg||0;}
     });
-    return{...t,laneA:a,laneB:b};
+    return{...t,laneA:setAnchor(a),laneB:setAnchor(b)};
   });
 
   const spread=Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total)));
@@ -935,8 +970,13 @@ function renderAutoResults(){
   const tots=laneGroups.map(t=>t.total),maxT=Math.max(...tots)||1;
   const spread=Math.round(Math.max(...tots)-Math.min(...tots));
 
-  let html=`<div class="bal-card"><div class="bal-title">⚖️ 팀별 합계 균형 (최대 편차: <strong>${spread}</strong>)</div>`;
-  laneGroups.forEach((t,i)=>{html+=`<div class="bal-row"><div class="bal-lbl">${t.laneAN}·${t.laneBN}</div><div class="bal-track"><div class="bal-fill" style="width:${(t.total/maxT*100).toFixed(0)}%;background:${TC[i%TC.length]}"></div></div><div class="bal-num">${Math.round(t.total)}</div></div>`;});
+  const avgs=laneGroups.map(t=>t.members.length?Math.round(t.total/t.members.length):0);
+  const maxAvg=Math.max(...avgs)||1;
+  let html=`<div class="bal-card"><div class="bal-title">⚖️ 팀별 균형 (합계 편차: <strong>${spread}</strong>)</div>`;
+  laneGroups.forEach((t,i)=>{
+    const avg=t.members.length?Math.round(t.total/t.members.length):0;
+    html+=`<div class="bal-row"><div class="bal-lbl">${t.laneAN}·${t.laneBN}</div><div class="bal-track"><div class="bal-fill" style="width:${(t.total/maxT*100).toFixed(0)}%;background:${TC[i%TC.length]}"></div></div><div class="bal-num">${Math.round(t.total)}</div><div style="font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0">avg ${avg}</div></div>`;
+  });
   html+='</div>';
 
   html+=laneGroups.map((t,ti)=>`
@@ -956,13 +996,13 @@ function renderAutoResults(){
         </div>
       </div>
       <div class="team-footer">
-        <button class="smBtn navy" onclick="startSwap()">🔄 수동 조정</button>
         <button class="smBtn" onclick="shuffleTeam(${ti})">🔀 섞기</button>
         <button class="smBtn" onclick="copyTeam(${ti})">📋 복사</button>
       </div>
     </div>`).join('');
 
   const allTxt=laneGroups.map(t=>`[팀${t.teamNum}] ${t.laneAN}레인:${t.laneA.map(m=>m.name).join(',')} / ${t.laneBN}레인:${t.laneB.map(m=>m.name).join(',')}`).join('\n');
+  html+=`<button class="bigBtn" style="margin-bottom:8px" onclick="startSwap()">🔄 수동 조정 (멤버 교체)</button>`;
   html+=`<button class="copy-all" onclick="navigator.clipboard.writeText(\`${allTxt.replace(/`/g,'\\`')}\`).then(()=>toast('📤 전체 복사됨!'))">📤 전체 결과 복사</button>`;
   con.innerHTML=html;
 }
@@ -1070,11 +1110,11 @@ function renderManualAssign(numTeams){
         <div class="manual-lanes-grid">
           <div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})">
             <div class="manual-lane-lbl">${la}번 레인</div>
-            ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span><button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
+            ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
           </div>
           ${lb?`<div class="manual-lane" id="ml-${lb}" onclick="assignToLane(${lb})">
             <div class="manual-lane-lbl">${lb}번 레인</div>
-            ${(manualLanes[lb]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span><button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${lb},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
+            ${(manualLanes[lb]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${lb},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
           </div>`:''}
         </div>
       </div>`;
@@ -1087,7 +1127,7 @@ function renderManualAssign(numTeams){
         </div>
         <div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})" style="border-radius:8px;padding:7px;border:2px dashed var(--border);min-height:50px;cursor:pointer">
           <div class="manual-lane-lbl">${la}번 레인</div>
-          ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span><button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
+          ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
         </div>
       </div>`;
     });
@@ -1177,7 +1217,7 @@ function renderDash(){
   document.getElementById('d-spd').textContent=laneGroups.length>1?Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total))):'-';
   drawTeamChart();drawDistChart(all);
   document.getElementById('rank-avg').innerHTML=all.filter(m=>m.avg>0).sort((a,b)=>b.avg-a.avg).slice(0,10).map((m,i)=>`<div class="rank-item"><div class="rnum ${i===0?'g':i===1?'s':i===2?'b':''}">${i+1}</div><div class="rname">${m.name}</div><div class="rval">${m.avg}</div></div>`).join('')||'<div class="empty">없음</div>';
-  document.getElementById('rank-reg').innerHTML=members.filter(m=>m.reg>0).sort((a,b)=>b.reg-a.reg).slice(0,10).map((m,i)=>`<div class="rank-item"><div class="rnum ${i===0?'g':i===1?'s':i===2?'b':''}">${i+1}</div><div class="rname">${m.name}</div><div class="rval">${m.reg}회</div></div>`).join('')||'<div class="empty">없음</div>';
+  document.getElementById('rank-reg').innerHTML=members.map(m=>({...m,tot:(m.reg||0)+(m.flash||0)})).filter(m=>m.tot>0).sort((a,b)=>b.tot-a.tot).slice(0,10).map((m,i)=>`<div class="rank-item"><div class="rnum ${i===0?'g':i===1?'s':i===2?'b':''}">${i+1}</div><div class="rname">${m.name}</div><div class="rval">${m.tot}회</div></div>`).join('')||'<div class="empty">없음</div>';
 }
 function drawTeamChart(){
   const cv=document.getElementById('team-chart'),em=document.getElementById('team-chart-empty');
@@ -1312,9 +1352,15 @@ function selectHistoryEvt(name){
   currentEvent=name;
   saveLocal();
   document.getElementById('evt-name-badge').textContent=name;
+  // 패널 닫기
+  evtListOpen=false;
+  const panel=document.getElementById('evt-list-panel');
+  const arrow=document.getElementById('evt-toggle-arrow');
+  if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';
   renderEvtHistory();
   loadFromSheet(name);
   toast(`📅 "${name}" 선택됨`);
+  setScrHeight();
 }
 
 
@@ -1339,6 +1385,75 @@ function updateAutoLaneLbl(){
   document.getElementById('team-lbl').textContent=`= ${teams}팀`;
   const hint=document.getElementById('auto-hint');
   if(hint) hint.textContent=autoTeamMode===2?`${v}개 레인, ${teams}팀 (2레인씩 한 팀)`:`${v}개 레인, ${teams}팀 (1레인 = 1팀)`;
+}
+
+/* ════ EVENT LIST TOGGLE (배지 클릭) ════ */
+let evtListOpen=false;
+function toggleEvtList(){
+  evtListOpen=!evtListOpen;
+  const panel=document.getElementById('evt-list-panel');
+  const arrow=document.getElementById('evt-toggle-arrow');
+  if(panel) panel.style.display=evtListOpen?'block':'none';
+  if(arrow) arrow.textContent=evtListOpen?'▲':'▼';
+  if(evtListOpen){
+    renderEvtHistory();
+    // 날짜 피커 초기화
+    initEvtDatePickers2();
+    setScrHeight();
+  }
+}
+function initEvtDatePickers2(){
+  const m2=document.getElementById('evt-month2');
+  const d2=document.getElementById('evt-day2');
+  if(!m2||m2.options.length>0) return;
+  const now=new Date();
+  for(let m=1;m<=12;m++){const o=document.createElement('option');o.value=m;o.textContent=m+'월';if(m===now.getMonth()+1)o.selected=true;m2.add(o);}
+  for(let d=1;d<=31;d++){const o=document.createElement('option');o.value=d;o.textContent=d+'일';if(d===now.getDate())o.selected=true;d2.add(o);}
+}
+let selectedType2='';
+function selType(type,el){
+  // 두 피커 모두 처리
+  selectedType=type;selectedType2=type;
+  document.querySelectorAll('.evt-type-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+  updateEvtPreview();
+  updateEvtPreview2();
+}
+function updateEvtPreview2(){
+  const dr=document.getElementById('evt-direct-row2');
+  const dateR=document.getElementById('evt-date-row2');
+  if(!selectedType2) return;
+  if(selectedType2==='직접입력'){
+    if(dr)dr.style.display='flex';if(dateR)dateR.style.display='none';
+    return;
+  }
+  if(dr)dr.style.display='none';if(dateR)dateR.style.display='flex';
+  const m=document.getElementById('evt-month2')?.value;
+  const d=document.getElementById('evt-day2')?.value;
+  const p=document.getElementById('evt-preview2');
+  if(p&&m&&d)p.textContent=`[${selectedType2}] ${m}/${d}`;
+}
+function confirmEvent2(){
+  let evtName;
+  if(selectedType2==='직접입력'){
+    const inp=document.getElementById('evt-direct-inp2');
+    if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}
+    evtName=inp.value.trim();
+  }else{
+    if(!selectedType2){toast('종류를 먼저 선택하세요');return;}
+    const m=document.getElementById('evt-month2')?.value;
+    const d=document.getElementById('evt-day2')?.value;
+    evtName=`[${selectedType2}] ${m}/${d}`;
+  }
+  currentEvent=evtName;
+  document.getElementById('evt-name-badge').textContent=evtName;
+  // 패널 닫기
+  evtListOpen=false;
+  const panel=document.getElementById('evt-list-panel');
+  const arrow=document.getElementById('evt-toggle-arrow');
+  if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';
+  saveLocal();renderEvtHistory();loadFromSheet(evtName);setScrHeight();
+  toast(`📅 "${evtName}" 선택됨`);
 }
 // init
 updateTeamLbls();
