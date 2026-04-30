@@ -9,8 +9,6 @@
 :root{--navy:#0d1b35;--navy2:#162447;--amber:#f59e0b;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--purple:#8b5cf6;--bg:#f0f3fa;--card:#fff;--border:#e2e8f0;--text:#1e293b;--muted:#64748b;--r:14px;--sh:0 2px 12px rgba(13,27,53,.09)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);max-width:440px;margin:0 auto;min-height:100dvh}
-
-/* ── HEADER ── */
 .hdr{background:var(--navy);padding:13px 15px 11px;position:sticky;top:0;z-index:200;box-shadow:0 3px 16px rgba(0,0,0,.35)}
 .hdr-r1{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
 .logo{font-size:16px;font-weight:900;color:#fff;letter-spacing:-.4px}.logo span{color:var(--amber)}
@@ -21,8 +19,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 @keyframes blink{from{opacity:.4}to{opacity:1}}
 .iBtn{background:rgba(255,255,255,.12);border:none;color:#fff;width:34px;height:34px;border-radius:9px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .iBtn:active{background:rgba(255,255,255,.22)}
-
-/* ── EVENT PICKER ── */
 .evt-bar{margin-top:2px}
 .evt-types{display:flex;gap:6px;margin-bottom:7px}
 .evt-type-btn{flex:1;padding:7px 0;border:1.5px solid rgba(255,255,255,.2);border-radius:9px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;transition:.13s;text-align:center}
@@ -35,37 +31,25 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .evt-current{display:flex;align-items:center;gap:7px;margin-top:6px}
 .evt-name-badge{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;color:#fff;flex:1}
 .evt-change-btn{background:transparent;border:1px solid rgba(255,255,255,.3);border-radius:7px;color:rgba(255,255,255,.7);font-size:11px;font-weight:700;font-family:'Noto Sans KR',sans-serif;padding:4px 8px;cursor:pointer}
-
-/* ── TAB BAR ── */
 .tabs{display:flex;background:var(--card);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:190;box-shadow:0 1px 6px rgba(0,0,0,.05)}
 .tBtn{flex:1;padding:10px 2px;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.12s;letter-spacing:-.3px}
 .tBtn.active{color:var(--navy);border-bottom-color:var(--amber)}
-
-/* ── SEARCH / TOOLBAR ── */
 .toolbar{display:flex;gap:7px;padding:9px 13px;background:var(--card);border-bottom:1px solid var(--border)}
 .srch{flex:1;position:relative}
 .srch input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:8px 12px 8px 32px;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none;color:var(--text)}
 .srch input:focus{border-color:var(--navy)}
 .srch-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--muted);pointer-events:none}
-
-/* ── VIEW TOGGLE BUTTON ── */
 .view-btn{background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:0 10px;font-size:14px;cursor:pointer;height:38px;flex-shrink:0;transition:.15s}
 .view-btn.grid-active{background:var(--navy);border-color:var(--navy);color:var(--amber)}
-
-/* ── UNSAVED BAR ── */
 .unsaved{background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 13px;display:none;align-items:center;justify-content:space-between;gap:8px}
 .unsaved.show{display:flex}
 .unsaved-txt{font-size:12px;font-weight:700;color:#92400e}
 .save-btn{background:var(--amber);border:none;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;color:var(--navy);cursor:pointer;white-space:nowrap}
-
-/* ── FILTER ── */
 .filters{display:flex;gap:6px;padding:7px 13px;overflow-x:auto;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
 .fp{flex-shrink:0;padding:5px 12px;border-radius:99px;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:.12s}
 .fp.active{background:var(--navy);border-color:var(--navy);color:#fff}
 .fp.ga.active{background:var(--green);border-color:var(--green)}
-
-/* ── MEMBER LIST (리스트 뷰) ── */
 .mlist{padding:6px 12px 110px}
 .mc{background:var(--card);border-radius:10px;padding:8px 12px;margin-bottom:4px;display:flex;align-items:center;gap:9px;box-shadow:var(--sh);border-left:4px solid transparent;cursor:pointer;user-select:none;transition:all .15s}
 .mc.attend{border-left-color:var(--green);background:#f0fdf4}
@@ -76,8 +60,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .avg-chip{display:inline-flex;align-items:center;background:var(--navy);color:var(--amber);font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px}
 .chk{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700;color:transparent;transition:.15s}
 .mc.attend .chk{background:var(--green);border-color:var(--green);color:#fff}
-
-/* ── GRID VIEW ── */
 .grid-view{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:7px 10px 110px}
 .gc{background:var(--card);border-radius:10px;padding:8px 9px;display:flex;flex-direction:column;gap:3px;box-shadow:var(--sh);border-left:3px solid transparent;cursor:pointer;user-select:none;transition:all .15s;position:relative;min-height:68px}
 .gc.attend{border-left-color:var(--green);background:#f0fdf4}
@@ -87,8 +69,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .gc-noavg{font-size:9px;color:#d97706;font-weight:700;margin-top:1px}
 .gc-chk{position:absolute;top:6px;right:7px;font-size:13px;color:var(--green);font-weight:900;line-height:1}
 .gc-fee{position:absolute;bottom:6px;right:6px;font-size:8px;color:var(--red);font-weight:700}
-
-/* ── AVG INPUT POPUP ── */
 .avg-popup{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;display:none;align-items:center;justify-content:center;padding:20px}
 .avg-popup.show{display:flex}
 .avg-popup-box{background:var(--card);border-radius:18px;padding:22px 20px;width:100%;max-width:320px}
@@ -104,8 +84,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .avg-manual-input:focus{border-color:var(--navy)}
 .avg-ok-btn{background:var(--navy);border:none;color:var(--amber);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;padding:0 16px;border-radius:10px;cursor:pointer}
 .avg-cancel-btn{width:100%;height:38px;border:none;border-radius:10px;background:var(--bg);color:var(--muted);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;margin-top:8px}
-
-/* ── LANE TAB ── */
 .lane-sec{padding:10px 12px 120px}
 .cfg-card{background:var(--card);border-radius:var(--r);padding:15px;margin-bottom:10px;box-shadow:var(--sh)}
 .cfg-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
@@ -122,13 +100,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .bigBtn:active{opacity:.85}
 .bigBtn.amber{background:var(--amber);color:var(--navy)}
 .bigBtn.green{background:var(--green);color:#fff}
-.bigBtn.red{background:var(--red);color:#fff}
 .hint{font-size:11px;color:var(--muted);line-height:1.6;margin-top:8px}
-
-/* ── NOAVG WARNING ── */
 .noavg-warn{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#92400e;line-height:1.7}
-
-/* ── BALANCE ── */
 .bal-card{background:var(--card);border-radius:var(--r);padding:13px 15px;margin-bottom:10px;box-shadow:var(--sh)}
 .bal-title{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:9px}
 .bal-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
@@ -136,8 +109,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .bal-track{flex:1;background:var(--bg);border-radius:4px;height:8px;overflow:hidden}
 .bal-fill{height:100%;border-radius:4px;transition:width .4s}
 .bal-num{font-size:12px;font-weight:700;color:var(--muted);width:30px;text-align:right;flex-shrink:0}
-
-/* ── TEAM CARD ── */
 .team-card{background:var(--card);border-radius:var(--r);margin-bottom:10px;box-shadow:var(--sh);overflow:hidden}
 .team-hdr{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;color:#fff}
 .team-hdr-l{font-size:13px;font-weight:900}
@@ -158,8 +129,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .team-footer{padding:7px 10px;border-top:1px solid var(--border);display:flex;gap:5px}
 .smBtn{padding:5px 9px;font-size:11px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:none;border-radius:7px;cursor:pointer;background:var(--bg);color:var(--muted)}
 .smBtn.navy{background:var(--navy);color:#fff}
-
-/* ── MANUAL ASSIGN ── */
 .manual-area{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
 .manual-title{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px}
 .unassigned-pool{display:flex;flex-wrap:wrap;gap:5px;min-height:40px;background:var(--bg);border-radius:10px;padding:8px;margin-bottom:12px;border:1.5px dashed var(--border)}
@@ -175,14 +144,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .manual-lane-lbl{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px}
 .manual-chip{background:var(--card);border:1.5px solid var(--border);border-radius:6px;padding:4px 7px;font-size:11px;font-weight:700;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between}
 .manual-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;padding:0 2px}
-
-/* ── SWAP BANNER ── */
 .swap-banner{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;background:var(--amber);padding:11px 16px;display:none;z-index:300;box-shadow:0 -4px 20px rgba(0,0,0,.15)}
 .swap-banner.show{display:flex;align-items:center;justify-content:space-between}
 .swap-cancel{border:none;background:var(--navy);color:#fff;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;padding:6px 11px;border-radius:8px;cursor:pointer}
 .copy-all{width:100%;height:42px;border:none;border-radius:11px;background:var(--navy2);color:var(--amber);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;margin-top:6px;margin-bottom:10px}
-
-/* ── DASHBOARD ── */
 .dash-sec{padding:10px 12px 110px}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
 .stat-card{background:var(--card);border-radius:12px;padding:13px 14px;box-shadow:var(--sh)}
@@ -197,8 +162,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .rnum.g{background:#fef3c7;color:#d97706}.rnum.s{background:#f1f5f9;color:#475569}.rnum.b{background:#fdf4e7;color:#b45309}
 .rname{flex:1;font-size:13px;font-weight:700}
 .rval{font-size:13px;font-weight:900;color:var(--navy)}
-
-/* ── SETTINGS MODAL ── */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:none;align-items:flex-end}
 .modal-bg.show{display:flex}
 .msheet{width:100%;max-width:440px;margin:0 auto;background:var(--card);border-radius:20px 20px 0 0;padding:20px 17px 44px;animation:sup .22s ease-out;max-height:90dvh;overflow-y:auto}
@@ -212,35 +175,24 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .f-row3 .f-inp{margin-bottom:0}
 .m-save{width:100%;height:43px;border:none;border-radius:11px;background:var(--navy);color:var(--amber);font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer}
 .m-cancel{width:100%;height:37px;border:none;border-radius:11px;background:var(--bg);color:var(--muted);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;margin-top:7px}
-
-/* ── FLOATING SAVE BTN ── */
 .float-save{position:fixed;bottom:22px;right:16px;z-index:350;background:var(--green);color:#fff;border:none;border-radius:99px;padding:11px 18px;font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(16,185,129,.45);display:none;align-items:center;gap:6px;transition:all .2s}
 .float-save.show{display:flex}
 .float-save.saving{background:var(--muted)}
-.float-save.done{background:var(--navy)}
 .auto-save-txt{font-size:10px;color:rgba(255,255,255,.75);margin-left:2px}
-
-/* ── SORT BAR ── */
 .sort-bar{display:flex;gap:6px;padding:6px 13px;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;align-items:center}
 .sort-bar::-webkit-scrollbar{display:none}
 .sort-lbl{font-size:11px;font-weight:700;color:var(--muted);flex-shrink:0}
 .sp{flex-shrink:0;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer}
 .sp.active{background:var(--navy);border-color:var(--navy);color:#fff}
-
-/* ── EVENT HISTORY SCROLL ── */
 .evt-history{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:7px;padding-bottom:2px}
 .evt-history::-webkit-scrollbar{display:none}
 .evt-hist-chip{flex-shrink:0;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.12s}
 .evt-hist-chip:active{background:rgba(255,255,255,.22)}
 .evt-hist-chip.sel{background:var(--amber);border-color:var(--amber);color:var(--navy)}
-
-/* ── LANE TEAM MODE TOGGLE ── */
 .lane-mode-toggle{display:flex;border:1.5px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:10px}
 .lmt-btn{flex:1;padding:8px 4px;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:none;background:transparent;color:var(--muted);cursor:pointer;text-align:center;border-right:1.5px solid var(--border)}
 .lmt-btn:last-child{border-right:none}
 .lmt-btn.active{background:var(--navy);color:var(--amber)}
-
-/* ── MISC ── */
 .sec{display:none}.sec.active{display:block}
 .loading{text-align:center;padding:50px 20px;color:var(--muted)}
 .spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
@@ -253,7 +205,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="hdr" id="hdr">
   <div class="hdr-r1">
     <div class="logo">🎳 팀<span>퍼펙트</span></div>
@@ -262,20 +213,17 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
       <button class="iBtn" onclick="openCfg()">⚙️</button>
     </div>
   </div>
-  <!-- 이벤트 피커 -->
   <div class="evt-bar" id="evt-bar" style="display:none">
-    <!-- 선택된 이벤트 표시 (선택 후) -->
     <div class="evt-current" id="evt-current" style="display:none">
       <div class="evt-name-badge" id="evt-name-badge" onclick="toggleEvtList()" style="cursor:pointer;flex:1">—</div>
       <span style="font-size:10px;color:rgba(255,255,255,.5);margin-left:4px" id="evt-toggle-arrow">▼</span>
       <button class="iBtn" onclick="syncAll()" style="width:28px;height:28px;font-size:11px;margin-left:4px">🔄</button>
     </div>
-    <!-- 이벤트 목록 토글 패널 -->
     <div id="evt-list-panel" style="display:none;margin-top:6px">
       <div class="evt-history" id="evt-history-panel"></div>
       <div style="height:1px;background:rgba(255,255,255,.12);margin:7px 0"></div>
       <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5px">➕ 새 모임 만들기</div>
-      <div class="evt-types" id="evt-types-new">
+      <div class="evt-types">
         <button class="evt-type-btn" onclick="selType('번개',this)">⚡번개</button>
         <button class="evt-type-btn" onclick="selType('정기전',this)">🎳정기전</button>
         <button class="evt-type-btn" onclick="selType('교류전',this)">🤝교류전</button>
@@ -295,7 +243,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
         <button class="evt-confirm-btn" onclick="confirmEvent2()">선택</button>
       </div>
     </div>
-    <!-- 피커 (선택 전) -->
     <div id="evt-picker">
       <div id="evt-existing-wrap" style="display:none">
         <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5px">📋 기존 모임 선택</div>
@@ -326,16 +273,14 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
 </div>
 
-<!-- TAB BAR -->
 <div class="tabs" id="tabs">
-  <button class="tBtn active" id="tab-att"  onclick="switchTab('att')">☑️ 참석여부</button>
-  <button class="tBtn"        id="tab-lane" onclick="switchTab('lane')">🎳 레인배정</button>
-  <button class="tBtn"        id="tab-dash" onclick="switchTab('dash')">📊 대시보드</button>
+  <button class="tBtn active" id="tab-att" onclick="switchTab('att')">☑️ 참석여부</button>
+  <button class="tBtn" id="tab-lane" onclick="switchTab('lane')">🎳 레인배정</button>
+  <button class="tBtn" id="tab-dash" onclick="switchTab('dash')">📊 대시보드</button>
 </div>
 
 <div class="scr" id="scr">
 
-<!-- ════════ 참석여부 탭 ════════ -->
 <div class="sec active" id="sec-att">
   <div class="toolbar">
     <div class="srch"><span class="srch-ico">🔍</span><input type="search" id="srch-inp" placeholder="이름 검색..." oninput="renderList()"></div>
@@ -350,16 +295,14 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
   <div class="filters">
     <button class="fp active" onclick="setFilter('all',this)">전체 <span id="cnt-all">0</span></button>
-    <button class="fp ga"     onclick="setFilter('attend',this)">✅ 참석 <span id="cnt-att">0</span></button>
-    <button class="fp"        onclick="setFilter('pending',this)">❓ 미정 <span id="cnt-pnd">0</span></button>
+    <button class="fp ga" onclick="setFilter('attend',this)">✅ 참석 <span id="cnt-att">0</span></button>
+    <button class="fp" onclick="setFilter('pending',this)">❓ 미정 <span id="cnt-pnd">0</span></button>
   </div>
   <div id="mlist-wrap">
-    <!-- viewMode에 따라 class가 mlist 또는 grid-view로 바뀜 -->
     <div class="mlist" id="mlist"><div class="loading"><div class="spinner"></div>데이터를 불러오는 중...</div></div>
   </div>
 </div>
 
-<!-- ════════ 레인배정 탭 ════════ -->
 <div class="sec" id="sec-lane">
   <div class="lane-sec">
     <div class="cfg-card">
@@ -416,7 +359,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
 </div>
 
-<!-- ════════ 대시보드 탭 ════════ -->
 <div class="sec" id="sec-dash">
   <div class="dash-sec">
     <div class="stat-grid">
@@ -424,6 +366,11 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
       <div class="stat-card"><div class="stat-lbl">평균 에버리지</div><div class="stat-val" id="d-avg">-</div><div class="stat-sub">참석자 기준</div></div>
       <div class="stat-card"><div class="stat-lbl">전체 회원</div><div class="stat-val" id="d-tot">-</div><div class="stat-sub">에버리지 보유</div></div>
       <div class="stat-card"><div class="stat-lbl">팀 균형 편차</div><div class="stat-val" id="d-spd">-</div><div class="stat-sub">배정 후</div></div>
+    </div>
+    <!-- ✅ 회비 납부율 카드 -->
+    <div class="stat-grid" style="margin-bottom:10px">
+      <div class="stat-card"><div class="stat-lbl">💰 회비 납부율</div><div class="stat-val" id="d-fee">-</div><div class="stat-sub" id="d-fee-sub">납부/전체</div></div>
+      <div class="stat-card"><div class="stat-lbl">⚠️ 회비 미납자</div><div class="stat-val" id="d-unpaid" style="color:var(--red)">-</div><div class="stat-sub">명</div></div>
     </div>
     <div class="chart-card">
       <div class="chart-title">⚖️ 팀별 에버리지 균형</div>
@@ -434,39 +381,41 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
       <div class="chart-title">📈 에버리지 분포</div>
       <canvas id="dist-chart" style="width:100%;display:block" height="100"></canvas>
     </div>
+    <!-- ✅ 이벤트별 참석 추이 -->
+    <div class="chart-card">
+      <div class="chart-title">📉 이벤트별 참석자 추이</div>
+      <div id="trend-empty" style="font-size:12px;color:var(--muted);padding:12px 0;text-align:center">동기화 후 이벤트가 2개 이상이면 표시됩니다</div>
+      <canvas id="trend-chart" style="width:100%;display:none" height="110"></canvas>
+    </div>
+    <!-- ✅ 학과별 참여 TOP 10 -->
+    <div class="chart-card">
+      <div class="chart-title">🏫 학과별 참여 횟수 TOP 10</div>
+      <div id="rank-dept"></div>
+    </div>
     <div class="chart-card"><div class="chart-title">🏆 에버리지 TOP 10</div><div id="rank-avg"></div></div>
     <div class="chart-card"><div class="chart-title">🎳 참석 TOP 10 (정기전+번개)</div><div id="rank-reg"></div></div>
   </div>
 </div>
 
-</div><!-- /scr -->
+</div>
 
-<!-- 플로팅 저장 버튼 -->
 <button class="float-save" id="float-save" onclick="saveToSheet()">
   ☁️ 저장
   <span class="auto-save-txt" id="auto-save-txt"></span>
 </button>
 
-<!-- 수동조정 배너 -->
 <div class="swap-banner" id="swap-banner">
   <span style="font-size:13px;font-weight:700;color:var(--navy)" id="swap-txt">교체할 멤버를 선택하세요</span>
   <button class="swap-cancel" onclick="cancelSwap()">취소</button>
 </div>
 
-<!-- 에버리지 입력 팝업 -->
 <div class="avg-popup" id="avg-popup">
   <div class="avg-popup-box">
     <div class="avg-popup-title" id="avg-popup-name"></div>
-    <div class="avg-popup-sub">에버리지가 없습니다. 입력하거나 평균값을 사용하세요.<br><span style="color:var(--muted);font-size:11px">※ 앱에서만 임시 사용 (시트에 저장하려면 별도 저장)</span></div>
+    <div class="avg-popup-sub">에버리지가 없습니다. 입력하거나 평균값을 사용하세요.<br><span style="color:var(--muted);font-size:11px">※ 앱에서만 임시 사용</span></div>
     <div class="avg-guide">
-      <div class="avg-guide-btn" onclick="setAvgGuide(125)">
-        <div class="avg-guide-lbl">👨 남자 평균</div>
-        <div class="avg-guide-val">125</div>
-      </div>
-      <div class="avg-guide-btn" onclick="setAvgGuide(105)">
-        <div class="avg-guide-lbl">👩 여자 평균</div>
-        <div class="avg-guide-val">105</div>
-      </div>
+      <div class="avg-guide-btn" onclick="setAvgGuide(100)"><div class="avg-guide-lbl">👨 남자 평균</div><div class="avg-guide-val">100</div></div>
+      <div class="avg-guide-btn" onclick="setAvgGuide(80)"><div class="avg-guide-lbl">👩 여자 평균</div><div class="avg-guide-val">80</div></div>
     </div>
     <div class="avg-input-row">
       <input class="avg-manual-input" id="avg-manual-inp" type="number" placeholder="직접 입력" min="0" max="300">
@@ -476,7 +425,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
 </div>
 
-<!-- 설정 모달 -->
 <div class="modal-bg" id="cfg-modal" onclick="closeCfgModal(event)">
   <div class="msheet">
     <div class="m-title">⚙️ 설정</div>
@@ -501,416 +449,137 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <div id="toast"></div>
 
 <script>
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxu6run01Cc9Y5LLgXKvLt35COSKNFL1KEyPQG74klxFlh6ZGUIbpcNqHNBr7GSbWEP/exec';
+const GAS_URL='https://script.google.com/macros/s/AKfycbxu6run01Cc9Y5LLgXKvLt35COSKNFL1KEyPQG74klxFlh6ZGUIbpcNqHNBr7GSbWEP/exec';
+let cfg={url:GAS_URL,name:1,avg:2,dept:3,fee:5,reg:6};
+let members=[],statusMap={},tempAvgMap={},eventList=[],currentEvent=null;
+let hasUnsaved=false,filter='all',sortMode='name',viewMode='list';
+let laneGroups=[],laneMode='auto',manualTeamMode=2,autoTeamMode=2;
+let swapMode=false,swapSel=null,avgPopupTarget=null;
+let manualLanes={},manualUnassigned=[],manualSelChip=null;
+let selectedType='',selectedType2='',evtListOpen=false;
 
-/* ════ CONFIG ════ */
-let cfg = { url: GAS_URL, name:1, avg:2, dept:3, fee:5, reg:6 };
-let members=[], statusMap={}, tempAvgMap={}, eventList=[], currentEvent=null;
-let hasUnsaved=false, filter='all', sortMode='name', viewMode='list';
-let laneGroups=[], laneMode='auto', manualTeamMode=2, autoTeamMode=2;
-let swapMode=false, swapSel=null;
-let avgPopupTarget=null;
-let manualLanes={}, manualUnassigned=[], manualSelChip=null;
-let selectedType='', selectedType2='';
-let evtListOpen=false;
+function saveLocal(){try{localStorage.setItem('pf_cfg',JSON.stringify(cfg));localStorage.setItem('pf_st',JSON.stringify(statusMap));localStorage.setItem('pf_tmpAvg',JSON.stringify(tempAvgMap));localStorage.setItem('pf_ev',currentEvent||'');localStorage.setItem('pf_view',viewMode);}catch(e){}}
+function loadLocal(){try{const c=localStorage.getItem('pf_cfg');if(c)cfg={...cfg,...JSON.parse(c)};const s=localStorage.getItem('pf_st');if(s)statusMap=JSON.parse(s);const t=localStorage.getItem('pf_tmpAvg');if(t)tempAvgMap=JSON.parse(t);const e=localStorage.getItem('pf_ev');if(e)currentEvent=e;const v=localStorage.getItem('pf_view');if(v)viewMode=v;}catch(e){}}
 
-/* ════ PERSIST ════ */
-function saveLocal(){
-  try{
-    localStorage.setItem('pf_cfg',JSON.stringify(cfg));
-    localStorage.setItem('pf_st',JSON.stringify(statusMap));
-    localStorage.setItem('pf_tmpAvg',JSON.stringify(tempAvgMap));
-    localStorage.setItem('pf_ev',currentEvent||'');
-    localStorage.setItem('pf_view',viewMode); // ✅ 뷰모드 저장
-  }catch(e){}
-}
-function loadLocal(){
-  try{
-    const c=localStorage.getItem('pf_cfg');if(c)cfg={...cfg,...JSON.parse(c)};
-    const s=localStorage.getItem('pf_st');if(s)statusMap=JSON.parse(s);
-    const t=localStorage.getItem('pf_tmpAvg');if(t)tempAvgMap=JSON.parse(t);
-    const e=localStorage.getItem('pf_ev');if(e)currentEvent=e;
-    const v=localStorage.getItem('pf_view');if(v)viewMode=v; // ✅ 뷰모드 복원
-  }catch(e){}
-}
-
-/* ════ AUTO EVENT SELECTION BY DATE ════ */
-/**
- * 이벤트 이름에서 날짜 파싱 ([정기전] 5/5, [교류전] 4/29 등)
- * 연도는 현재 연도 기준, 날짜가 6개월 이상 이전이면 다음 연도로 처리
- */
 function parseEventDate(evtName){
-  const match = evtName.match(/(\d{1,2})\/(\d{1,2})/);
-  if(!match) return null;
-  const now = new Date();
-  const month = parseInt(match[1]);
-  const day = parseInt(match[2]);
-  if(month < 1 || month > 12 || day < 1 || day > 31) return null;
-  let year = now.getFullYear();
-  let date = new Date(year, month-1, day);
-  // 6개월 넘게 과거면 내년으로 (순환 처리)
-  if(now - date > 1000*60*60*24*180) date = new Date(year+1, month-1, day);
+  const match=evtName.match(/(\d{1,2})\/(\d{1,2})/);
+  if(!match)return null;
+  const now=new Date(),month=parseInt(match[1]),day=parseInt(match[2]);
+  if(month<1||month>12||day<1||day>31)return null;
+  let date=new Date(now.getFullYear(),month-1,day);
+  if(now-date>1000*60*60*24*180)date=new Date(now.getFullYear()+1,month-1,day);
   return date;
 }
-
-/**
- * 가장 가까운 미래 모임 자동 선택
- * 미래 모임 없으면 → 가장 최근 과거 모임
- */
 function autoSelectBestEvent(){
-  if(!eventList.length) return null;
-  const now = new Date();
-  now.setHours(0,0,0,0);
-
-  const withDates = eventList.map(ev=>({ev, date: parseEventDate(ev.name)}));
-
-  // 날짜 파싱된 것만
-  const dated = withDates.filter(x=>x.date);
-  const undated = withDates.filter(x=>!x.date); // 직접입력 등
-
-  // 오늘 포함 미래
-  const future = dated.filter(x=>x.date >= now).sort((a,b)=>a.date-b.date);
-  if(future.length) return future[0].ev.name;
-
-  // 과거: 가장 최근
-  const past = dated.filter(x=>x.date < now).sort((a,b)=>b.date-a.date);
-  if(past.length) return past[0].ev.name;
-
-  // 날짜 없는 이벤트: 마지막 것
-  if(undated.length) return undated[undated.length-1].ev.name;
-
+  if(!eventList.length)return null;
+  const now=new Date();now.setHours(0,0,0,0);
+  const withDates=eventList.map(ev=>({ev,date:parseEventDate(ev.name)}));
+  const dated=withDates.filter(x=>x.date),undated=withDates.filter(x=>!x.date);
+  const future=dated.filter(x=>x.date>=now).sort((a,b)=>a.date-b.date);
+  if(future.length)return future[0].ev.name;
+  const past=dated.filter(x=>x.date<now).sort((a,b)=>b.date-a.date);
+  if(past.length)return past[0].ev.name;
+  if(undated.length)return undated[undated.length-1].ev.name;
   return eventList[eventList.length-1].name;
 }
 
-/* ════ INIT ════ */
-window.addEventListener('DOMContentLoaded',()=>{
-  loadLocal();
-  applyViewMode(); // ✅ 저장된 뷰모드 버튼 상태 반영
-  initEvtDatePickers();
-  setScrHeight();
-  window.addEventListener('resize',setScrHeight);
-  if(cfg.url) syncAll();
-  else{
-    setSS('err','URL 없음');
-    document.getElementById('mlist').innerHTML='<div class="err-box">⚙️ 설정에서 GAS URL을 먼저 입력해주세요.</div>';
-  }
-});
+window.addEventListener('DOMContentLoaded',()=>{loadLocal();applyViewMode();initEvtDatePickers();setScrHeight();window.addEventListener('resize',setScrHeight);if(cfg.url)syncAll();else{setSS('err','URL 없음');document.getElementById('mlist').innerHTML='<div class="err-box">⚙️ 설정에서 GAS URL을 먼저 입력해주세요.</div>';}});
+function setScrHeight(){const h=document.getElementById('hdr').offsetHeight+document.getElementById('tabs').offsetHeight;document.getElementById('scr').style.height=`calc(100dvh - ${h}px)`;}
 
-function setScrHeight(){
-  const h=document.getElementById('hdr').offsetHeight+document.getElementById('tabs').offsetHeight;
-  document.getElementById('scr').style.height=`calc(100dvh - ${h}px)`;
-}
+function initEvtDatePickers(){const now=new Date();const mSel=document.getElementById('evt-month');const dSel=document.getElementById('evt-day');if(!mSel||mSel.options.length>0)return;for(let m=1;m<=12;m++){const o=document.createElement('option');o.value=m;o.textContent=m+'월';if(m===now.getMonth()+1)o.selected=true;mSel.add(o);}for(let d=1;d<=31;d++){const o=document.createElement('option');o.value=d;o.textContent=d+'일';if(d===now.getDate())o.selected=true;dSel.add(o);}updateEvtPreview();}
+function initEvtDatePickers2(){const m2=document.getElementById('evt-month2');const d2=document.getElementById('evt-day2');if(!m2||m2.options.length>0)return;const now=new Date();for(let m=1;m<=12;m++){const o=document.createElement('option');o.value=m;o.textContent=m+'월';if(m===now.getMonth()+1)o.selected=true;m2.add(o);}for(let d=1;d<=31;d++){const o=document.createElement('option');o.value=d;o.textContent=d+'일';if(d===now.getDate())o.selected=true;d2.add(o);}}
+function selType(type,el){selectedType=type;selectedType2=type;document.querySelectorAll('.evt-type-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');updateEvtPreview();updateEvtPreview2();}
+function updateEvtPreview(){const dr=document.getElementById('evt-direct-row');const dateR=document.getElementById('evt-date-row');if(!selectedType)return;if(selectedType==='직접입력'){if(dr)dr.style.display='flex';if(dateR)dateR.style.display='none';document.getElementById('evt-preview').textContent='';return;}if(dr)dr.style.display='none';if(dateR)dateR.style.display='flex';const m=document.getElementById('evt-month')?.value;const d=document.getElementById('evt-day')?.value;if(m&&d)document.getElementById('evt-preview').textContent=`[${selectedType}] ${m}/${d}`;}
+function updateEvtPreview2(){const dr=document.getElementById('evt-direct-row2');const dateR=document.getElementById('evt-date-row2');if(!selectedType2)return;if(selectedType2==='직접입력'){if(dr)dr.style.display='flex';if(dateR)dateR.style.display='none';return;}if(dr)dr.style.display='none';if(dateR)dateR.style.display='flex';const m=document.getElementById('evt-month2')?.value;const d=document.getElementById('evt-day2')?.value;const p=document.getElementById('evt-preview2');if(p&&m&&d)p.textContent=`[${selectedType2}] ${m}/${d}`;}
+function confirmEvent(){if(!selectedType){toast('종류를 먼저 선택하세요');return;}let evtName;if(selectedType==='직접입력'){const inp=document.getElementById('evt-direct-inp');if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}evtName=inp.value.trim();}else{const m=document.getElementById('evt-month').value;const d=document.getElementById('evt-day').value;evtName=`[${selectedType}] ${m}/${d}`;}currentEvent=evtName;saveLocal();showCurrentEvent();loadFromSheet(currentEvent);}
+function confirmEvent2(){let evtName;if(selectedType2==='직접입력'){const inp=document.getElementById('evt-direct-inp2');if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}evtName=inp.value.trim();}else{if(!selectedType2){toast('종류를 먼저 선택하세요');return;}const m=document.getElementById('evt-month2')?.value;const d=document.getElementById('evt-day2')?.value;evtName=`[${selectedType2}] ${m}/${d}`;}currentEvent=evtName;document.getElementById('evt-name-badge').textContent=evtName;evtListOpen=false;const panel=document.getElementById('evt-list-panel');const arrow=document.getElementById('evt-toggle-arrow');if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';saveLocal();renderEvtHistory();loadFromSheet(evtName);setScrHeight();toast(`📅 "${evtName}" 선택됨`);}
+function showCurrentEvent(){document.getElementById('evt-picker').style.display='none';document.getElementById('evt-current').style.display='flex';document.getElementById('evt-name-badge').textContent=currentEvent;setScrHeight();}
 
-/* ════ EVENT PICKER INIT ════ */
-function initEvtDatePickers(){
-  const now=new Date();
-  const mSel=document.getElementById('evt-month');
-  const dSel=document.getElementById('evt-day');
-  if(!mSel||mSel.options.length>0) return;
-  for(let m=1;m<=12;m++){const o=document.createElement('option');o.value=m;o.textContent=m+'월';if(m===now.getMonth()+1)o.selected=true;mSel.add(o);}
-  for(let d=1;d<=31;d++){const o=document.createElement('option');o.value=d;o.textContent=d+'일';if(d===now.getDate())o.selected=true;dSel.add(o);}
-  updateEvtPreview();
-}
-
-function initEvtDatePickers2(){
-  const m2=document.getElementById('evt-month2');
-  const d2=document.getElementById('evt-day2');
-  if(!m2||m2.options.length>0) return;
-  const now=new Date();
-  for(let m=1;m<=12;m++){const o=document.createElement('option');o.value=m;o.textContent=m+'월';if(m===now.getMonth()+1)o.selected=true;m2.add(o);}
-  for(let d=1;d<=31;d++){const o=document.createElement('option');o.value=d;o.textContent=d+'일';if(d===now.getDate())o.selected=true;d2.add(o);}
-}
-
-function selType(type,el){
-  selectedType=type; selectedType2=type;
-  document.querySelectorAll('.evt-type-btn').forEach(b=>b.classList.remove('sel'));
-  el.classList.add('sel');
-  updateEvtPreview();
-  updateEvtPreview2();
-}
-
-function updateEvtPreview(){
-  const directRow=document.getElementById('evt-direct-row');
-  const dateRow=document.getElementById('evt-date-row');
-  if(!selectedType) return;
-  if(selectedType==='직접입력'){
-    if(directRow)directRow.style.display='flex';
-    if(dateRow)dateRow.style.display='none';
-    document.getElementById('evt-preview').textContent='';
-    return;
-  }
-  if(directRow)directRow.style.display='none';
-  if(dateRow)dateRow.style.display='flex';
-  const m=document.getElementById('evt-month')?.value;
-  const d=document.getElementById('evt-day')?.value;
-  if(m&&d) document.getElementById('evt-preview').textContent=`[${selectedType}] ${m}/${d}`;
-}
-
-function updateEvtPreview2(){
-  const dr=document.getElementById('evt-direct-row2');
-  const dateR=document.getElementById('evt-date-row2');
-  if(!selectedType2) return;
-  if(selectedType2==='직접입력'){
-    if(dr)dr.style.display='flex';if(dateR)dateR.style.display='none';
-    return;
-  }
-  if(dr)dr.style.display='none';if(dateR)dateR.style.display='flex';
-  const m=document.getElementById('evt-month2')?.value;
-  const d=document.getElementById('evt-day2')?.value;
-  const p=document.getElementById('evt-preview2');
-  if(p&&m&&d) p.textContent=`[${selectedType2}] ${m}/${d}`;
-}
-
-function confirmEvent(){
-  if(!selectedType){toast('종류를 먼저 선택하세요');return;}
-  let evtName;
-  if(selectedType==='직접입력'){
-    const inp=document.getElementById('evt-direct-inp');
-    if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}
-    evtName=inp.value.trim();
-  }else{
-    const m=document.getElementById('evt-month').value;
-    const d=document.getElementById('evt-day').value;
-    evtName=`[${selectedType}] ${m}/${d}`;
-  }
-  currentEvent=evtName;
-  saveLocal();
-  showCurrentEvent();
-  loadFromSheet(currentEvent);
-}
-
-function confirmEvent2(){
-  let evtName;
-  if(selectedType2==='직접입력'){
-    const inp=document.getElementById('evt-direct-inp2');
-    if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}
-    evtName=inp.value.trim();
-  }else{
-    if(!selectedType2){toast('종류를 먼저 선택하세요');return;}
-    const m=document.getElementById('evt-month2')?.value;
-    const d=document.getElementById('evt-day2')?.value;
-    evtName=`[${selectedType2}] ${m}/${d}`;
-  }
-  currentEvent=evtName;
-  document.getElementById('evt-name-badge').textContent=evtName;
-  evtListOpen=false;
-  const panel=document.getElementById('evt-list-panel');
-  const arrow=document.getElementById('evt-toggle-arrow');
-  if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';
-  saveLocal();renderEvtHistory();loadFromSheet(evtName);setScrHeight();
-  toast(`📅 "${evtName}" 선택됨`);
-}
-
-function showCurrentEvent(){
-  document.getElementById('evt-picker').style.display='none';
-  document.getElementById('evt-current').style.display='flex';
-  document.getElementById('evt-name-badge').textContent=currentEvent;
-  setScrHeight();
-}
-
-/* ════ SYNC ════ */
 async function syncAll(){
   setSS('spin','동기화 중...');
   try{
-    const [dr,er]=await Promise.all([
-      gasGet('getData'),
-      gasGet('getEvents').catch(()=>[])
-    ]);
-    if(dr.error) throw new Error(dr.error);
-    members=dr.filter(row=>{
-      const n=row[cfg.name];
-      if(!n||String(n).trim()==='') return false;
-      if(!isNaN(n)) return false;
-      const s=String(n);
-      if(s.includes('이름')||s.includes('★')||s.includes('찾음')||s.includes('예시')) return false;
-      return true;
-    }).map(row=>({
-      name:String(row[cfg.name]).trim(),
-      avg:parseFloat(row[cfg.avg])||0,
-      dept:String(row[cfg.dept]||'').trim(),
-      fee:String(row[cfg.fee]||'').trim(),
-      reg:parseInt(row[cfg.reg])||0,
-      flash:parseInt(row[7])||0,
-    }));
+    const[dr,er]=await Promise.all([gasGet('getData'),gasGet('getEvents').catch(()=>[])]);
+    if(dr.error)throw new Error(dr.error);
+    members=dr.filter(row=>{const n=row[cfg.name];if(!n||String(n).trim()==='')return false;if(!isNaN(n))return false;const s=String(n);if(s.includes('이름')||s.includes('★')||s.includes('찾음')||s.includes('예시'))return false;return true;}).map(row=>({name:String(row[cfg.name]).trim(),avg:parseFloat(row[cfg.avg])||0,dept:String(row[cfg.dept]||'').trim(),fee:String(row[cfg.fee]||'').trim(),reg:parseInt(row[cfg.reg])||0,flash:parseInt(row[7])||0}));
     eventList=Array.isArray(er)?er:[];
     document.getElementById('evt-bar').style.display='block';
-
-    // ✅ 날짜 기반 자동 이벤트 선택
-    // currentEvent가 없거나 eventList에 없을 때만 자동 선택
-    const evtExists = currentEvent && eventList.find(ev=>ev.name===currentEvent);
-    if(!evtExists && eventList.length){
-      const best = autoSelectBestEvent();
-      if(best){
-        currentEvent = best;
-        saveLocal();
-        toast(`📅 "${best}" 자동 선택됨`);
-      }
-    }
-
+    const evtExists=currentEvent&&eventList.find(ev=>ev.name===currentEvent);
+    if(!evtExists&&eventList.length){const best=autoSelectBestEvent();if(best){currentEvent=best;saveLocal();toast(`📅 "${best}" 자동 선택됨`);}}
     renderEvtHistory();
-    if(currentEvent) showCurrentEvent();
-    if(currentEvent) await loadFromSheet(currentEvent);
-
-    setSS('ok',`${members.length}명`);
-    setScrHeight();renderList();renderDash();saveLocal();
+    if(currentEvent)showCurrentEvent();
+    if(currentEvent)await loadFromSheet(currentEvent);
+    setSS('ok',`${members.length}명`);setScrHeight();renderList();renderDash();saveLocal();
     toast(`✅ ${members.length}명 동기화 완료`);
-  }catch(e){
-    setSS('err','오류');
-    document.getElementById('mlist').innerHTML=`<div class="err-box">❌ <strong>동기화 실패</strong><br><br>${e.message}<br><br>· GAS URL 확인<br>· 배포 → "모든 사용자" 확인<br>· 시트명 "통합_DB" 확인</div>`;
-  }
+  }catch(e){setSS('err','오류');document.getElementById('mlist').innerHTML=`<div class="err-box">❌ <strong>동기화 실패</strong><br><br>${e.message}<br><br>· GAS URL 확인<br>· 배포 → "모든 사용자" 확인<br>· 시트명 "통합_DB" 확인</div>`;}
 }
-
-async function gasGet(action, params={}){
-  const url=new URL(cfg.url);
-  url.searchParams.set('action',action);
-  Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));
-  const r=await fetch(url.toString());
-  return r.json();
-}
-
+async function gasGet(action,params={}){const url=new URL(cfg.url);url.searchParams.set('action',action);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));const r=await fetch(url.toString());return r.json();}
 function setSS(s,t){document.getElementById('sdot').className='sdot '+s;document.getElementById('stxt').textContent=t;}
+async function loadFromSheet(evtName){if(!cfg.url||!evtName)return;try{const data=await gasGet('getAttendance',{event:evtName});if(data.error||!data.attendees)return;data.attendees.forEach(n=>{statusMap[n]='attend';});renderList();toast(`📥 "${evtName}" ${data.attendees.length}명 불러옴`);}catch(e){}}
 
-async function loadFromSheet(evtName){
-  if(!cfg.url||!evtName)return;
-  try{
-    const data=await gasGet('getAttendance',{event:evtName});
-    if(data.error||!data.attendees)return;
-    data.attendees.forEach(n=>{statusMap[n]='attend';});
-    renderList();
-    toast(`📥 "${evtName}" ${data.attendees.length}명 불러옴`);
-  }catch(e){}
-}
+function switchTab(tab){['att','lane','dash'].forEach(t=>{document.getElementById(`sec-${t}`).classList.toggle('active',t===tab);document.getElementById(`tab-${t}`).classList.toggle('active',t===tab);});document.getElementById('evt-bar').style.display=(tab==='att'&&members.length)?'block':'none';if(tab==='dash')renderDash();if(tab==='lane'){const att=getAttendees();if(att.length)checkNoAvg(att);}setScrHeight();}
+function applyViewMode(){const btn=document.getElementById('view-btn');if(viewMode==='grid'){btn.textContent='⊞';btn.classList.add('grid-active');}else{btn.textContent='☰';btn.classList.remove('grid-active');}}
+function toggleView(){viewMode=viewMode==='list'?'grid':'list';applyViewMode();saveLocal();renderList();toast(viewMode==='grid'?'⊞ 그리드 뷰':'☰ 리스트 뷰');}
 
-/* ════ TAB ════ */
-function switchTab(tab){
-  ['att','lane','dash'].forEach(t=>{
-    document.getElementById(`sec-${t}`).classList.toggle('active',t===tab);
-    document.getElementById(`tab-${t}`).classList.toggle('active',t===tab);
-  });
-  document.getElementById('evt-bar').style.display=(tab==='att'&&members.length)?'block':'none';
-  if(tab==='dash')renderDash();
-  if(tab==='lane'){const att=getAttendees();if(att.length)checkNoAvg(att);}
-  setScrHeight();
-}
-
-/* ════ VIEW TOGGLE ════ */
-function applyViewMode(){
-  const btn=document.getElementById('view-btn');
-  if(viewMode==='grid'){
-    btn.textContent='⊞';
-    btn.classList.add('grid-active');
-  }else{
-    btn.textContent='☰';
-    btn.classList.remove('grid-active');
-  }
-}
-
-function toggleView(){
-  viewMode = viewMode==='list' ? 'grid' : 'list';
-  applyViewMode();
-  saveLocal(); // ✅ 뷰모드 즉시 저장
-  renderList();
-  toast(viewMode==='grid'?'⊞ 그리드 뷰':'☰ 리스트 뷰');
-}
-
-/* ════ MEMBER LIST ════ */
 function renderList(){
   const el=document.getElementById('mlist');
   if(!members.length)return;
   const q=(document.getElementById('srch-inp')?.value||'').trim();
   let data=members;
   if(q)data=data.filter(m=>m.name.includes(q));
-  if(filter==='attend') data=data.filter(m=>statusMap[m.name]==='attend');
+  if(filter==='attend')data=data.filter(m=>statusMap[m.name]==='attend');
   if(filter==='pending')data=data.filter(m=>(statusMap[m.name]||'pending')==='pending');
   data=applySort(data);
-
   const attCnt=members.filter(m=>statusMap[m.name]==='attend').length;
   document.getElementById('cnt-all').textContent=members.length;
   document.getElementById('cnt-att').textContent=attCnt;
   document.getElementById('cnt-pnd').textContent=members.length-attCnt;
-
-  if(!data.length){
-    el.className='mlist';
-    el.innerHTML='<div class="empty">검색 결과 없음 🤔</div>';
-    return;
-  }
-
-  // ✅ 그리드 뷰
+  if(!data.length){el.className='mlist';el.innerHTML='<div class="empty">검색 결과 없음 🤔</div>';return;}
   if(viewMode==='grid'){
     el.className='grid-view';
-    el.innerHTML=data.map(m=>{
-      const att=statusMap[m.name]==='attend';
-      const eff=getEffAvg(m);
-      const hasAvg=!!eff;
-      const nm=m.name.replace(/'/g,"\\'");
-      return `<div class="gc ${att?'attend':''}" onclick="toggleMember('${nm}')">
-        <div class="gc-name">${m.name}</div>
-        ${hasAvg
-          ? `<div class="gc-avg">${eff}</div>`
-          : `<div class="gc-noavg">에버?</div>`
-        }
-        <div class="gc-dept">${m.dept||''}</div>
-        ${att?`<div class="gc-chk">✓</div>`:''}
-        ${m.fee==='X'?`<div class="gc-fee">미납</div>`:''}
-      </div>`;
-    }).join('');
-
-  // ✅ 리스트 뷰
+    el.innerHTML=data.map(m=>{const att=statusMap[m.name]==='attend';const eff=getEffAvg(m);const nm=m.name.replace(/'/g,"\\'");return `<div class="gc ${att?'attend':''}" onclick="toggleMember('${nm}')"><div class="gc-name">${m.name}</div>${eff?`<div class="gc-avg">${eff}</div>`:`<div class="gc-noavg">에버?</div>`}<div class="gc-dept">${m.dept||''}</div>${att?`<div class="gc-chk">✓</div>`:''}${m.fee==='X'?`<div class="gc-fee">미납</div>`:''}</div>`;}).join('');
   }else{
     el.className='mlist';
-    el.innerHTML=data.map(m=>{
-      const att=statusMap[m.name]==='attend';
-      const eff=getEffAvg(m);
-      const hasAvg=m.avg>0||tempAvgMap[m.name];
-      const nm=m.name.replace(/'/g,"\\'");
-      return `<div class="mc ${att?'attend':(!hasAvg&&att?'noavg':'')}" onclick="toggleMember('${nm}')">
-        <div class="mc-info">
-          <div class="mc-name">${m.name}${m.fee==='X'?' <span style="font-size:10px;color:var(--red);font-weight:700">미납</span>':''}</div>
-          <div class="mc-sub">
-            ${eff?`<span class="avg-chip">${eff}</span>`:''}
-            <span>${m.dept}</span>
-          </div>
-        </div>
-        <div class="chk">${att?'✓':''}</div>
-      </div>`;
-    }).join('');
+    el.innerHTML=data.map(m=>{const att=statusMap[m.name]==='attend';const eff=getEffAvg(m);const nm=m.name.replace(/'/g,"\\'");return `<div class="mc ${att?'attend':''}" onclick="toggleMember('${nm}')"><div class="mc-info"><div class="mc-name">${m.name}${m.fee==='X'?' <span style="font-size:10px;color:var(--red);font-weight:700">미납</span>':''}</div><div class="mc-sub">${eff?`<span class="avg-chip">${eff}</span>`:''}<span>${m.dept}</span></div></div><div class="chk">${att?'✓':''}</div></div>`;}).join('');
   }
 }
-
-function getEffAvg(m){
-  if(tempAvgMap[m.name]) return tempAvgMap[m.name];
-  return m.avg||0;
-}
-
-function toggleMember(name){
-  statusMap[name]=statusMap[name]==='attend'?'pending':'attend';
-  markUnsaved();renderList();
-}
+function getEffAvg(m){if(tempAvgMap[m.name])return tempAvgMap[m.name];return m.avg||0;}
+function toggleMember(name){statusMap[name]=statusMap[name]==='attend'?'pending':'attend';markUnsaved();renderList();}
 function setFilter(f,el){filter=f;document.querySelectorAll('.fp').forEach(p=>p.classList.remove('active'));el.classList.add('active');renderList();}
 
 /* ════ UNSAVED / FLOAT SAVE ════ */
+/* ✅ 수정: 디바운스 3초 + 최대 15초 타임아웃 */
+let _autoSaveTimer, _maxSaveTimer, _saveStartTime=0;
+
 function markUnsaved(){
   hasUnsaved=true;
+  if(!_saveStartTime)_saveStartTime=Date.now();
   showFloatSave();
   scheduleAutoSave();
 }
 function clearUnsaved(){
   hasUnsaved=false;
   clearTimeout(_autoSaveTimer);
+  clearTimeout(_maxSaveTimer);
+  _maxSaveTimer=null;
+  _saveStartTime=0;
   document.getElementById('auto-save-txt').textContent='';
   hideFloatSave();
 }
 function showFloatSave(){document.getElementById('float-save').classList.add('show');}
 function hideFloatSave(){document.getElementById('float-save').classList.remove('show');}
-
-let _autoSaveTimer;
 function scheduleAutoSave(){
   clearTimeout(_autoSaveTimer);
-  document.getElementById('auto-save-txt').textContent='3초 후 자동저장';
+  // 디바운스: 마지막 체크 후 3초
   _autoSaveTimer=setTimeout(()=>{if(hasUnsaved)saveToSheet();},3000);
+  // 최대 타임아웃: 아무리 연속 체크해도 15초 안에 반드시 저장
+  if(!_maxSaveTimer){
+    _maxSaveTimer=setTimeout(()=>{_maxSaveTimer=null;if(hasUnsaved)saveToSheet();},15000);
+  }
+  const elapsed=Math.round((Date.now()-(_saveStartTime||Date.now()))/1000);
+  const rem=Math.max(0,15-elapsed);
+  document.getElementById('auto-save-txt').textContent=rem<10?`${rem}초 내 저장`:'3초 후 자동저장';
 }
 
-/* ════ SAVE TO SHEET ════ */
 async function saveToSheet(){
   if(!currentEvent){toast('이벤트를 먼저 선택하세요');return;}
   const attendees=members.filter(m=>statusMap[m.name]==='attend').map(m=>m.name);
@@ -920,157 +589,57 @@ async function saveToSheet(){
   if(fbtn){fbtn.textContent='⏳ 저장중...';fbtn.classList.add('saving');fbtn.disabled=true;}
   let saved=false;
   try{
-    const res=await fetch(cfg.url,{
-      method:'POST',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify({action:'saveAttendance',eventName:currentEvent,eventType,attendees,overwrite:true}),
-    });
+    const res=await fetch(cfg.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'saveAttendance',eventName:currentEvent,eventType,attendees,overwrite:true})});
     const data=JSON.parse(await res.text());
-    if(data.error) throw new Error(data.error);
-    if(data.isNew) eventList.push({col:data.eventCol,name:currentEvent});
+    if(data.error)throw new Error(data.error);
+    if(data.isNew)eventList.push({col:data.eventCol,name:currentEvent});
     clearUnsaved();saveLocal();saved=true;
     toast(`✅ ${data.markedCount}명 시트 저장 완료!`);
-    if(data.notFound?.length) setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
+    if(data.notFound?.length)setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
   }catch(e1){console.warn('POST 실패, GET 재시도:',e1.message);}
   if(!saved){
     try{
       const data=await gasGet('saveAttendance',{eventName:currentEvent,eventType,attendees:attendees.join(','),overwrite:'true'});
-      if(data.error) throw new Error(data.error);
-      if(data.isNew) eventList.push({col:data.eventCol,name:currentEvent});
+      if(data.error)throw new Error(data.error);
+      if(data.isNew)eventList.push({col:data.eventCol,name:currentEvent});
       clearUnsaved();saveLocal();
       toast(`✅ ${data.markedCount}명 시트 저장 완료!`);
-      if(data.notFound?.length) setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
+      if(data.notFound?.length)setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
     }catch(e2){toast('❌ 저장 실패: '+e2.message);}
   }
   if(fbtn){fbtn.innerHTML='☁️ 저장<span class="auto-save-txt"></span>';fbtn.classList.remove('saving');fbtn.disabled=false;}
 }
 
-/* ════ AVG POPUP ════ */
-function openAvgPopup(name){
-  avgPopupTarget=name;
-  document.getElementById('avg-popup-name').textContent=name+' — 에버리지 입력';
-  document.getElementById('avg-manual-inp').value=tempAvgMap[name]||'';
-  document.getElementById('avg-popup').classList.add('show');
-}
+function openAvgPopup(name){avgPopupTarget=name;document.getElementById('avg-popup-name').textContent=name+' — 에버리지 입력';document.getElementById('avg-manual-inp').value=tempAvgMap[name]||'';document.getElementById('avg-popup').classList.add('show');}
 function closeAvgPopup(){document.getElementById('avg-popup').classList.remove('show');avgPopupTarget=null;}
 function setAvgGuide(v){document.getElementById('avg-manual-inp').value=v;}
-function applyAvg(){
-  const v=parseInt(document.getElementById('avg-manual-inp').value);
-  if(!v||v<50||v>300){toast('50~300 사이 값을 입력하세요');return;}
-  if(avgPopupTarget){tempAvgMap[avgPopupTarget]=v;saveLocal();}
-  closeAvgPopup();renderList();toast(`✅ ${avgPopupTarget} 에버리지 ${v} 적용 (임시)`);
-}
+function applyAvg(){const v=parseInt(document.getElementById('avg-manual-inp').value);if(!v||v<50||v>300){toast('50~300 사이 값을 입력하세요');return;}if(avgPopupTarget){tempAvgMap[avgPopupTarget]=v;saveLocal();}closeAvgPopup();renderList();toast(`✅ ${avgPopupTarget} 에버리지 ${v} 적용 (임시)`);}
+function setLaneMode(mode){laneMode=mode;document.getElementById('modeTab-auto').classList.toggle('active',mode==='auto');document.getElementById('modeTab-manual').classList.toggle('active',mode==='manual');document.getElementById('auto-cfg').style.display=mode==='auto'?'block':'none';document.getElementById('manual-cfg').style.display=mode==='manual'?'block':'none';document.getElementById('lane-results').innerHTML='';cancelSwap();}
+function getAttendees(){return members.filter(m=>statusMap[m.name]==='attend').map(m=>({name:m.name,avg:getEffAvg(m)||0}));}
 
-/* ════ LANE MODE ════ */
-function setLaneMode(mode){
-  laneMode=mode;
-  document.getElementById('modeTab-auto').classList.toggle('active',mode==='auto');
-  document.getElementById('modeTab-manual').classList.toggle('active',mode==='manual');
-  document.getElementById('auto-cfg').style.display=mode==='auto'?'block':'none';
-  document.getElementById('manual-cfg').style.display=mode==='manual'?'block':'none';
-  document.getElementById('lane-results').innerHTML='';
-  cancelSwap();
-}
-
-function getAttendees(){
-  return members.filter(m=>statusMap[m.name]==='attend').map(m=>({name:m.name,avg:getEffAvg(m)||0}));
-}
-
-/* ════ AUTO ASSIGN ════ */
 let _assignCount=0;
 function autoAssign(){
   const att=getAttendees();
   if(!att.length){toast('참석자를 먼저 체크하세요 👆');return;}
-  checkNoAvg(att);
-  _assignCount++;
+  checkNoAvg(att);_assignCount++;
   const numLanes=parseInt(document.getElementById('lane-cnt').value)||6;
   const numTeams=autoTeamMode===2?Math.floor(numLanes/2):numLanes;
   const sorted=[...att].sort((a,b)=>b.avg-a.avg);
-  if(_assignCount>1){
-    for(let i=0;i<sorted.length-1;i++){
-      if(Math.abs((sorted[i].avg||0)-(sorted[i+1].avg||0))<=8&&Math.random()<0.5){
-        [sorted[i],sorted[i+1]]=[sorted[i+1],sorted[i]];
-      }
-    }
-  }
-  const teams=Array.from({length:numTeams},(_,i)=>({
-    teamNum:i+1,
-    laneAN:autoTeamMode===2?i*2+1:i+1,
-    laneBN:autoTeamMode===2?i*2+2:i+1,
-    members:[],total:0
-  }));
-  sorted.forEach(m=>{
-    const t=teams.reduce((mn,t)=>t.total<mn.total?t:mn,teams[0]);
-    t.members.push(m);t.total+=m.avg;
-  });
+  if(_assignCount>1){for(let i=0;i<sorted.length-1;i++){if(Math.abs((sorted[i].avg||0)-(sorted[i+1].avg||0))<=8&&Math.random()<0.5)[sorted[i],sorted[i+1]]=[sorted[i+1],sorted[i]];}}
+  const teams=Array.from({length:numTeams},(_,i)=>({teamNum:i+1,laneAN:autoTeamMode===2?i*2+1:i+1,laneBN:autoTeamMode===2?i*2+2:i+1,members:[],total:0}));
+  sorted.forEach(m=>{const t=teams.reduce((mn,t)=>t.total<mn.total?t:mn,teams[0]);t.members.push(m);t.total+=m.avg;});
   let improved=true,iter=0;
-  while(improved&&iter<200){
-    improved=false;iter++;
-    for(let ti=0;ti<teams.length-1;ti++){
-      for(let tj=ti+1;tj<teams.length;tj++){
-        for(let mi=0;mi<teams[ti].members.length;mi++){
-          for(let mj=0;mj<teams[tj].members.length;mj++){
-            const ai=teams[ti].members[mi].avg||0,aj=teams[tj].members[mj].avg||0;
-            if(ai===aj)continue;
-            const oldSpread=Math.max(...teams.map(t=>t.total))-Math.min(...teams.map(t=>t.total));
-            teams[ti].total+=aj-ai;teams[tj].total+=ai-aj;
-            const newSpread=Math.max(...teams.map(t=>t.total))-Math.min(...teams.map(t=>t.total));
-            if(newSpread<oldSpread-0.5){
-              const tmp=teams[ti].members[mi];teams[ti].members[mi]=teams[tj].members[mj];teams[tj].members[mj]=tmp;
-              improved=true;
-            }else{teams[ti].total+=ai-aj;teams[tj].total+=aj-ai;}
-          }
-        }
-      }
-    }
-  }
-  function setAnchor(lane){
-    if(lane.length<2)return lane;
-    const maxIdx=lane.reduce((mi,m,i)=>(m.avg||0)>(lane[mi].avg||0)?i:mi,0);
-    const anchor=lane.splice(maxIdx,1)[0];lane.push(anchor);return lane;
-  }
-  laneGroups=teams.map(t=>{
-    if(autoTeamMode===1) return{...t,laneA:setAnchor([...t.members]),laneB:[]};
-    const sorted2=[...t.members].sort((a,b)=>(b.avg||0)-(a.avg||0));
-    const a=[],b=[];let sa=0,sb=0;
-    sorted2.forEach(m=>{if(sa<=sb){a.push(m);sa+=m.avg||0;}else{b.push(m);sb+=m.avg||0;}});
-    return{...t,laneA:setAnchor(a),laneB:setAnchor(b)};
-  });
+  while(improved&&iter<200){improved=false;iter++;for(let ti=0;ti<teams.length-1;ti++){for(let tj=ti+1;tj<teams.length;tj++){for(let mi=0;mi<teams[ti].members.length;mi++){for(let mj=0;mj<teams[tj].members.length;mj++){const ai=teams[ti].members[mi].avg||0,aj=teams[tj].members[mj].avg||0;if(ai===aj)continue;const oldS=Math.max(...teams.map(t=>t.total))-Math.min(...teams.map(t=>t.total));teams[ti].total+=aj-ai;teams[tj].total+=ai-aj;const newS=Math.max(...teams.map(t=>t.total))-Math.min(...teams.map(t=>t.total));if(newS<oldS-0.5){const tmp=teams[ti].members[mi];teams[ti].members[mi]=teams[tj].members[mj];teams[tj].members[mj]=tmp;improved=true;}else{teams[ti].total+=ai-aj;teams[tj].total+=aj-ai;}}}}}}
+  function setAnchor(lane){if(lane.length<2)return lane;const maxIdx=lane.reduce((mi,m,i)=>(m.avg||0)>(lane[mi].avg||0)?i:mi,0);const anchor=lane.splice(maxIdx,1)[0];lane.push(anchor);return lane;}
+  laneGroups=teams.map(t=>{if(autoTeamMode===1)return{...t,laneA:setAnchor([...t.members]),laneB:[]};const s2=[...t.members].sort((a,b)=>(b.avg||0)-(a.avg||0));const a=[],b=[];let sa=0,sb=0;s2.forEach(m=>{if(sa<=sb){a.push(m);sa+=m.avg||0;}else{b.push(m);sb+=m.avg||0;}});return{...t,laneA:setAnchor(a),laneB:setAnchor(b)};});
   const spread=Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total)));
   cancelSwap();renderAutoResults();renderDash();
   toast(`⚡ ${numTeams}팀 배정 완료 (편차: ${spread}점)${_assignCount>1?' · 재배정됨':''}`);
 }
 
-function checkNoAvg(att){
-  const noAvg=att.filter(m=>!m.avg||m.avg===0);
-  const sec=document.getElementById('noavg-section');
-  const list=document.getElementById('noavg-list');
-  if(!noAvg.length){if(sec)sec.style.display='none';return;}
-  if(sec)sec.style.display='block';
-  if(!list)return;
-  list.innerHTML=noAvg.map(m=>{
-    const nm=m.name.replace(/'/g,"\\'");
-    const tmp=tempAvgMap[m.name]||'';
-    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-      <span style="flex:1;font-size:13px;font-weight:700">${m.name}</span>
-      <button onclick="setNoAvgGuide('${nm}',100)" style="padding:4px 8px;border:1.5px solid var(--border);border-radius:7px;background:var(--bg);font-size:11px;font-weight:700;cursor:pointer;color:var(--muted)">남 100</button>
-      <button onclick="setNoAvgGuide('${nm}',80)" style="padding:4px 8px;border:1.5px solid var(--border);border-radius:7px;background:var(--bg);font-size:11px;font-weight:700;cursor:pointer;color:var(--muted)">여 80</button>
-      <input type="number" id="navg-${nm.replace(/[^가-힣a-zA-Z0-9]/g,'_')}" value="${tmp}" placeholder="직접입력" min="50" max="300"
-        style="width:72px;border:1.5px solid var(--border);border-radius:8px;padding:5px 7px;font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;outline:none;text-align:center;color:var(--navy)"
-        oninput="applyNoAvg('${nm}',this.value)">
-    </div>`;
-  }).join('');
-}
-function setNoAvgGuide(name,v){
-  const safeId=name.replace(/[^가-힣a-zA-Z0-9]/g,'_');
-  const inp=document.getElementById('navg-'+safeId);
-  if(inp)inp.value=v;
-  applyNoAvg(name,v);
-}
-function applyNoAvg(name,v){
-  const n=parseInt(v);
-  if(n>=50&&n<=300){tempAvgMap[name]=n;saveLocal();}
-}
+function checkNoAvg(att){const noAvg=att.filter(m=>!m.avg||m.avg===0);const sec=document.getElementById('noavg-section');const list=document.getElementById('noavg-list');if(!noAvg.length){if(sec)sec.style.display='none';return;}if(sec)sec.style.display='block';if(!list)return;list.innerHTML=noAvg.map(m=>{const nm=m.name.replace(/'/g,"\\'");const tmp=tempAvgMap[m.name]||'';return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="flex:1;font-size:13px;font-weight:700">${m.name}</span><button onclick="setNoAvgGuide('${nm}',100)" style="padding:4px 8px;border:1.5px solid var(--border);border-radius:7px;background:var(--bg);font-size:11px;font-weight:700;cursor:pointer;color:var(--muted)">남 100</button><button onclick="setNoAvgGuide('${nm}',80)" style="padding:4px 8px;border:1.5px solid var(--border);border-radius:7px;background:var(--bg);font-size:11px;font-weight:700;cursor:pointer;color:var(--muted)">여 80</button><input type="number" id="navg-${nm.replace(/[^가-힣a-zA-Z0-9]/g,'_')}" value="${tmp}" placeholder="직접입력" min="50" max="300" style="width:72px;border:1.5px solid var(--border);border-radius:8px;padding:5px 7px;font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;outline:none;text-align:center;color:var(--navy)" oninput="applyNoAvg('${nm}',this.value)"></div>`;}).join('');}
+function setNoAvgGuide(name,v){const inp=document.getElementById('navg-'+name.replace(/[^가-힣a-zA-Z0-9]/g,'_'));if(inp)inp.value=v;applyNoAvg(name,v);}
+function applyNoAvg(name,v){const n=parseInt(v);if(n>=50&&n<=300){tempAvgMap[name]=n;saveLocal();}}
 
 const TC=['#162447','#065f46','#7c2d12','#4c1d95','#1e3a5f','#1f2937'];
 
@@ -1080,221 +649,49 @@ function renderAutoResults(){
   const tots=laneGroups.map(t=>t.total),maxT=Math.max(...tots)||1;
   const spread=Math.round(Math.max(...tots)-Math.min(...tots));
   let html=`<div class="bal-card"><div class="bal-title">⚖️ 팀별 균형 (합계 편차: <strong>${spread}</strong>)</div>`;
-  laneGroups.forEach((t,i)=>{
-    const avg=t.members.length?Math.round(t.total/t.members.length):0;
-    html+=`<div class="bal-row"><div class="bal-lbl">${t.laneAN}·${t.laneBN}</div><div class="bal-track"><div class="bal-fill" style="width:${(t.total/maxT*100).toFixed(0)}%;background:${TC[i%TC.length]}"></div></div><div class="bal-num">${Math.round(t.total)}</div><div style="font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0">avg ${avg}</div></div>`;
-  });
+  laneGroups.forEach((t,i)=>{const avg=t.members.length?Math.round(t.total/t.members.length):0;html+=`<div class="bal-row"><div class="bal-lbl">${t.laneAN}·${t.laneBN}</div><div class="bal-track"><div class="bal-fill" style="width:${(t.total/maxT*100).toFixed(0)}%;background:${TC[i%TC.length]}"></div></div><div class="bal-num">${Math.round(t.total)}</div><div style="font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0">avg ${avg}</div></div>`;});
   html+='</div>';
-  html+=laneGroups.map((t,ti)=>`
-    <div class="team-card">
-      <div class="team-hdr" style="background:${TC[ti%TC.length]}">
-        <div class="team-hdr-l">팀 ${ti+1} &nbsp;(${t.laneAN}·${t.laneBN} 레인)</div>
-        <div class="team-hdr-r">합계 ${Math.round(t.total)} · 평균 ${t.members.length?Math.round(t.total/t.members.length):0} · ${t.members.length}명</div>
-      </div>
-      <div class="lanes-wrap">
-        <div class="lane-col">
-          <div class="lane-col-hdr"><span>${t.laneAN}번</span><span class="lane-avg">${lavg(t.laneA)}</span></div>
-          <div id="lc-${ti}-A">${t.laneA.map((m,ci)=>chp(m,ti,'A',ci)).join('')}</div>
-        </div>
-        <div class="lane-col">
-          <div class="lane-col-hdr"><span>${t.laneBN}번</span><span class="lane-avg">${lavg(t.laneB)}</span></div>
-          <div id="lc-${ti}-B">${t.laneB.map((m,ci)=>chp(m,ti,'B',ci)).join('')}</div>
-        </div>
-      </div>
-      <div class="team-footer">
-        <button class="smBtn" onclick="shuffleTeam(${ti})">🔀 섞기</button>
-        <button class="smBtn" onclick="copyTeam(${ti})">📋 복사</button>
-      </div>
-    </div>`).join('');
-  const allTxt=laneGroups.map(t=>`[팀${t.teamNum}] ${t.laneAN}레인:${t.laneA.map(m=>m.name).join(',')} / ${t.laneBN}레인:${t.laneB.map(m=>m.name).join(',')}`).join('\n');
+  html+=laneGroups.map((t,ti)=>`<div class="team-card"><div class="team-hdr" style="background:${TC[ti%TC.length]}"><div class="team-hdr-l">팀 ${ti+1} &nbsp;(${t.laneAN}·${t.laneBN} 레인)</div><div class="team-hdr-r">합계 ${Math.round(t.total)} · 평균 ${t.members.length?Math.round(t.total/t.members.length):0} · ${t.members.length}명</div></div><div class="lanes-wrap"><div class="lane-col"><div class="lane-col-hdr"><span>${t.laneAN}번</span><span class="lane-avg">${lavg(t.laneA)}</span></div><div id="lc-${ti}-A">${t.laneA.map((m,ci)=>chp(m,ti,'A',ci)).join('')}</div></div><div class="lane-col"><div class="lane-col-hdr"><span>${t.laneBN}번</span><span class="lane-avg">${lavg(t.laneB)}</span></div><div id="lc-${ti}-B">${t.laneB.map((m,ci)=>chp(m,ti,'B',ci)).join('')}</div></div></div><div class="team-footer"><button class="smBtn" onclick="shuffleTeam(${ti})">🔀 섞기</button><button class="smBtn" onclick="copyTeam(${ti})">📋 복사</button></div></div>`).join('');
+  /* ✅ 카카오 공유 버튼 */
   html+=`<button class="bigBtn" style="margin-bottom:8px" onclick="startSwap()">🔄 수동 조정 (멤버 교체)</button>`;
-  html+=`<button class="copy-all" onclick="navigator.clipboard.writeText(\`${allTxt.replace(/`/g,'\\`')}\`).then(()=>toast('📤 전체 복사됨!'))">📤 전체 결과 복사</button>`;
+  html+=`<button class="copy-all" onclick="copyKakaoResult()">📤 카카오톡으로 공유</button>`;
   con.innerHTML=html;
 }
 
-function chp(m,ti,lane,ci){
-  const warn=!m.avg||m.avg===0;
-  return `<div class="mchip ${warn?'warn':''}" id="chip-${ti}-${lane}-${ci}" onclick="onChip(${ti},'${lane}',${ci})">
-    <span class="chip-name">${m.name}</span>
-    ${m.avg?`<span class="chip-avg">${m.avg}</span>`:`<span class="chip-warn">?</span>`}
-  </div>`;
-}
+function chp(m,ti,lane,ci){const warn=!m.avg||m.avg===0;return `<div class="mchip ${warn?'warn':''}" id="chip-${ti}-${lane}-${ci}" onclick="onChip(${ti},'${lane}',${ci})"><span class="chip-name">${m.name}</span>${m.avg?`<span class="chip-avg">${m.avg}</span>`:`<span class="chip-warn">?</span>`}</div>`;}
 function lavg(arr){const f=arr.filter(m=>m.avg>0);return f.length?Math.round(f.reduce((s,m)=>s+m.avg,0)/f.length)+'':'—';}
 
-/* ════ SWAP ════ */
-function startSwap(){
-  swapMode=true;
-  document.getElementById('swap-banner').classList.add('show');
-  document.getElementById('swap-txt').textContent='교체할 멤버를 선택하세요';
-  toast('멤버를 탭해서 교체하세요');
-}
-function cancelSwap(){
-  swapMode=false;swapSel=null;
-  document.getElementById('swap-banner').classList.remove('show');
-  document.querySelectorAll('.mchip').forEach(c=>c.classList.remove('sel','tgt'));
-}
-function onChip(ti,lane,ci){
-  if(!swapMode)return;
-  if(!swapSel){
-    swapSel={ti,lane,ci};
-    document.getElementById(`chip-${ti}-${lane}-${ci}`).classList.add('sel');
-    document.querySelectorAll('.mchip').forEach(c=>{if(c.id!==`chip-${ti}-${lane}-${ci}`)c.classList.add('tgt');});
-    document.getElementById('swap-txt').textContent='교체할 대상을 선택하세요';
-  }else{
-    const{ti:ti2,lane:lane2,ci:ci2}=swapSel;
-    if(ti===ti2&&lane===lane2&&ci===ci2){cancelSwap();startSwap();return;}
-    const a1=lane2==='A'?laneGroups[ti2].laneA:laneGroups[ti2].laneB;
-    const a2=lane==='A'?laneGroups[ti].laneA:laneGroups[ti].laneB;
-    [a1[ci2],a2[ci]]=[a2[ci],a1[ci2]];
-    laneGroups.forEach(t=>{t.total=[...t.laneA,...t.laneB].reduce((s,m)=>s+m.avg,0);t.members=[...t.laneA,...t.laneB];});
-    swapSel=null;renderAutoResults();renderDash();toast('✅ 교체 완료!');startSwap();
-  }
-}
-function shuffleTeam(ti){
-  const t=laneGroups[ti],all=[...t.laneA,...t.laneB];
-  for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}
-  t.laneA=all.slice(0,Math.ceil(all.length/2));t.laneB=all.slice(Math.ceil(all.length/2));
-  renderAutoResults();toast('🔀 섞었어요');
-}
-function copyTeam(ti){
-  const t=laneGroups[ti];
-  navigator.clipboard.writeText(`[팀${t.teamNum}] ${t.laneAN}레인:${t.laneA.map(m=>m.name).join(',')} / ${t.laneBN}레인:${t.laneB.map(m=>m.name).join(',')}`).then(()=>toast('📋 복사됨!'));
+/* ✅ 카카오톡 공유 포맷 */
+function copyKakaoResult(){
+  if(!laneGroups.length){toast('배정 결과가 없어요');return;}
+  const spread=Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total)));
+  const total=laneGroups.reduce((s,t)=>s+t.members.length,0);
+  let txt=`📋 레인배정 결과 (${currentEvent||'미정'})\n`;
+  txt+=`참석 ${total}명 · 팀간 편차 ${spread}점\n`;
+  txt+=`${'─'.repeat(22)}\n\n`;
+  laneGroups.forEach(t=>{
+    const avg=t.members.length?Math.round(t.total/t.members.length):0;
+    txt+=`🎳 팀${t.teamNum} (${t.laneAN}·${t.laneBN}레인) 합계:${Math.round(t.total)} 평균:${avg}\n`;
+    txt+=` ${t.laneAN}레인: ${t.laneA.map(m=>m.avg?m.name+'('+m.avg+')':m.name).join('  ')}\n`;
+    if(t.laneB.length)txt+=` ${t.laneBN}레인: ${t.laneB.map(m=>m.avg?m.name+'('+m.avg+')':m.name).join('  ')}\n`;
+    txt+='\n';
+  });
+  navigator.clipboard.writeText(txt.trim()).then(()=>toast('📤 카카오톡 형식으로 복사됨!'));
 }
 
-/* ════ MANUAL ASSIGN ════ */
-function initManualAssign(){
-  const numLanes=parseInt(document.getElementById('lane-cnt2').value)||6;
-  const att=getAttendees();
-  if(!att.length){toast('참석자를 먼저 체크하세요 👆');return;}
-  checkNoAvg(att);
-  manualUnassigned=[...att].sort((a,b)=>(b.avg||0)-(a.avg||0));
-  manualLanes={};
-  if(manualTeamMode===2){
-    const numTeams2=Math.floor(numLanes/2);
-    for(let i=0;i<numTeams2;i++){manualLanes[`${i*2+1}`]=[];manualLanes[`${i*2+2}`]=[];}
-  }else{
-    for(let i=0;i<numLanes;i++){manualLanes[`${i+1}`]=[];}
-  }
-  manualSelChip=null;
-  renderManualAssign(numLanes/2);
-  toast('참석자를 탭한 후 레인을 탭해서 배치하세요');
-}
+function startSwap(){swapMode=true;document.getElementById('swap-banner').classList.add('show');document.getElementById('swap-txt').textContent='교체할 멤버를 선택하세요';toast('멤버를 탭해서 교체하세요');}
+function cancelSwap(){swapMode=false;swapSel=null;document.getElementById('swap-banner').classList.remove('show');document.querySelectorAll('.mchip').forEach(c=>c.classList.remove('sel','tgt'));}
+function onChip(ti,lane,ci){if(!swapMode)return;if(!swapSel){swapSel={ti,lane,ci};document.getElementById(`chip-${ti}-${lane}-${ci}`).classList.add('sel');document.querySelectorAll('.mchip').forEach(c=>{if(c.id!==`chip-${ti}-${lane}-${ci}`)c.classList.add('tgt');});document.getElementById('swap-txt').textContent='교체할 대상을 선택하세요';}else{const{ti:ti2,lane:lane2,ci:ci2}=swapSel;if(ti===ti2&&lane===lane2&&ci===ci2){cancelSwap();startSwap();return;}const a1=lane2==='A'?laneGroups[ti2].laneA:laneGroups[ti2].laneB;const a2=lane==='A'?laneGroups[ti].laneA:laneGroups[ti].laneB;[a1[ci2],a2[ci]]=[a2[ci],a1[ci2]];laneGroups.forEach(t=>{t.total=[...t.laneA,...t.laneB].reduce((s,m)=>s+m.avg,0);t.members=[...t.laneA,...t.laneB];});swapSel=null;renderAutoResults();renderDash();toast('✅ 교체 완료!');startSwap();}}
+function shuffleTeam(ti){const t=laneGroups[ti],all=[...t.laneA,...t.laneB];for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}t.laneA=all.slice(0,Math.ceil(all.length/2));t.laneB=all.slice(Math.ceil(all.length/2));renderAutoResults();toast('🔀 섞었어요');}
+function copyTeam(ti){const t=laneGroups[ti];navigator.clipboard.writeText(`[팀${t.teamNum}] ${t.laneAN}레인:${t.laneA.map(m=>m.name).join(',')} / ${t.laneBN}레인:${t.laneB.map(m=>m.name).join(',')}`).then(()=>toast('📋 복사됨!'));}
 
-function renderManualAssign(numTeams){
-  if(!numTeams) numTeams=Object.keys(manualLanes).length/2;
-  const con=document.getElementById('lane-results');
-  let html=`<div class="manual-area">
-    <div class="manual-title">📦 미배정 인원 (탭해서 선택 → 레인에 배치)</div>
-    <div class="unassigned-pool" id="pool">
-      ${manualUnassigned.map(m=>`
-        <div class="pool-chip ${!m.avg?'warn':''}" id="pool-${m.name.replace(/[^가-힣a-zA-Z0-9]/g,'_')}" onclick="selPoolChip('${m.name.replace(/'/g,"\\'")}')">
-          <span>${m.name}</span>
-          ${m.avg?`<span style="font-size:10px;color:var(--muted)">${m.avg}</span>`:`<span style="font-size:10px;color:#92400e">?</span>`}
-        </div>`).join('')}
-      ${!manualUnassigned.length?'<span style="font-size:12px;color:var(--muted);padding:4px">모두 배치됨 ✅</span>':''}
-    </div>
-  </div>`;
-  html+=`<div class="manual-area"><div class="manual-title">🎳 레인 배치 (레인 탭해서 배치)</div><div class="manual-lanes">`;
-  const laneKeys=Object.keys(manualLanes).map(Number).sort((a,b)=>a-b);
-  if(manualTeamMode===2){
-    const pairs=[];
-    for(let i=0;i<laneKeys.length;i+=2)pairs.push([laneKeys[i],laneKeys[i+1]]);
-    pairs.forEach((pair,pi)=>{
-      const[la,lb]=pair;
-      html+=`<div class="manual-lane-pair">
-        <div class="manual-lane-pair-hdr">팀 ${pi+1} — ${la}·${lb||'?'} 레인
-          <span style="font-size:11px;color:var(--muted);float:right">합계: ${manualLaneTotal(la,lb)}</span>
-        </div>
-        <div class="manual-lanes-grid">
-          <div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})">
-            <div class="manual-lane-lbl">${la}번 레인</div>
-            ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
-          </div>
-          ${lb?`<div class="manual-lane" id="ml-${lb}" onclick="assignToLane(${lb})">
-            <div class="manual-lane-lbl">${lb}번 레인</div>
-            ${(manualLanes[lb]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${lb},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
-          </div>`:''}
-        </div>
-      </div>`;
-    });
-  }else{
-    laneKeys.forEach((la,pi)=>{
-      html+=`<div class="manual-lane-pair">
-        <div class="manual-lane-pair-hdr">팀 ${pi+1} — ${la}번 레인
-          <span style="font-size:11px;color:var(--muted);float:right">${(manualLanes[la]||[]).reduce((s,m)=>s+(m.avg||0),0)||0}</span>
-        </div>
-        <div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})" style="border-radius:8px;padding:7px;border:2px dashed var(--border);min-height:50px;cursor:pointer">
-          <div class="manual-lane-lbl">${la}번 레인</div>
-          ${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}
-        </div>
-      </div>`;
-    });
-  }
-  html+='</div></div>';
-  const numTeamsNow=manualTeamMode===2?Object.keys(manualLanes).length/2:Object.keys(manualLanes).length;
-  const allTxt=Array.from({length:numTeamsNow},(_,i)=>{
-    const la=manualTeamMode===2?i*2+1:i+1,lb=manualTeamMode===2?i*2+2:null;
-    return `[팀${i+1}] ${la}레인:${(manualLanes[la]||[]).map(m=>m.name).join(',')}${lb?` / ${lb}레인:${(manualLanes[lb]||[]).map(m=>m.name).join(',')}`:''}`;
-  }).join('\n');
-  html+=`<div style="display:flex;gap:7px;margin-top:6px;margin-bottom:12px">
-    <button class="bigBtn amber" onclick="finalizeManual()">✅ 배정 완료 → 결과 보기</button>
-    <button class="bigBtn" onclick="navigator.clipboard.writeText(\`${allTxt.replace(/`/g,'\\`')}\`).then(()=>toast('📤 복사됨!'))">📤 복사</button>
-  </div>`;
-  con.innerHTML=html;
-  if(manualSelChip){
-    const el=document.getElementById('pool-'+manualSelChip.replace(/[^가-힣a-zA-Z0-9]/g,'_'));
-    if(el)el.classList.add('sel');
-  }
-}
-
-function manualLaneTotal(la,lb){
-  const s=[...(manualLanes[la]||[]),...(lb?manualLanes[lb]||[]:[])]
-    .reduce((s,m)=>s+(m.avg||0),0);
-  return s?Math.round(s):'0';
-}
-function selPoolChip(name){
-  manualSelChip=(manualSelChip===name?null:name);
-  document.querySelectorAll('.pool-chip').forEach(c=>c.classList.remove('sel'));
-  if(manualSelChip){
-    const el=document.getElementById('pool-'+name.replace(/[^가-힣a-zA-Z0-9]/g,'_'));
-    if(el)el.classList.add('sel');
-    toast('레인을 탭해서 배치하세요');
-  }
-}
-function assignToLane(laneNum){
-  if(!manualSelChip){toast('먼저 인원을 선택하세요');return;}
-  const member=manualUnassigned.find(m=>m.name===manualSelChip);
-  if(!member){manualSelChip=null;return;}
-  manualLanes[laneNum]=[...(manualLanes[laneNum]||[]),member];
-  manualUnassigned=manualUnassigned.filter(m=>m.name!==manualSelChip);
-  manualSelChip=null;
-  renderManualAssign();
-}
-function removeFromLane(laneNum,name){
-  const member=manualLanes[laneNum]?.find(m=>m.name===name);
-  if(!member)return;
-  manualLanes[laneNum]=manualLanes[laneNum].filter(m=>m.name!==name);
-  manualUnassigned.push(member);
-  renderManualAssign();
-}
-function finalizeManual(){
-  const laneKeys=Object.keys(manualLanes).map(Number).sort((a,b)=>a-b);
-  if(manualTeamMode===2){
-    laneGroups=[];
-    for(let i=0;i<laneKeys.length;i+=2){
-      const la=laneKeys[i],lb=laneKeys[i+1];
-      const laneA=manualLanes[la]||[],laneB=lb?manualLanes[lb]||[]:[];
-      const members=[...laneA,...laneB];
-      laneGroups.push({teamNum:laneGroups.length+1,laneAN:la,laneBN:lb||la,laneA,laneB,members,total:members.reduce((s,m)=>s+(m.avg||0),0)});
-    }
-  }else{
-    laneGroups=laneKeys.map((la,i)=>{
-      const laneA=manualLanes[la]||[];
-      return{teamNum:i+1,laneAN:la,laneBN:la,laneA,laneB:[],members:[...laneA],total:laneA.reduce((s,m)=>s+(m.avg||0),0)};
-    });
-  }
-  renderAutoResults();renderDash();toast('✅ 수동 배정 결과 확정!');
-}
+function initManualAssign(){const numLanes=parseInt(document.getElementById('lane-cnt2').value)||6;const att=getAttendees();if(!att.length){toast('참석자를 먼저 체크하세요 👆');return;}checkNoAvg(att);manualUnassigned=[...att].sort((a,b)=>(b.avg||0)-(a.avg||0));manualLanes={};if(manualTeamMode===2){const numTeams2=Math.floor(numLanes/2);for(let i=0;i<numTeams2;i++){manualLanes[`${i*2+1}`]=[];manualLanes[`${i*2+2}`]=[];}}else{for(let i=0;i<numLanes;i++){manualLanes[`${i+1}`]=[];}}manualSelChip=null;renderManualAssign(numLanes/2);toast('참석자를 탭한 후 레인을 탭해서 배치하세요');}
+function renderManualAssign(numTeams){if(!numTeams)numTeams=Object.keys(manualLanes).length/2;const con=document.getElementById('lane-results');let html=`<div class="manual-area"><div class="manual-title">📦 미배정 인원 (탭해서 선택 → 레인에 배치)</div><div class="unassigned-pool" id="pool">${manualUnassigned.map(m=>`<div class="pool-chip ${!m.avg?'warn':''}" id="pool-${m.name.replace(/[^가-힣a-zA-Z0-9]/g,'_')}" onclick="selPoolChip('${m.name.replace(/'/g,"\\'")}')"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted)">${m.avg}</span>`:`<span style="font-size:10px;color:#92400e">?</span>`}</div>`).join('')}${!manualUnassigned.length?'<span style="font-size:12px;color:var(--muted);padding:4px">모두 배치됨 ✅</span>':''}</div></div>`;html+=`<div class="manual-area"><div class="manual-title">🎳 레인 배치 (레인 탭해서 배치)</div><div class="manual-lanes">`;const laneKeys=Object.keys(manualLanes).map(Number).sort((a,b)=>a-b);if(manualTeamMode===2){const pairs=[];for(let i=0;i<laneKeys.length;i+=2)pairs.push([laneKeys[i],laneKeys[i+1]]);pairs.forEach((pair,pi)=>{const[la,lb]=pair;html+=`<div class="manual-lane-pair"><div class="manual-lane-pair-hdr">팀 ${pi+1} — ${la}·${lb||'?'} 레인<span style="font-size:11px;color:var(--muted);float:right">합계: ${manualLaneTotal(la,lb)}</span></div><div class="manual-lanes-grid"><div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})"><div class="manual-lane-lbl">${la}번 레인</div>${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}</div>${lb?`<div class="manual-lane" id="ml-${lb}" onclick="assignToLane(${lb})"><div class="manual-lane-lbl">${lb}번 레인</div>${(manualLanes[lb]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${lb},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}</div>`:''}</div></div>`;});}else{laneKeys.forEach((la,pi)=>{html+=`<div class="manual-lane-pair"><div class="manual-lane-pair-hdr">팀 ${pi+1} — ${la}번 레인<span style="font-size:11px;color:var(--muted);float:right">${(manualLanes[la]||[]).reduce((s,m)=>s+(m.avg||0),0)||0}</span></div><div class="manual-lane" id="ml-${la}" onclick="assignToLane(${la})" style="border-radius:8px;padding:7px;border:2px dashed var(--border);min-height:50px;cursor:pointer"><div class="manual-lane-lbl">${la}번 레인</div>${(manualLanes[la]||[]).map(m=>`<div class="manual-chip"><span>${m.name}</span>${m.avg?`<span style="font-size:10px;color:var(--muted);margin:0 4px">${m.avg}</span>`:''}<button class="manual-remove" onclick="event.stopPropagation();removeFromLane(${la},'${m.name.replace(/'/g,"\\'")}')">×</button></div>`).join('')}</div></div>`;});}html+='</div></div>';const numTeamsNow=manualTeamMode===2?Object.keys(manualLanes).length/2:Object.keys(manualLanes).length;const allTxt=Array.from({length:numTeamsNow},(_,i)=>{const la=manualTeamMode===2?i*2+1:i+1,lb=manualTeamMode===2?i*2+2:null;return `[팀${i+1}] ${la}레인:${(manualLanes[la]||[]).map(m=>m.name).join(',')}${lb?` / ${lb}레인:${(manualLanes[lb]||[]).map(m=>m.name).join(',')}`:''}`;}).join('\n');html+=`<div style="display:flex;gap:7px;margin-top:6px;margin-bottom:12px"><button class="bigBtn amber" onclick="finalizeManual()">✅ 배정 완료 → 결과 보기</button><button class="bigBtn" onclick="navigator.clipboard.writeText(\`${allTxt.replace(/`/g,'\\`')}\`).then(()=>toast('📤 복사됨!'))">📤 복사</button></div>`;con.innerHTML=html;if(manualSelChip){const el=document.getElementById('pool-'+manualSelChip.replace(/[^가-힣a-zA-Z0-9]/g,'_'));if(el)el.classList.add('sel');}}
+function manualLaneTotal(la,lb){const s=[...(manualLanes[la]||[]),...(lb?manualLanes[lb]||[]:[])]  .reduce((s,m)=>s+(m.avg||0),0);return s?Math.round(s):'0';}
+function selPoolChip(name){manualSelChip=(manualSelChip===name?null:name);document.querySelectorAll('.pool-chip').forEach(c=>c.classList.remove('sel'));if(manualSelChip){const el=document.getElementById('pool-'+name.replace(/[^가-힣a-zA-Z0-9]/g,'_'));if(el)el.classList.add('sel');toast('레인을 탭해서 배치하세요');}}
+function assignToLane(laneNum){if(!manualSelChip){toast('먼저 인원을 선택하세요');return;}const member=manualUnassigned.find(m=>m.name===manualSelChip);if(!member){manualSelChip=null;return;}manualLanes[laneNum]=[...(manualLanes[laneNum]||[]),member];manualUnassigned=manualUnassigned.filter(m=>m.name!==manualSelChip);manualSelChip=null;renderManualAssign();}
+function removeFromLane(laneNum,name){const member=manualLanes[laneNum]?.find(m=>m.name===name);if(!member)return;manualLanes[laneNum]=manualLanes[laneNum].filter(m=>m.name!==name);manualUnassigned.push(member);renderManualAssign();}
+function finalizeManual(){const laneKeys=Object.keys(manualLanes).map(Number).sort((a,b)=>a-b);if(manualTeamMode===2){laneGroups=[];for(let i=0;i<laneKeys.length;i+=2){const la=laneKeys[i],lb=laneKeys[i+1];const laneA=manualLanes[la]||[],laneB=lb?manualLanes[lb]||[]:[];const members=[...laneA,...laneB];laneGroups.push({teamNum:laneGroups.length+1,laneAN:la,laneBN:lb||la,laneA,laneB,members,total:members.reduce((s,m)=>s+(m.avg||0),0)});}}else{laneGroups=laneKeys.map((la,i)=>{const laneA=manualLanes[la]||[];return{teamNum:i+1,laneAN:la,laneBN:la,laneA,laneB:[],members:[...laneA],total:laneA.reduce((s,m)=>s+(m.avg||0),0)};});}renderAutoResults();renderDash();toast('✅ 수동 배정 결과 확정!');}
 
 /* ════ DASHBOARD ════ */
 function renderDash(){
@@ -1304,198 +701,103 @@ function renderDash(){
   const wa=att.filter(a=>a.avg>0);
   document.getElementById('d-avg').textContent=wa.length?Math.round(wa.reduce((s,a)=>s+a.avg,0)/wa.length):'-';
   document.getElementById('d-spd').textContent=laneGroups.length>1?Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total))):'-';
-  drawTeamChart();drawDistChart(all);
+  /* ✅ 회비 납부율 */
+  const paid=members.filter(m=>m.fee==='O').length;
+  const unpaid=members.filter(m=>m.fee==='X').length;
+  const tot=members.length||1;
+  const feeEl=document.getElementById('d-fee');
+  const feeSubEl=document.getElementById('d-fee-sub');
+  const unpaidEl=document.getElementById('d-unpaid');
+  if(feeEl)feeEl.textContent=Math.round(paid/tot*100)+'%';
+  if(feeSubEl)feeSubEl.textContent=`${paid}/${tot}명 납부`;
+  if(unpaidEl)unpaidEl.textContent=unpaid||'0';
+  drawTeamChart();drawDistChart(all);drawTrendChart();renderDeptRank();
   document.getElementById('rank-avg').innerHTML=all.filter(m=>m.avg>0).sort((a,b)=>b.avg-a.avg).slice(0,10).map((m,i)=>`<div class="rank-item"><div class="rnum ${i===0?'g':i===1?'s':i===2?'b':''}">${i+1}</div><div class="rname">${m.name}</div><div class="rval">${m.avg}</div></div>`).join('')||'<div class="empty">없음</div>';
   document.getElementById('rank-reg').innerHTML=members.map(m=>({...m,tot:(m.reg||0)+(m.flash||0)})).filter(m=>m.tot>0).sort((a,b)=>b.tot-a.tot).slice(0,10).map((m,i)=>`<div class="rank-item"><div class="rnum ${i===0?'g':i===1?'s':i===2?'b':''}">${i+1}</div><div class="rname">${m.name}</div><div class="rval">${m.tot}회</div></div>`).join('')||'<div class="empty">없음</div>';
 }
-function drawTeamChart(){
-  const cv=document.getElementById('team-chart'),em=document.getElementById('team-chart-empty');
-  if(!laneGroups.length){cv.style.display='none';em.style.display='block';return;}
-  cv.style.display='block';em.style.display='none';
-  const W=cv.offsetWidth||360,H=140;
+
+/* ✅ 이벤트별 참석 추이 차트 */
+function drawTrendChart(){
+  const cv=document.getElementById('trend-chart');
+  const em=document.getElementById('trend-empty');
+  if(!eventList||eventList.length<2){if(em)em.style.display='block';if(cv)cv.style.display='none';return;}
+  if(em)em.style.display='none';if(cv)cv.style.display='block';
+  const W=cv.offsetWidth||360,H=110;
   cv.width=W*devicePixelRatio;cv.height=H*devicePixelRatio;cv.style.width=W+'px';cv.style.height=H+'px';
   const ctx=cv.getContext('2d');ctx.scale(devicePixelRatio,devicePixelRatio);
-  const p={t:16,r:8,b:26,l:32},w=W-p.l-p.r,h=H-p.t-p.b;
-  const tots=laneGroups.map(t=>t.total),maxT=Math.max(...tots)*1.1||1;
-  laneGroups.forEach((t,i)=>{
-    const bw=w/laneGroups.length*.65,x=p.l+(i+.5)*(w/laneGroups.length)-bw/2,bh=(t.total/maxT)*h,y=p.t+h-bh;
-    ctx.fillStyle=TC[i%TC.length];rr(ctx,x,y,bw,bh,4);ctx.fill();
-    ctx.fillStyle='#1e293b';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText(Math.round(t.total),x+bw/2,y-3);
-    ctx.fillStyle='#64748b';ctx.font='9px sans-serif';ctx.fillText(`${t.laneAN}·${t.laneBN}`,x+bw/2,p.t+h+16);
+  const p={t:14,r:10,b:28,l:10},w=W-p.l-p.r,h=H-p.t-p.b;
+  const evts=[...eventList].sort((a,b)=>{const da=parseEventDate(a.name),db=parseEventDate(b.name);if(!da&&!db)return 0;if(!da)return 1;if(!db)return-1;return da-db;});
+  const step=evts.length>1?w/(evts.length-1):w;
+  // 타임라인 선
+  ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(p.l,p.t+h/2);ctx.lineTo(p.l+w,p.t+h/2);ctx.stroke();
+  // 연결선
+  if(evts.length>1){ctx.strokeStyle='#0d1b35';ctx.lineWidth=2;ctx.beginPath();evts.forEach((_,i)=>{const x=p.l+i*step;if(i===0)ctx.moveTo(x,p.t+h/2);else ctx.lineTo(x,p.t+h/2);});ctx.stroke();}
+  // 점 + 이름
+  evts.forEach((ev,i)=>{
+    const x=p.l+i*step;
+    const isCurrent=ev.name===currentEvent;
+    ctx.fillStyle=isCurrent?'var(--amber)':'#0d1b35';
+    ctx.beginPath();ctx.arc(x,p.t+h/2,isCurrent?6:4,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#64748b';ctx.font='8px sans-serif';ctx.textAlign='center';
+    const short=ev.name.replace(/\[|\]/g,'').trim().substring(0,7);
+    ctx.fillText(short,x,p.t+h+18);
+    if(isCurrent){ctx.fillStyle='#0d1b35';ctx.font='bold 8px sans-serif';ctx.fillText('▲',x,p.t+h/2-10);}
   });
 }
-function drawDistChart(all){
-  const cv=document.getElementById('dist-chart'),W=cv.offsetWidth||360,H=100;
-  cv.width=W*devicePixelRatio;cv.height=H*devicePixelRatio;cv.style.width=W+'px';cv.style.height=H+'px';
-  const ctx=cv.getContext('2d');ctx.scale(devicePixelRatio,devicePixelRatio);
-  const labels=['<80','80','100','120','140','160','180','200+'],counts=new Array(8).fill(0);
-  all.forEach(r=>{const v=r.avg;if(v<80)counts[0]++;else if(v<100)counts[1]++;else if(v<120)counts[2]++;else if(v<140)counts[3]++;else if(v<160)counts[4]++;else if(v<180)counts[5]++;else if(v<200)counts[6]++;else counts[7]++;});
-  const p={t:10,r:5,b:22,l:20},w=W-p.l-p.r,h=H-p.t-p.b,maxC=Math.max(...counts)||1;
-  counts.forEach((c,i)=>{
-    const bw=w/8*.72,x=p.l+(i+.5)*(w/8)-bw/2,bh=(c/maxC)*h,y=p.t+h-bh;
-    ctx.fillStyle='#1f3a6e';rr(ctx,x,y,bw,bh,3);ctx.fill();
-    if(c>0){ctx.fillStyle='#fff';ctx.font='bold 9px sans-serif';ctx.textAlign='center';ctx.fillText(c,x+bw/2,y-2);}
-    ctx.fillStyle='#64748b';ctx.font='8px sans-serif';ctx.fillText(labels[i],x+bw/2,p.t+h+14);
+
+/* ✅ 학과별 참여 TOP 10 */
+function renderDeptRank(){
+  const el=document.getElementById('rank-dept');
+  if(!el)return;
+  const deptMap={};
+  members.forEach(m=>{
+    if(!m.dept||m.dept==='게스트')return;
+    if(!deptMap[m.dept])deptMap[m.dept]={dept:m.dept,att:0,count:0};
+    deptMap[m.dept].att+=(m.reg||0)+(m.flash||0);
+    deptMap[m.dept].count++;
   });
+  const ranked=Object.values(deptMap).filter(d=>d.count>0).sort((a,b)=>b.att-a.att||b.count-a.count).slice(0,10);
+  if(!ranked.length){el.innerHTML='<div class="empty">데이터 없음</div>';return;}
+  const maxAtt=ranked[0].att||1;
+  el.innerHTML=ranked.map((d,i)=>`<div class="rank-item"><div class="rnum ${i===0?'g':i===1?'s':i===2?'b':''}">${i+1}</div><div style="flex:1;min-width:0"><div class="rname" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${d.dept}</div><div style="height:4px;background:var(--bg);border-radius:2px;margin-top:3px"><div style="height:100%;border-radius:2px;background:var(--navy);width:${Math.round(d.att/maxAtt*100)}%;transition:width .4s"></div></div></div><div style="text-align:right;flex-shrink:0;margin-left:8px"><div class="rval">${d.att}회</div><div style="font-size:9px;color:var(--muted)">${d.count}명</div></div></div>`).join('');
 }
+
+function drawTeamChart(){const cv=document.getElementById('team-chart'),em=document.getElementById('team-chart-empty');if(!laneGroups.length){cv.style.display='none';em.style.display='block';return;}cv.style.display='block';em.style.display='none';const W=cv.offsetWidth||360,H=140;cv.width=W*devicePixelRatio;cv.height=H*devicePixelRatio;cv.style.width=W+'px';cv.style.height=H+'px';const ctx=cv.getContext('2d');ctx.scale(devicePixelRatio,devicePixelRatio);const p={t:16,r:8,b:26,l:32},w=W-p.l-p.r,h=H-p.t-p.b;const tots=laneGroups.map(t=>t.total),maxT=Math.max(...tots)*1.1||1;laneGroups.forEach((t,i)=>{const bw=w/laneGroups.length*.65,x=p.l+(i+.5)*(w/laneGroups.length)-bw/2,bh=(t.total/maxT)*h,y=p.t+h-bh;ctx.fillStyle=TC[i%TC.length];rr(ctx,x,y,bw,bh,4);ctx.fill();ctx.fillStyle='#1e293b';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText(Math.round(t.total),x+bw/2,y-3);ctx.fillStyle='#64748b';ctx.font='9px sans-serif';ctx.fillText(`${t.laneAN}·${t.laneBN}`,x+bw/2,p.t+h+16);});}
+function drawDistChart(all){const cv=document.getElementById('dist-chart'),W=cv.offsetWidth||360,H=100;cv.width=W*devicePixelRatio;cv.height=H*devicePixelRatio;cv.style.width=W+'px';cv.style.height=H+'px';const ctx=cv.getContext('2d');ctx.scale(devicePixelRatio,devicePixelRatio);const labels=['<80','80','100','120','140','160','180','200+'],counts=new Array(8).fill(0);all.forEach(r=>{const v=r.avg;if(v<80)counts[0]++;else if(v<100)counts[1]++;else if(v<120)counts[2]++;else if(v<140)counts[3]++;else if(v<160)counts[4]++;else if(v<180)counts[5]++;else if(v<200)counts[6]++;else counts[7]++;});const p={t:10,r:5,b:22,l:20},w=W-p.l-p.r,h=H-p.t-p.b,maxC=Math.max(...counts)||1;counts.forEach((c,i)=>{const bw=w/8*.72,x=p.l+(i+.5)*(w/8)-bw/2,bh=(c/maxC)*h,y=p.t+h-bh;ctx.fillStyle='#1f3a6e';rr(ctx,x,y,bw,bh,3);ctx.fill();if(c>0){ctx.fillStyle='#fff';ctx.font='bold 9px sans-serif';ctx.textAlign='center';ctx.fillText(c,x+bw/2,y-2);}ctx.fillStyle='#64748b';ctx.font='8px sans-serif';ctx.fillText(labels[i],x+bw/2,p.t+h+14);});}
 function rr(ctx,x,y,w,h,r){if(h<=0)return;ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h);ctx.lineTo(x,y+h);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
 
-/* ════ SETTINGS ════ */
-function openCfg(){
-  document.getElementById('c-url').value=cfg.url;
-  document.getElementById('c-name').value=cfg.name;
-  document.getElementById('c-avg').value=cfg.avg;
-  document.getElementById('c-dept').value=cfg.dept;
-  document.getElementById('c-fee').value=cfg.fee;
-  document.getElementById('c-reg').value=cfg.reg;
-  document.getElementById('cfg-modal').classList.add('show');
-}
+function openCfg(){document.getElementById('c-url').value=cfg.url;document.getElementById('c-name').value=cfg.name;document.getElementById('c-avg').value=cfg.avg;document.getElementById('c-dept').value=cfg.dept;document.getElementById('c-fee').value=cfg.fee;document.getElementById('c-reg').value=cfg.reg;document.getElementById('cfg-modal').classList.add('show');}
 function closeCfgModal(e){if(!e||e.target===document.getElementById('cfg-modal'))document.getElementById('cfg-modal').classList.remove('show');}
-function saveCfg(){
-  cfg.url=document.getElementById('c-url').value.trim()||cfg.url;
-  cfg.name=parseInt(document.getElementById('c-name').value)||1;
-  cfg.avg=parseInt(document.getElementById('c-avg').value)||2;
-  cfg.dept=parseInt(document.getElementById('c-dept').value)||3;
-  cfg.fee=parseInt(document.getElementById('c-fee').value)||5;
-  cfg.reg=parseInt(document.getElementById('c-reg').value)||6;
-  document.getElementById('cfg-modal').classList.remove('show');
-  saveLocal();syncAll();
-}
+function saveCfg(){cfg.url=document.getElementById('c-url').value.trim()||cfg.url;cfg.name=parseInt(document.getElementById('c-name').value)||1;cfg.avg=parseInt(document.getElementById('c-avg').value)||2;cfg.dept=parseInt(document.getElementById('c-dept').value)||3;cfg.fee=parseInt(document.getElementById('c-fee').value)||5;cfg.reg=parseInt(document.getElementById('c-reg').value)||6;document.getElementById('cfg-modal').classList.remove('show');saveLocal();syncAll();}
 
-/* ════ TOAST ════ */
 let _tt;
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
-  clearTimeout(_tt);_tt=setTimeout(()=>{t.style.opacity='0';},2400);
-}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';clearTimeout(_tt);_tt=setTimeout(()=>{t.style.opacity='0';},2400);}
+function setSort(s,el){sortMode=s;document.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));el.classList.add('active');renderList();}
+function applySort(data){const fee_ok=data.filter(m=>m.fee!=='X');const fee_no=data.filter(m=>m.fee==='X');function srt(arr){if(sortMode==='name')return[...arr].sort((a,b)=>a.name.localeCompare(b.name,'ko'));if(sortMode==='avg-d')return[...arr].sort((a,b)=>(b.avg||0)-(a.avg||0));if(sortMode==='avg-a')return[...arr].sort((a,b)=>(a.avg||0)-(b.avg||0));if(sortMode==='grade')return[...arr].sort((a,b)=>String(a.dept).localeCompare(String(b.dept)));return arr;}return[...srt(fee_ok),...srt(fee_no)];}
+function setManualTeamMode(n,el){manualTeamMode=n;document.querySelectorAll('.lmt-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');updateManualLaneLbl();}
+function adjManualLane(d){const inp=document.getElementById('lane-cnt2');const min=manualTeamMode===2?2:1;let v=Math.max(min,Math.min(12,parseInt(inp.value)+d));if(manualTeamMode===2)v=Math.round(v/2)*2;inp.value=v;updateManualLaneLbl();}
+function updateManualLaneLbl(){const v=parseInt(document.getElementById('lane-cnt2').value)||2;const teams=manualTeamMode===2?v/2:v;document.getElementById('team-lbl2').textContent=`= ${teams}팀`;document.getElementById('manual-hint').textContent=manualTeamMode===2?`${v}개 레인, ${teams}팀 (2레인씩 한 팀)`:`${v}개 레인, ${teams}팀 (레인 = 팀)`;}
+function setAutoTeamMode(n,el){autoTeamMode=n;document.querySelectorAll('#almt-2,#almt-1').forEach(b=>b.classList.remove('active'));el.classList.add('active');updateAutoLaneLbl();}
+function adjAutoLane(d){const inp=document.getElementById('lane-cnt');const min=autoTeamMode===2?2:1;let v=Math.max(min,Math.min(12,parseInt(inp.value)+d));if(autoTeamMode===2)v=Math.round(v/2)*2;inp.value=v;updateAutoLaneLbl();}
+function updateAutoLaneLbl(){const v=parseInt(document.getElementById('lane-cnt').value)||6;const teams=autoTeamMode===2?Math.floor(v/2):v;document.getElementById('team-lbl').textContent=`= ${teams}팀`;const hint=document.getElementById('auto-hint');if(hint)hint.textContent=autoTeamMode===2?`${v}개 레인, ${teams}팀 (2레인씩 한 팀)`:`${v}개 레인, ${teams}팀 (1레인 = 1팀)`;}
 
-/* ════ SORT ════ */
-function setSort(s,el){
-  sortMode=s;
-  document.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  renderList();
-}
-function applySort(data){
-  const fee_ok=data.filter(m=>m.fee!=='X');
-  const fee_no=data.filter(m=>m.fee==='X');
-  function srt(arr){
-    if(sortMode==='name')  return [...arr].sort((a,b)=>a.name.localeCompare(b.name,'ko'));
-    if(sortMode==='avg-d') return [...arr].sort((a,b)=>(b.avg||0)-(a.avg||0));
-    if(sortMode==='avg-a') return [...arr].sort((a,b)=>(a.avg||0)-(b.avg||0));
-    if(sortMode==='grade') return [...arr].sort((a,b)=>String(a.dept).localeCompare(String(b.dept)));
-    return arr;
-  }
-  return [...srt(fee_ok),...srt(fee_no)];
-}
-
-/* ════ MANUAL/AUTO TEAM MODE ════ */
-function setManualTeamMode(n,el){
-  manualTeamMode=n;
-  document.querySelectorAll('.lmt-btn').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  updateManualLaneLbl();
-}
-function adjManualLane(d){
-  const inp=document.getElementById('lane-cnt2');
-  const min=manualTeamMode===2?2:1;
-  let v=Math.max(min,Math.min(12,parseInt(inp.value)+d));
-  if(manualTeamMode===2)v=Math.round(v/2)*2;
-  inp.value=v;updateManualLaneLbl();
-}
-function updateManualLaneLbl(){
-  const v=parseInt(document.getElementById('lane-cnt2').value)||2;
-  const teams=manualTeamMode===2?v/2:v;
-  document.getElementById('team-lbl2').textContent=`= ${teams}팀`;
-  document.getElementById('manual-hint').textContent=manualTeamMode===2?`${v}개 레인, ${teams}팀 (2레인씩 한 팀)`:`${v}개 레인, ${teams}팀 (레인 = 팀)`;
-}
-function setAutoTeamMode(n,el){
-  autoTeamMode=n;
-  document.querySelectorAll('#almt-2,#almt-1').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  updateAutoLaneLbl();
-}
-function adjAutoLane(d){
-  const inp=document.getElementById('lane-cnt');
-  const min=autoTeamMode===2?2:1;
-  let v=Math.max(min,Math.min(12,parseInt(inp.value)+d));
-  if(autoTeamMode===2)v=Math.round(v/2)*2;
-  inp.value=v;updateAutoLaneLbl();
-}
-function updateAutoLaneLbl(){
-  const v=parseInt(document.getElementById('lane-cnt').value)||6;
-  const teams=autoTeamMode===2?Math.floor(v/2):v;
-  document.getElementById('team-lbl').textContent=`= ${teams}팀`;
-  const hint=document.getElementById('auto-hint');
-  if(hint)hint.textContent=autoTeamMode===2?`${v}개 레인, ${teams}팀 (2레인씩 한 팀)`:`${v}개 레인, ${teams}팀 (1레인 = 1팀)`;
-}
-
-/* ════ EVENT HISTORY ════ */
 function renderEvtHistory(){
-  // 패널 안 히스토리
   const elPanel=document.getElementById('evt-history-panel');
-  // 피커 안 히스토리
   const elPicker=document.getElementById('evt-history-picker');
   const wrap=document.getElementById('evt-existing-wrap');
-
-  const makeChips = (container) => {
-    if(!container) return;
-    if(!eventList.length){ container.innerHTML=''; return; }
-    // 날짜 기준 정렬: 가까운 미래 → 과거 순
-    const sorted = [...eventList].sort((a,b)=>{
-      const da=parseEventDate(a.name), db=parseEventDate(b.name);
-      if(!da&&!db) return 0;
-      if(!da) return 1;
-      if(!db) return -1;
-      const now=new Date(); now.setHours(0,0,0,0);
-      // 미래 우선, 그 다음 최근 과거
-      const fa=da>=now, fb=db>=now;
-      if(fa&&fb) return da-db; // 둘 다 미래: 가까운 순
-      if(fa&&!fb) return -1;  // a만 미래: a 앞
-      if(!fa&&fb) return 1;
-      return db-da; // 둘 다 과거: 최근 순
-    });
-    container.innerHTML=sorted.map(ev=>`
-      <div class="evt-hist-chip ${currentEvent===ev.name?'sel':''}" onclick="selectHistoryEvt('${ev.name.replace(/'/g,"\'")}')">
-        ${ev.name}
-      </div>`).join('');
+  const makeChips=(container)=>{
+    if(!container)return;
+    if(!eventList.length){container.innerHTML='';return;}
+    const sorted=[...eventList].sort((a,b)=>{const da=parseEventDate(a.name),db=parseEventDate(b.name);if(!da&&!db)return 0;if(!da)return 1;if(!db)return-1;const now=new Date();now.setHours(0,0,0,0);const fa=da>=now,fb=db>=now;if(fa&&fb)return da-db;if(fa&&!fb)return-1;if(!fa&&fb)return 1;return db-da;});
+    container.innerHTML=sorted.map(ev=>`<div class="evt-hist-chip ${currentEvent===ev.name?'sel':''}" onclick="selectHistoryEvt('${ev.name.replace(/'/g,"\\'")}')"> ${ev.name}</div>`).join('');
   };
-
-  makeChips(elPanel);
-  makeChips(elPicker);
-  if(wrap) wrap.style.display=eventList.length?'block':'none';
+  makeChips(elPanel);makeChips(elPicker);
+  if(wrap)wrap.style.display=eventList.length?'block':'none';
 }
+function selectHistoryEvt(name){currentEvent=name;saveLocal();document.getElementById('evt-name-badge').textContent=name;evtListOpen=false;const panel=document.getElementById('evt-list-panel');const arrow=document.getElementById('evt-toggle-arrow');if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';renderEvtHistory();loadFromSheet(name);toast(`📅 "${name}" 선택됨`);setScrHeight();}
+function toggleEvtList(){evtListOpen=!evtListOpen;const panel=document.getElementById('evt-list-panel');const arrow=document.getElementById('evt-toggle-arrow');if(panel)panel.style.display=evtListOpen?'block':'none';if(arrow)arrow.textContent=evtListOpen?'▲':'▼';if(evtListOpen){renderEvtHistory();initEvtDatePickers2();setScrHeight();}}
 
-function selectHistoryEvt(name){
-  currentEvent=name;
-  saveLocal();
-  document.getElementById('evt-name-badge').textContent=name;
-  evtListOpen=false;
-  const panel=document.getElementById('evt-list-panel');
-  const arrow=document.getElementById('evt-toggle-arrow');
-  if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';
-  renderEvtHistory();
-  loadFromSheet(name);
-  toast(`📅 "${name}" 선택됨`);
-  setScrHeight();
-}
-
-/* ════ EVENT LIST TOGGLE ════ */
-function toggleEvtList(){
-  evtListOpen=!evtListOpen;
-  const panel=document.getElementById('evt-list-panel');
-  const arrow=document.getElementById('evt-toggle-arrow');
-  if(panel)panel.style.display=evtListOpen?'block':'none';
-  if(arrow)arrow.textContent=evtListOpen?'▲':'▼';
-  if(evtListOpen){
-    renderEvtHistory();
-    initEvtDatePickers2();
-    setScrHeight();
-  }
-}
-
-// init
 updateAutoLaneLbl();
 updateManualLaneLbl();
 </script>
