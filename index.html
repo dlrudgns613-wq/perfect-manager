@@ -41,10 +41,6 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .srch-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--muted);pointer-events:none}
 .view-btn{background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:0 10px;font-size:14px;cursor:pointer;height:38px;flex-shrink:0;transition:.15s}
 .view-btn.grid-active{background:var(--navy);border-color:var(--navy);color:var(--amber)}
-.unsaved{background:#fef3c7;border-bottom:1px solid #fcd34d;padding:7px 13px;display:none;align-items:center;justify-content:space-between;gap:8px}
-.unsaved.show{display:flex}
-.unsaved-txt{font-size:12px;font-weight:700;color:#92400e}
-.save-btn{background:var(--amber);border:none;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;color:var(--navy);cursor:pointer;white-space:nowrap}
 .filters{display:flex;gap:6px;padding:7px 13px;overflow-x:auto;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
 .fp{flex-shrink:0;padding:5px 12px;border-radius:99px;font-size:12px;font-weight:700;font-family:'Noto Sans KR',sans-serif;border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:.12s}
@@ -175,10 +171,41 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .f-row3 .f-inp{margin-bottom:0}
 .m-save{width:100%;height:43px;border:none;border-radius:11px;background:var(--navy);color:var(--amber);font-size:14px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer}
 .m-cancel{width:100%;height:37px;border:none;border-radius:11px;background:var(--bg);color:var(--muted);font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;margin-top:7px}
-.float-save{position:fixed;bottom:22px;right:16px;z-index:350;background:var(--green);color:#fff;border:none;border-radius:99px;padding:11px 18px;font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(16,185,129,.45);display:none;align-items:center;gap:6px;transition:all .2s}
+
+/* ─── 저장 버튼: 완전 재설계 ─── */
+.float-save{
+  position:fixed;bottom:22px;right:16px;z-index:350;
+  background:var(--green);color:#fff;border:none;
+  border-radius:99px;padding:11px 18px;
+  font-size:13px;font-weight:700;font-family:'Noto Sans KR',sans-serif;
+  cursor:pointer;box-shadow:0 4px 16px rgba(16,185,129,.45);
+  display:none;align-items:center;gap:7px;
+  transition:all .2s;white-space:nowrap;
+}
 .float-save.show{display:flex}
-.float-save.saving{background:var(--muted)}
-.auto-save-txt{font-size:10px;color:rgba(255,255,255,.75);margin-left:2px}
+.float-save.saving{background:#94a3b8;box-shadow:none;cursor:not-allowed}
+.float-save.done{background:#0d1b35;box-shadow:0 4px 16px rgba(13,27,53,.35)}
+.save-label{font-size:13px;font-weight:700}
+.save-timer{font-size:10px;font-weight:600;opacity:.8;background:rgba(0,0,0,.18);border-radius:5px;padding:1px 5px}
+/* ─── 저장 진행 오버레이 ─── */
+.save-overlay{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(13,27,53,.55);
+  display:none;align-items:center;justify-content:center;
+  flex-direction:column;gap:14px;
+}
+.save-overlay.show{display:flex}
+.save-overlay-box{
+  background:#fff;border-radius:18px;
+  padding:26px 32px;text-align:center;
+  box-shadow:0 8px 40px rgba(0,0,0,.25);
+  min-width:220px;
+}
+.save-overlay-icon{font-size:32px;margin-bottom:8px;display:block}
+.save-overlay-title{font-size:15px;font-weight:900;color:var(--navy);margin-bottom:4px}
+.save-overlay-sub{font-size:12px;color:var(--muted)}
+.save-spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 6px}
+
 .sort-bar{display:flex;gap:6px;padding:6px 13px;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;align-items:center}
 .sort-bar::-webkit-scrollbar{display:none}
 .sort-lbl{font-size:11px;font-weight:700;color:var(--muted);flex-shrink:0}
@@ -367,7 +394,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
       <div class="stat-card"><div class="stat-lbl">전체 회원</div><div class="stat-val" id="d-tot">-</div><div class="stat-sub">에버리지 보유</div></div>
       <div class="stat-card"><div class="stat-lbl">팀 균형 편차</div><div class="stat-val" id="d-spd">-</div><div class="stat-sub">배정 후</div></div>
     </div>
-    <!-- ✅ 회비 납부율 카드 -->
+    <!-- 회비 납부율 -->
     <div class="stat-grid" style="margin-bottom:10px">
       <div class="stat-card"><div class="stat-lbl">💰 회비 납부율</div><div class="stat-val" id="d-fee">-</div><div class="stat-sub" id="d-fee-sub">납부/전체</div></div>
       <div class="stat-card"><div class="stat-lbl">⚠️ 회비 미납자</div><div class="stat-val" id="d-unpaid" style="color:var(--red)">-</div><div class="stat-sub">명</div></div>
@@ -381,13 +408,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
       <div class="chart-title">📈 에버리지 분포</div>
       <canvas id="dist-chart" style="width:100%;display:block" height="100"></canvas>
     </div>
-    <!-- ✅ 이벤트별 참석 추이 -->
+    <!-- 이벤트별 참석 추이 -->
     <div class="chart-card">
       <div class="chart-title">📉 이벤트별 참석자 추이</div>
       <div id="trend-empty" style="font-size:12px;color:var(--muted);padding:12px 0;text-align:center">동기화 후 이벤트가 2개 이상이면 표시됩니다</div>
       <canvas id="trend-chart" style="width:100%;display:none" height="110"></canvas>
     </div>
-    <!-- ✅ 학과별 참여 TOP 10 -->
+    <!-- 학과별 참여 TOP 10 -->
     <div class="chart-card">
       <div class="chart-title">🏫 학과별 참여 횟수 TOP 10</div>
       <div id="rank-dept"></div>
@@ -399,10 +426,21 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 
 </div>
 
+<!-- ====== 저장 버튼 (완전 재설계) ====== -->
 <button class="float-save" id="float-save" onclick="saveToSheet()">
-  ☁️ 저장
-  <span class="auto-save-txt" id="auto-save-txt"></span>
+  <span id="save-icon">☁️</span>
+  <span class="save-label" id="save-label">저장</span>
+  <span class="save-timer" id="save-timer" style="display:none"></span>
 </button>
+
+<!-- ====== 저장 진행 오버레이 ====== -->
+<div class="save-overlay" id="save-overlay">
+  <div class="save-overlay-box">
+    <div class="save-spinner" id="save-spinner"></div>
+    <div class="save-overlay-title" id="save-overlay-title">시트에 저장 중...</div>
+    <div class="save-overlay-sub" id="save-overlay-sub">잠깐만요 ☁️</div>
+  </div>
+</div>
 
 <div class="swap-banner" id="swap-banner">
   <span style="font-size:13px;font-weight:700;color:var(--navy)" id="swap-txt">교체할 멤버를 선택하세요</span>
@@ -546,68 +584,163 @@ function getEffAvg(m){if(tempAvgMap[m.name])return tempAvgMap[m.name];return m.a
 function toggleMember(name){statusMap[name]=statusMap[name]==='attend'?'pending':'attend';markUnsaved();renderList();}
 function setFilter(f,el){filter=f;document.querySelectorAll('.fp').forEach(p=>p.classList.remove('active'));el.classList.add('active');renderList();}
 
-/* ════ UNSAVED / FLOAT SAVE ════ */
-/* ✅ 수정: 디바운스 3초 + 최대 15초 타임아웃 */
-let _autoSaveTimer, _maxSaveTimer, _saveStartTime=0;
+/* ════════════════════════════════════
+   저장 시스템 — 완전 재설계
+   ════════════════════════════════════
+   핵심 원칙:
+   1. 디바운스 3초 + 강제 최대 15초
+   2. 중복 실행 완전 차단 (_isSaving 플래그)
+   3. 저장 중 오버레이로 명확한 피드백
+   4. 성공/실패 결과 오버레이에 표시
+   ════════════════════════════════════ */
+let _autoSaveTimer=null, _maxSaveTimer=null, _saveStartTime=0, _isSaving=false;
 
 function markUnsaved(){
   hasUnsaved=true;
   if(!_saveStartTime)_saveStartTime=Date.now();
-  showFloatSave();
-  scheduleAutoSave();
+  _showFloatBtn();
+  _scheduleAutoSave();
 }
-function clearUnsaved(){
-  hasUnsaved=false;
+
+function _showFloatBtn(){
+  const btn=document.getElementById('float-save');
+  btn.classList.add('show');
+  btn.classList.remove('done','saving');
+  document.getElementById('save-icon').textContent='☁️';
+  document.getElementById('save-label').textContent='저장';
+}
+
+function _scheduleAutoSave(){
+  // 디바운스: 마지막 체크 후 3초
+  clearTimeout(_autoSaveTimer);
+  _autoSaveTimer=setTimeout(()=>{
+    if(hasUnsaved&&!_isSaving)saveToSheet();
+  },3000);
+
+  // 강제 최대 타임아웃: 15초 안에 무조건 저장
+  if(!_maxSaveTimer){
+    _maxSaveTimer=setTimeout(()=>{
+      _maxSaveTimer=null;
+      if(hasUnsaved&&!_isSaving)saveToSheet();
+    },15000);
+  }
+
+  // 카운트다운 표시
+  _updateSaveTimer();
+}
+
+let _timerInterval=null;
+function _updateSaveTimer(){
+  clearInterval(_timerInterval);
+  const timerEl=document.getElementById('save-timer');
+  timerEl.style.display='inline';
+  _timerInterval=setInterval(()=>{
+    if(!hasUnsaved||_isSaving){clearInterval(_timerInterval);timerEl.style.display='none';return;}
+    const elapsed=Math.round((Date.now()-_saveStartTime)/1000);
+    const rem=Math.max(0,15-elapsed);
+    timerEl.textContent=rem+'초';
+  },500);
+}
+
+function _clearSaveSchedule(){
   clearTimeout(_autoSaveTimer);
   clearTimeout(_maxSaveTimer);
+  clearInterval(_timerInterval);
+  _autoSaveTimer=null;
   _maxSaveTimer=null;
   _saveStartTime=0;
-  document.getElementById('auto-save-txt').textContent='';
-  hideFloatSave();
+  document.getElementById('save-timer').style.display='none';
 }
-function showFloatSave(){document.getElementById('float-save').classList.add('show');}
-function hideFloatSave(){document.getElementById('float-save').classList.remove('show');}
-function scheduleAutoSave(){
-  clearTimeout(_autoSaveTimer);
-  // 디바운스: 마지막 체크 후 3초
-  _autoSaveTimer=setTimeout(()=>{if(hasUnsaved)saveToSheet();},3000);
-  // 최대 타임아웃: 아무리 연속 체크해도 15초 안에 반드시 저장
-  if(!_maxSaveTimer){
-    _maxSaveTimer=setTimeout(()=>{_maxSaveTimer=null;if(hasUnsaved)saveToSheet();},15000);
-  }
-  const elapsed=Math.round((Date.now()-(_saveStartTime||Date.now()))/1000);
-  const rem=Math.max(0,15-elapsed);
-  document.getElementById('auto-save-txt').textContent=rem<10?`${rem}초 내 저장`:'3초 후 자동저장';
+
+function _showSaveOverlay(title,sub,showSpinner=true){
+  document.getElementById('save-spinner').style.display=showSpinner?'block':'none';
+  document.getElementById('save-overlay-title').textContent=title;
+  document.getElementById('save-overlay-sub').textContent=sub;
+  document.getElementById('save-overlay').classList.add('show');
+}
+function _hideSaveOverlay(){
+  document.getElementById('save-overlay').classList.remove('show');
 }
 
 async function saveToSheet(){
+  // 중복 실행 차단
+  if(_isSaving){return;}
   if(!currentEvent){toast('이벤트를 먼저 선택하세요');return;}
   const attendees=members.filter(m=>statusMap[m.name]==='attend').map(m=>m.name);
-  if(!attendees.length){toast('참석자가 없습니다');return;}
+  if(!attendees.length){toast('참석자가 없습니다');_clearSaveSchedule();hasUnsaved=false;document.getElementById('float-save').classList.remove('show');return;}
+
+  _isSaving=true;
+  _clearSaveSchedule();
+  hasUnsaved=false;
+
+  // 버튼 상태 → 저장 중
+  const btn=document.getElementById('float-save');
+  btn.classList.add('saving');
+  btn.classList.remove('done');
+  document.getElementById('save-icon').textContent='⏳';
+  document.getElementById('save-label').textContent='저장 중...';
+
+  // 오버레이 표시
+  _showSaveOverlay('시트에 저장 중...','잠깐만요 ☁️',true);
+
   const eventType=currentEvent.includes('번개')?'flash':'regular';
-  const fbtn=document.getElementById('float-save');
-  if(fbtn){fbtn.textContent='⏳ 저장중...';fbtn.classList.add('saving');fbtn.disabled=true;}
-  let saved=false;
+  let saved=false,markedCount=0,notFound=[];
+
   try{
-    const res=await fetch(cfg.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'saveAttendance',eventName:currentEvent,eventType,attendees,overwrite:true})});
+    const res=await fetch(cfg.url,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({action:'saveAttendance',eventName:currentEvent,eventType,attendees,overwrite:true})
+    });
     const data=JSON.parse(await res.text());
     if(data.error)throw new Error(data.error);
     if(data.isNew)eventList.push({col:data.eventCol,name:currentEvent});
-    clearUnsaved();saveLocal();saved=true;
-    toast(`✅ ${data.markedCount}명 시트 저장 완료!`);
-    if(data.notFound?.length)setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
-  }catch(e1){console.warn('POST 실패, GET 재시도:',e1.message);}
-  if(!saved){
+    markedCount=data.markedCount||attendees.length;
+    notFound=data.notFound||[];
+    saved=true;
+  }catch(e1){
+    // POST 실패 → GET 재시도
     try{
       const data=await gasGet('saveAttendance',{eventName:currentEvent,eventType,attendees:attendees.join(','),overwrite:'true'});
       if(data.error)throw new Error(data.error);
       if(data.isNew)eventList.push({col:data.eventCol,name:currentEvent});
-      clearUnsaved();saveLocal();
-      toast(`✅ ${data.markedCount}명 시트 저장 완료!`);
-      if(data.notFound?.length)setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
-    }catch(e2){toast('❌ 저장 실패: '+e2.message);}
+      markedCount=data.markedCount||attendees.length;
+      notFound=data.notFound||[];
+      saved=true;
+    }catch(e2){
+      // 저장 실패
+      _isSaving=false;
+      _showSaveOverlay('저장 실패 ❌',e2.message,false);
+      btn.classList.remove('saving');
+      btn.classList.add('show');
+      document.getElementById('save-icon').textContent='⚠️';
+      document.getElementById('save-label').textContent='재시도';
+      hasUnsaved=true; // 다시 저장 가능하게
+      setTimeout(()=>_hideSaveOverlay(),3500);
+      return;
+    }
   }
-  if(fbtn){fbtn.innerHTML='☁️ 저장<span class="auto-save-txt"></span>';fbtn.classList.remove('saving');fbtn.disabled=false;}
+
+  // ✅ 저장 성공
+  _isSaving=false;
+  saveLocal();
+
+  // 오버레이 → 성공 표시 후 사라짐
+  document.getElementById('save-spinner').style.display='none';
+  document.getElementById('save-overlay-title').textContent=`✅ ${markedCount}명 저장 완료!`;
+  document.getElementById('save-overlay-sub').textContent=currentEvent;
+  setTimeout(()=>{
+    _hideSaveOverlay();
+    // 버튼 → 완료 상태
+    btn.classList.remove('saving');
+    btn.classList.add('done');
+    document.getElementById('save-icon').textContent='✅';
+    document.getElementById('save-label').textContent=`${markedCount}명 저장됨`;
+    // 2초 후 버튼 숨김
+    setTimeout(()=>btn.classList.remove('show','done'),2000);
+  },1200);
+
+  if(notFound?.length)setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${notFound.join(', ')}`),1600);
 }
 
 function openAvgPopup(name){avgPopupTarget=name;document.getElementById('avg-popup-name').textContent=name+' — 에버리지 입력';document.getElementById('avg-manual-inp').value=tempAvgMap[name]||'';document.getElementById('avg-popup').classList.add('show');}
@@ -652,8 +785,7 @@ function renderAutoResults(){
   laneGroups.forEach((t,i)=>{const avg=t.members.length?Math.round(t.total/t.members.length):0;html+=`<div class="bal-row"><div class="bal-lbl">${t.laneAN}·${t.laneBN}</div><div class="bal-track"><div class="bal-fill" style="width:${(t.total/maxT*100).toFixed(0)}%;background:${TC[i%TC.length]}"></div></div><div class="bal-num">${Math.round(t.total)}</div><div style="font-size:10px;color:var(--muted);width:36px;text-align:right;flex-shrink:0">avg ${avg}</div></div>`;});
   html+='</div>';
   html+=laneGroups.map((t,ti)=>`<div class="team-card"><div class="team-hdr" style="background:${TC[ti%TC.length]}"><div class="team-hdr-l">팀 ${ti+1} &nbsp;(${t.laneAN}·${t.laneBN} 레인)</div><div class="team-hdr-r">합계 ${Math.round(t.total)} · 평균 ${t.members.length?Math.round(t.total/t.members.length):0} · ${t.members.length}명</div></div><div class="lanes-wrap"><div class="lane-col"><div class="lane-col-hdr"><span>${t.laneAN}번</span><span class="lane-avg">${lavg(t.laneA)}</span></div><div id="lc-${ti}-A">${t.laneA.map((m,ci)=>chp(m,ti,'A',ci)).join('')}</div></div><div class="lane-col"><div class="lane-col-hdr"><span>${t.laneBN}번</span><span class="lane-avg">${lavg(t.laneB)}</span></div><div id="lc-${ti}-B">${t.laneB.map((m,ci)=>chp(m,ti,'B',ci)).join('')}</div></div></div><div class="team-footer"><button class="smBtn" onclick="shuffleTeam(${ti})">🔀 섞기</button><button class="smBtn" onclick="copyTeam(${ti})">📋 복사</button></div></div>`).join('');
-  /* ✅ 카카오 공유 버튼 */
-  html+=`<button class="bigBtn" style="margin-bottom:8px" onclick="startSwap()">🔄 수동 조정 (멤버 교체)</button>`;
+  html+=`<button class="bigBtn" style="margin-bottom:8px;width:100%" onclick="startSwap()">🔄 수동 조정 (멤버 교체)</button>`;
   html+=`<button class="copy-all" onclick="copyKakaoResult()">📤 카카오톡으로 공유</button>`;
   con.innerHTML=html;
 }
@@ -661,21 +793,24 @@ function renderAutoResults(){
 function chp(m,ti,lane,ci){const warn=!m.avg||m.avg===0;return `<div class="mchip ${warn?'warn':''}" id="chip-${ti}-${lane}-${ci}" onclick="onChip(${ti},'${lane}',${ci})"><span class="chip-name">${m.name}</span>${m.avg?`<span class="chip-avg">${m.avg}</span>`:`<span class="chip-warn">?</span>`}</div>`;}
 function lavg(arr){const f=arr.filter(m=>m.avg>0);return f.length?Math.round(f.reduce((s,m)=>s+m.avg,0)/f.length)+'':'—';}
 
-/* ✅ 카카오톡 공유 포맷 */
+/* 카카오톡 공유 포맷 */
 function copyKakaoResult(){
   if(!laneGroups.length){toast('배정 결과가 없어요');return;}
   const spread=Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total)));
   const total=laneGroups.reduce((s,t)=>s+t.members.length,0);
-  let txt=`📋 레인배정 결과 (${currentEvent||'미정'})\n`;
-  txt+=`참석 ${total}명 · 팀간 편차 ${spread}점\n`;
-  txt+=`${'─'.repeat(22)}\n\n`;
+  let txt=`🎳 레인배정 결과\n`;
+  txt+=`📅 ${currentEvent||'미정'}\n`;
+  txt+=`👥 참석 ${total}명 · 팀간 편차 ${spread}점\n`;
+  txt+=`${'━'.repeat(20)}\n\n`;
   laneGroups.forEach(t=>{
     const avg=t.members.length?Math.round(t.total/t.members.length):0;
-    txt+=`🎳 팀${t.teamNum} (${t.laneAN}·${t.laneBN}레인) 합계:${Math.round(t.total)} 평균:${avg}\n`;
-    txt+=` ${t.laneAN}레인: ${t.laneA.map(m=>m.avg?m.name+'('+m.avg+')':m.name).join('  ')}\n`;
-    if(t.laneB.length)txt+=` ${t.laneBN}레인: ${t.laneB.map(m=>m.avg?m.name+'('+m.avg+')':m.name).join('  ')}\n`;
+    txt+=`🏆 팀${t.teamNum}  (${t.laneAN}·${t.laneBN}번 레인)\n`;
+    txt+=`   합계 ${Math.round(t.total)}  평균 ${avg}\n`;
+    txt+=`   ${t.laneAN}번 🎳 ${t.laneA.map(m=>m.avg?m.name+'('+m.avg+')':m.name).join(' · ')}\n`;
+    if(t.laneB.length)txt+=`   ${t.laneBN}번 🎳 ${t.laneB.map(m=>m.avg?m.name+'('+m.avg+')':m.name).join(' · ')}\n`;
     txt+='\n';
   });
+  txt+=`${'━'.repeat(20)}\n🎉 모두 즐거운 게임 되세요!`;
   navigator.clipboard.writeText(txt.trim()).then(()=>toast('📤 카카오톡 형식으로 복사됨!'));
 }
 
@@ -701,7 +836,6 @@ function renderDash(){
   const wa=att.filter(a=>a.avg>0);
   document.getElementById('d-avg').textContent=wa.length?Math.round(wa.reduce((s,a)=>s+a.avg,0)/wa.length):'-';
   document.getElementById('d-spd').textContent=laneGroups.length>1?Math.round(Math.max(...laneGroups.map(t=>t.total))-Math.min(...laneGroups.map(t=>t.total))):'-';
-  /* ✅ 회비 납부율 */
   const paid=members.filter(m=>m.fee==='O').length;
   const unpaid=members.filter(m=>m.fee==='X').length;
   const tot=members.length||1;
@@ -716,7 +850,6 @@ function renderDash(){
   document.getElementById('rank-reg').innerHTML=members.map(m=>({...m,tot:(m.reg||0)+(m.flash||0)})).filter(m=>m.tot>0).sort((a,b)=>b.tot-a.tot).slice(0,10).map((m,i)=>`<div class="rank-item"><div class="rnum ${i===0?'g':i===1?'s':i===2?'b':''}">${i+1}</div><div class="rname">${m.name}</div><div class="rval">${m.tot}회</div></div>`).join('')||'<div class="empty">없음</div>';
 }
 
-/* ✅ 이벤트별 참석 추이 차트 */
 function drawTrendChart(){
   const cv=document.getElementById('trend-chart');
   const em=document.getElementById('trend-empty');
@@ -728,16 +861,13 @@ function drawTrendChart(){
   const p={t:14,r:10,b:28,l:10},w=W-p.l-p.r,h=H-p.t-p.b;
   const evts=[...eventList].sort((a,b)=>{const da=parseEventDate(a.name),db=parseEventDate(b.name);if(!da&&!db)return 0;if(!da)return 1;if(!db)return-1;return da-db;});
   const step=evts.length>1?w/(evts.length-1):w;
-  // 타임라인 선
   ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1.5;
   ctx.beginPath();ctx.moveTo(p.l,p.t+h/2);ctx.lineTo(p.l+w,p.t+h/2);ctx.stroke();
-  // 연결선
   if(evts.length>1){ctx.strokeStyle='#0d1b35';ctx.lineWidth=2;ctx.beginPath();evts.forEach((_,i)=>{const x=p.l+i*step;if(i===0)ctx.moveTo(x,p.t+h/2);else ctx.lineTo(x,p.t+h/2);});ctx.stroke();}
-  // 점 + 이름
   evts.forEach((ev,i)=>{
     const x=p.l+i*step;
     const isCurrent=ev.name===currentEvent;
-    ctx.fillStyle=isCurrent?'var(--amber)':'#0d1b35';
+    ctx.fillStyle=isCurrent?'#f59e0b':'#0d1b35';
     ctx.beginPath();ctx.arc(x,p.t+h/2,isCurrent?6:4,0,Math.PI*2);ctx.fill();
     ctx.fillStyle='#64748b';ctx.font='8px sans-serif';ctx.textAlign='center';
     const short=ev.name.replace(/\[|\]/g,'').trim().substring(0,7);
@@ -746,7 +876,6 @@ function drawTrendChart(){
   });
 }
 
-/* ✅ 학과별 참여 TOP 10 */
 function renderDeptRank(){
   const el=document.getElementById('rank-dept');
   if(!el)return;
