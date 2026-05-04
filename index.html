@@ -496,8 +496,16 @@ function initEvtDatePickers2(){const m2=document.getElementById('evt-month2');co
 function selType(type,el){selectedType=type;selectedType2=type;document.querySelectorAll('.evt-type-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');updateEvtPreview();updateEvtPreview2();}
 function updateEvtPreview(){const dr=document.getElementById('evt-direct-row');const dateR=document.getElementById('evt-date-row');if(!selectedType)return;if(selectedType==='직접입력'){if(dr)dr.style.display='flex';if(dateR)dateR.style.display='none';document.getElementById('evt-preview').textContent='';return;}if(dr)dr.style.display='none';if(dateR)dateR.style.display='flex';const m=document.getElementById('evt-month')?.value;const d=document.getElementById('evt-day')?.value;if(m&&d)document.getElementById('evt-preview').textContent=`[${selectedType}] ${m}/${d}`;}
 function updateEvtPreview2(){const dr=document.getElementById('evt-direct-row2');const dateR=document.getElementById('evt-date-row2');if(!selectedType2)return;if(selectedType2==='직접입력'){if(dr)dr.style.display='flex';if(dateR)dateR.style.display='none';return;}if(dr)dr.style.display='none';if(dateR)dateR.style.display='flex';const m=document.getElementById('evt-month2')?.value;const d=document.getElementById('evt-day2')?.value;const p=document.getElementById('evt-preview2');if(p&&m&&d)p.textContent=`[${selectedType2}] ${m}/${d}`;}
-function confirmEvent(){if(!selectedType){toast('종류를 먼저 선택하세요');return;}let evtName;if(selectedType==='직접입력'){const inp=document.getElementById('evt-direct-inp');if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}evtName=inp.value.trim();}else{const m=document.getElementById('evt-month').value;const d=document.getElementById('evt-day').value;evtName=`[${selectedType}] ${m}/${d}`;}currentEvent=evtName;saveLocal();showCurrentEvent();loadFromSheet(currentEvent);}
-function confirmEvent2(){let evtName;if(selectedType2==='직접입력'){const inp=document.getElementById('evt-direct-inp2');if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}evtName=inp.value.trim();}else{if(!selectedType2){toast('종류를 먼저 선택하세요');return;}const m=document.getElementById('evt-month2')?.value;const d=document.getElementById('evt-day2')?.value;evtName=`[${selectedType2}] ${m}/${d}`;}currentEvent=evtName;document.getElementById('evt-name-badge').textContent=evtName;evtListOpen=false;const panel=document.getElementById('evt-list-panel');const arrow=document.getElementById('evt-toggle-arrow');if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';saveLocal();renderEvtHistory();loadFromSheet(evtName);setScrHeight();toast(`📅 "${evtName}" 선택됨`);}
+function confirmEvent(){
+  if(!selectedType){toast('종류를 먼저 선택하세요');return;}
+  let evtName;
+  if(selectedType==='직접입력'){const inp=document.getElementById('evt-direct-inp');if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}evtName=inp.value.trim();}
+  else{const m=document.getElementById('evt-month').value;const d=document.getElementById('evt-day').value;evtName=`[${selectedType}] ${m}/${d}`;}
+  statusMap={};  // ✅ 새 모임 생성 시 이전 체크 초기화
+  currentEvent=evtName;
+  saveLocal();showCurrentEvent();renderList();loadFromSheet(currentEvent);
+}
+function confirmEvent2(){let evtName;if(selectedType2==='직접입력'){const inp=document.getElementById('evt-direct-inp2');if(!inp||!inp.value.trim()){toast('이벤트 이름을 입력하세요');return;}evtName=inp.value.trim();}else{if(!selectedType2){toast('종류를 먼저 선택하세요');return;}const m=document.getElementById('evt-month2')?.value;const d=document.getElementById('evt-day2')?.value;evtName=`[${selectedType2}] ${m}/${d}`;}statusMap={};currentEvent=evtName;document.getElementById('evt-name-badge').textContent=evtName;evtListOpen=false;const panel=document.getElementById('evt-list-panel');const arrow=document.getElementById('evt-toggle-arrow');if(panel)panel.style.display='none';if(arrow)arrow.textContent='▼';saveLocal();renderList();renderEvtHistory();loadFromSheet(evtName);setScrHeight();toast(`📅 "${evtName}" 선택됨`);}
 function showCurrentEvent(){document.getElementById('evt-picker').style.display='none';document.getElementById('evt-current').style.display='flex';document.getElementById('evt-name-badge').textContent=currentEvent;setScrHeight();}
 
 async function syncAll(){
@@ -606,8 +614,6 @@ async function saveToSheet(){
     clearUnsaved();saveLocal();saved=true;
     toast(`✅ ${data.markedCount}명 시트 저장 완료!`);
     if(data.notFound?.length)setTimeout(()=>alert(`⚠️ DB에 없는 이름:\n${data.notFound.join(', ')}`),500);
-    // ✅ 저장 직후 reg/flash 정확한 값을 시트에서 다시 가져옴 (statusMap 보존)
-    refreshMemberStats();
   }catch(e1){console.warn('POST 실패, GET 재시도:',e1.message);}
   if(!saved){
     try{
@@ -704,19 +710,6 @@ function selPoolChip(name){manualSelChip=(manualSelChip===name?null:name);docume
 function assignToLane(laneNum){if(!manualSelChip){toast('먼저 인원을 선택하세요');return;}const member=manualUnassigned.find(m=>m.name===manualSelChip);if(!member){manualSelChip=null;return;}manualLanes[laneNum]=[...(manualLanes[laneNum]||[]),member];manualUnassigned=manualUnassigned.filter(m=>m.name!==manualSelChip);manualSelChip=null;renderManualAssign();}
 function removeFromLane(laneNum,name){const member=manualLanes[laneNum]?.find(m=>m.name===name);if(!member)return;manualLanes[laneNum]=manualLanes[laneNum].filter(m=>m.name!==name);manualUnassigned.push(member);renderManualAssign();}
 function finalizeManual(){const laneKeys=Object.keys(manualLanes).map(Number).sort((a,b)=>a-b);if(manualTeamMode===2){laneGroups=[];for(let i=0;i<laneKeys.length;i+=2){const la=laneKeys[i],lb=laneKeys[i+1];const laneA=manualLanes[la]||[],laneB=lb?manualLanes[lb]||[]:[];const members=[...laneA,...laneB];laneGroups.push({teamNum:laneGroups.length+1,laneAN:la,laneBN:lb||la,laneA,laneB,members,total:members.reduce((s,m)=>s+(m.avg||0),0)});}}else{laneGroups=laneKeys.map((la,i)=>{const laneA=manualLanes[la]||[];return{teamNum:i+1,laneAN:la,laneBN:la,laneA,laneB:[],members:[...laneA],total:laneA.reduce((s,m)=>s+(m.avg||0),0)};});}renderAutoResults();renderDash();toast('✅ 수동 배정 결과 확정!');}
-
-/* ════ 시트 저장 후 reg/flash 새로고침 (statusMap은 보존) ════ */
-async function refreshMemberStats(){
-  if(!cfg.url) return;
-  try{
-    const dr=await gasGet('getData');
-    if(dr.error||!Array.isArray(dr))return;
-    const newMembers=dr.filter(row=>{const n=row[cfg.name];if(!n||String(n).trim()==='')return false;if(!isNaN(n))return false;const s=String(n);if(s.includes('이름')||s.includes('★')||s.includes('찾음')||s.includes('예시'))return false;return true;}).map(row=>({name:String(row[cfg.name]).trim(),avg:parseFloat(row[cfg.avg])||0,dept:String(row[cfg.dept]||'').trim(),fee:String(row[cfg.fee]||'').trim(),reg:parseInt(row[cfg.reg])||0,flash:parseInt(row[7])||0}));
-    // members 배열 업데이트 (statusMap, tempAvgMap 보존)
-    members=newMembers;
-    renderDash();
-  }catch(e){console.warn('refreshMemberStats failed:',e.message);}
-}
 
 /* ════ DASHBOARD ════ */
 function renderDash(){
