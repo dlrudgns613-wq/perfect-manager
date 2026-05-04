@@ -527,7 +527,7 @@ async function syncAll(){
 }
 async function gasGet(action,params={}){const url=new URL(cfg.url);url.searchParams.set('action',action);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));const r=await fetch(url.toString());return r.json();}
 function setSS(s,t){document.getElementById('sdot').className='sdot '+s;document.getElementById('stxt').textContent=t;}
-async function loadFromSheet(evtName){if(!cfg.url||!evtName)return;try{const data=await gasGet('getAttendance',{event:evtName});if(data.error||!data.attendees)return;statusMap={};data.attendees.forEach(n=>{statusMap[n]='attend';});renderList();toast(`📥 "${evtName}" ${data.attendees.length}명 불러옴`);}catch(e){}}
+async function loadFromSheet(evtName){if(!cfg.url||!evtName)return;try{const data=await gasGet('getAttendance',{event:evtName});if(data.error||!data.attendees)return;data.attendees.forEach(n=>{statusMap[n]='attend';});renderList();toast(`📥 "${evtName}" ${data.attendees.length}명 불러옴`);}catch(e){}}
 
 function switchTab(tab){['att','lane','dash'].forEach(t=>{document.getElementById(`sec-${t}`).classList.toggle('active',t===tab);document.getElementById(`tab-${t}`).classList.toggle('active',t===tab);});document.getElementById('evt-bar').style.display=(tab==='att'&&members.length)?'block':'none';if(tab==='dash')renderDash();if(tab==='lane'){const att=getAttendees();if(att.length)checkNoAvg(att);}setScrHeight();}
 function applyViewMode(){const btn=document.getElementById('view-btn');if(viewMode==='grid'){btn.textContent='⊞';btn.classList.add('grid-active');}else{btn.textContent='☰';btn.classList.remove('grid-active');}}
